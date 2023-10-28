@@ -1,0 +1,36 @@
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "uid" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "text" TEXT NOT NULL,
+    "isPublished" BOOLEAN NOT NULL DEFAULT false,
+    "updatedAt" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER,
+    CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "uid" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "isVerified" BOOLEAN NOT NULL DEFAULT false,
+    "updatedAt" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "roleId" INTEGER,
+    CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Role" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "uid" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "updatedAt" DATETIME NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

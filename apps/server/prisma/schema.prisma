@@ -9,3 +9,47 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Post {
+  id          Int     @id @default(autoincrement())
+  uid         String  @default(uuid())
+  title       String
+  content     String
+  isPublished Boolean @default(false)
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  uid        String   @default(uuid())
+  name       String
+  email      String
+  password   String
+  isVerified Boolean? @default(false)
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  roleId Int?
+  role   Role? @relation(fields: [roleId], references: [id])
+
+  posts Post[]
+}
+
+model Role {
+  id          Int     @id @default(autoincrement())
+  uid         String  @default(uuid())
+  code        String
+  name        String
+  description String?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  users User[]
+}
