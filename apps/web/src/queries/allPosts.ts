@@ -7,26 +7,25 @@ export interface PostQuery {
   content: string
   user: {
     name: string
-  };
+  }
 }
 
 export interface PostsQuery {
-  posts: PostQuery[];
+  posts: PostQuery[]
 }
 
 export const fetchPosts = async (): Promise<PostsQuery> => {
-    const query = gql`
+  const query = gql`
     query GetPosts {
-        posts {
-            id
-            title
-            content
-            user {
-                name
-            }
-        } 
+      posts {
+        id
+        title
+        content
+        user {
+          name
+        }
+      }
     }
   `
-  return request("http://localhost:3005/graphql", query);
-};
-
+  return request('http://localhost:3005/graphql', query)
+}
