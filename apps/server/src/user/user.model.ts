@@ -1,41 +1,35 @@
-
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {Role, User} from "@prisma/client";
-import {RoleModel} from "../role/role.model";
+import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Role, User } from '@prisma/client'
+import { RoleModel } from '../role/role.model'
 
 @ObjectType()
 export class UserModel implements User {
-  @Field(type => Int)
-  id: number;
+  @Field((type) => Int)
+  id: number
 
   @Field()
-  uid: string;
+  uid: string
 
   @Field()
-  name: string;
+  name: string
 
   @Field()
-  email: string;
+  email: string
 
   @Field()
-  password: string;
+  password: string
 
   @Field()
-  isVerified: boolean;
+  isVerified: boolean
 
-
-
-  @Field(type => Int)
-  roleId: number;
-  @Field(type => RoleModel)
+  @Field((type) => Int)
+  roleId: number
+  @Field((type) => RoleModel)
   role: RoleModel
 
-
-
+  @Field()
+  createdAt: Date
 
   @Field()
-  createdAt: Date;
-
-  @Field()
-  updatedAt: Date;
+  updatedAt: Date
 }

@@ -1,5 +1,5 @@
-import {Prisma} from "@prisma/client";
-import {Field, InputType, Int} from "@nestjs/graphql";
+import { Prisma } from '@prisma/client'
+import { Field, InputType, Int } from '@nestjs/graphql'
 
 @InputType()
 export class UserCreateInput implements Prisma.UserCreateInput {
@@ -12,9 +12,9 @@ export class UserCreateInput implements Prisma.UserCreateInput {
   @Field()
   name: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   isVerified?: boolean
 
-  @Field(type => Int)
+  @Field((type) => Int)
   roleId: number
 }

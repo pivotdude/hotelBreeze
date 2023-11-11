@@ -1,17 +1,17 @@
-import {Prisma} from "@prisma/client";
-import {Field, InputType, Int} from "@nestjs/graphql";
+import { Prisma } from '@prisma/client'
+import { Field, InputType, Int } from '@nestjs/graphql'
 
 @InputType()
 export class PostCreateInput implements Prisma.PostCreateInput {
   @Field()
-  title: string;
+  title: string
 
   @Field()
-  content: string;
+  content: string
 
-  @Field({nullable: true})
-  isPublished?: boolean;
+  @Field({ nullable: true })
+  isPublished?: boolean
 
-  @Field(type => Int)
+  @Field((type) => Int)
   userId: number
 }

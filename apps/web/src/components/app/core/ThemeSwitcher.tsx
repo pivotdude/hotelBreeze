@@ -1,10 +1,10 @@
-"use client";
-import {useTheme} from "next-themes";
-import { useEffect, useState } from "react";
-import {Button} from "@nextui-org/react";
-import {MoonIcon, SunIcon} from "@nextui-org/shared-icons";
+'use client'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+import { Button } from '@nextui-org/react'
+import { MoonIcon, SunIcon } from '@nextui-org/shared-icons'
 
-type ITheme = "light" | "dark"
+type ITheme = 'light' | 'dark'
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState<boolean>(false)
@@ -14,7 +14,7 @@ export function ThemeSwitcher() {
     setMounted(true)
   }, [])
 
-  if(!mounted) return null
+  if (!mounted) return null
 
   const toggleTheme = () => {
     console.log(theme)
@@ -26,10 +26,10 @@ export function ThemeSwitcher() {
   }
 
   return (
-  <>
-    <Button isIconOnly aria-label="Like" onClick={toggleTheme}>
-      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-    </Button>
-  </>
+    <>
+      <Button isIconOnly aria-label="Like" onClick={toggleTheme}>
+        {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+      </Button>
+    </>
   )
-};
+}

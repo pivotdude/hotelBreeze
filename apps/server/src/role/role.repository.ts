@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import {Role, Prisma} from '@prisma/client';
-import {RoleCreateInput} from "./models/RoleCreateInput";
-import {DefaultWhereInput} from "../core/Inputs/DefaultWhereInput";
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from '../prisma/prisma.service'
+import { Role } from '@prisma/client'
+import { RoleCreateInput } from './models/RoleCreateInput'
+import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
 @Injectable()
 export class RoleRepository {
@@ -11,11 +11,11 @@ export class RoleRepository {
   async find(data: DefaultWhereInput): Promise<Role | null> {
     return this.prisma.role.findUnique({
       where: data,
-    });
+    })
   }
 
   async findAll(): Promise<Role[]> {
-    return this.prisma.role.findMany();
+    return this.prisma.role.findMany()
   }
 
   // async findAll(params: {
@@ -38,7 +38,7 @@ export class RoleRepository {
   async create(data: RoleCreateInput): Promise<Role> {
     return this.prisma.role.create({
       data,
-    });
+    })
   }
 
   // async update(params: {

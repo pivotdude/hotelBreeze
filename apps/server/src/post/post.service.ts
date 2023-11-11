@@ -1,14 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import {PostRepository} from "./post.repository";
-import {Post, Prisma} from "@prisma/client";
-import {PostCreateInput} from "./models/PostCreateInput";
+import { Injectable } from '@nestjs/common'
+import { PostRepository } from './post.repository'
+import { Post } from '@prisma/client'
+import { PostCreateInput } from './models/PostCreateInput'
 
 @Injectable()
 export class PostService {
-  constructor(
-    private readonly postRepository: PostRepository,
-  ) {}
-
+  constructor(private readonly postRepository: PostRepository) {}
 
   // async findOne(id: string): Promise<Post | null> {
   //   return this.prisma.post.findUnique({
@@ -19,11 +16,11 @@ export class PostService {
   // }
 
   async findAll(): Promise<Post[]> {
-    return this.postRepository.findAll();
+    return this.postRepository.findAll()
   }
 
   async find(id: number): Promise<Post> {
-    return this.postRepository.find({ id });
+    return this.postRepository.find({ id })
   }
 
   async create(input: PostCreateInput): Promise<Post> {
