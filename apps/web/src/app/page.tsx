@@ -1,10 +1,12 @@
-import Image from 'next/image'
-import {ThemeSwitcher} from "@/components/app/core/ThemeSwitcher";
+import { fetchPosts, PostsQuery } from "@/queries/allPosts";
+import Post from "@/components/ui/core/Post";
 
-export default function Home() {
+
+export default async function Home() {
+  const posts = await fetchPosts()
   return (
     <>
-      <ThemeSwitcher />
+      {posts.posts.map((post) => <Post post={post} />)}
     </>
   )
 }
