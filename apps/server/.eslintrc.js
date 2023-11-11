@@ -8,7 +8,6 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
   ],
   root: true,
   env: {
@@ -20,4 +19,17 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
-};
+  overrides: [
+    {
+      files: [
+        '**/*.model.ts',
+        '**/*.resolvers.ts',
+        '**/models/*.ts',
+        '**/Inputs/*.ts',
+      ],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+  ],
+}

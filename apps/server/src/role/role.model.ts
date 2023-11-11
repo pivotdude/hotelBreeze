@@ -1,14 +1,13 @@
-
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {Role, User} from "@prisma/client";
+import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Role, User } from '@prisma/client'
 
 @ObjectType()
 export class RoleModel implements Role {
-  @Field(type => Int)
-  id: number;
+  @Field((type) => Int)
+  id: number
 
   @Field()
-  uid: string;
+  uid: string
 
   @Field()
   code: string
@@ -19,11 +18,9 @@ export class RoleModel implements Role {
   @Field()
   description: string
 
-
+  @Field()
+  createdAt: Date
 
   @Field()
-  createdAt: Date;
-
-  @Field()
-  updatedAt: Date;
+  updatedAt: Date
 }

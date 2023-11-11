@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import {User, Prisma, Post} from '@prisma/client';
-import {PostCreateInput} from "./models/PostCreateInput";
-import {DefaultWhereInput} from "../core/Inputs/DefaultWhereInput";
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from '../prisma/prisma.service'
+import { Post } from '@prisma/client'
+import { PostCreateInput } from './models/PostCreateInput'
+import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
 @Injectable()
 export class PostRepository {
@@ -14,11 +14,11 @@ export class PostRepository {
       include: {
         user: {
           include: {
-            role: true
-          }
-        }
-      }
-    });
+            role: true,
+          },
+        },
+      },
+    })
   }
 
   async findAll(): Promise<Post[]> {
@@ -26,10 +26,10 @@ export class PostRepository {
       include: {
         user: {
           include: {
-            role: true
-          }
-        }
-      }
+            role: true,
+          },
+        },
+      },
     })
   }
 
@@ -53,7 +53,7 @@ export class PostRepository {
   async create(data: PostCreateInput): Promise<Post> {
     return this.prisma.post.create({
       data,
-    });
+    })
   }
 
   // async update(params: {

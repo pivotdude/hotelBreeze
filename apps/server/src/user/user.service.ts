@@ -1,14 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import {UserRepository} from "./user.repository";
-import {User, Prisma} from "@prisma/client";
-import {UserCreateInput} from "./models/UserCreateInput";
+import { Injectable } from '@nestjs/common'
+import { UserRepository } from './user.repository'
+import { User } from '@prisma/client'
+import { UserCreateInput } from './models/UserCreateInput'
 
 @Injectable()
 export class UserService {
-  constructor(
-    private readonly postRepository: UserRepository,
-  ) {}
-
+  constructor(private readonly postRepository: UserRepository) {}
 
   // async findOne(id: string): Promise<User | null> {
   //   return this.prisma.post.findUnique({
@@ -19,11 +16,11 @@ export class UserService {
   // }
 
   async findAll(): Promise<User[]> {
-    return this.postRepository.findAll();
+    return this.postRepository.findAll()
   }
 
   async find(id: number): Promise<User> {
-    return this.postRepository.find({ id });
+    return this.postRepository.find({ id })
   }
 
   async create(input: UserCreateInput): Promise<User> {

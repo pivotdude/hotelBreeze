@@ -1,30 +1,31 @@
-import {request} from "graphql-request";
-import gql from "graphql-tag";
+import { request } from 'graphql-request'
+import gql from 'graphql-tag'
 
 export interface PostQuery {
-    title: string;
-    content: string;
-    user: {
-      name: string;
-    };
+  id: number
+  title: string
+  content: string
+  user: {
+    name: string
+  }
 }
 
 export interface PostsQuery {
-  posts: PostQuery[];
+  posts: PostQuery[]
 }
 
 export const fetchPosts = async (): Promise<PostsQuery> => {
-    const query = gql`
+  const query = gql`
     query GetPosts {
-        posts {
-            title
-            content
-            user {
-                name
-            }
+      posts {
+        id
+        title
+        content
+        user {
+          name
         }
+      }
     }
   `
-  return request("http://localhost:3005/graphql", query);
-};
-
+  return request('http://localhost:3005/graphql', query)
+}

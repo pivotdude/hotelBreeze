@@ -1,44 +1,39 @@
-
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {Post} from "@prisma/client";
-import {UserModel} from "../user/user.model";
+import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Post } from '@prisma/client'
+import { UserModel } from '../user/user.model'
 
 @ObjectType()
 export class PostModel implements Post {
-  @Field(type => Int)
-  id: number;
+  @Field((type) => Int)
+  id: number
 
   @Field()
-  uid: string;
+  uid: string
 
   @Field()
-  title: string;
+  title: string
 
   @Field()
-  content: string;
+  content: string
 
   @Field()
-  isPublished: boolean;
+  isPublished: boolean
 
   @Field()
-  text: string;
+  text: string
 
   @Field()
-  publishedAt: string;
+  publishedAt: string
 
-
-
-  @Field(type => Int)
+  @Field((type) => Int)
   userId: number
 
-  @Field(type => UserModel)
+  @Field((type) => UserModel)
   user: UserModel
 
-
+  @Field()
+  createdAt: Date
 
   @Field()
-  createdAt: Date;
-
-  @Field()
-  updatedAt: Date;
+  updatedAt: Date
 }
