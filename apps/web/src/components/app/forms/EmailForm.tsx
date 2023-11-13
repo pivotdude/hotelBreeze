@@ -1,12 +1,9 @@
 'use client'
-import { Input } from '@nextui-org/input'
-import { MailIcon } from '@nextui-org/shared-icons'
-import { Button } from '@nextui-org/react'
 import FormItem from '@/components/app/forms/FormItem'
-import { FormEvent, ReactEventHandler, useRef, useState } from 'react'
-import parseErrors, { IEmailFormData } from '@/schemes/EmailSchema'
-import EmailSchema from '@/schemes/EmailSchema'
-import getErrors from '@/schemes/EmailSchema'
+import { FormEvent, useRef, useState } from 'react'
+import getErrors, { IEmailFormData } from '@/schemes/EmailSchema'
+import { Input } from 'antd'
+import { Button } from '@nextui-org/react'
 
 export default function EmailForm() {
   const formRef = useRef()
@@ -27,15 +24,8 @@ export default function EmailForm() {
       <FormItem>
         <Input
           type="string"
-          label="Email"
-          variant="bordered"
-          isInvalid={errors.email !== undefined}
           placeholder="mail@example.com"
-          errorMessage={errors.email}
           className="max-w-xs"
-          startContent={
-            <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-          }
           name="email"
         />
       </FormItem>
