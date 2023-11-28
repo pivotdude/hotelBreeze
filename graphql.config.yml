@@ -1,0 +1,8 @@
+schema: schema.qpl
+documents: 'apps/server/src/*.gql'
+extensions:
+  endpoints:
+    One:
+      url: http://localhost:3005/graphql
+      headers:
+        Authorization: bearer ${ TOKEN }
