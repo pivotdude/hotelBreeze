@@ -8,6 +8,7 @@
     "build:server": "pnpm --filter server build",
     "build:web": "pnpm --filter web build",
     "build": "pnpm run --parallel build",
+    "start": "pnpm run --parallel start",
     "start:server": "pnpm --filter server start:prod",
     "start:web": "pnpm --filter web start",
     "format": "prettier apps",
