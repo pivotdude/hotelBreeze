@@ -2,8 +2,7 @@
 import FormItem from '@/components/app/forms/FormItem'
 import { FormEvent, useRef, useState } from 'react'
 import getErrors, { IEmailFormData } from '@/schemes/EmailSchema'
-import { Input } from 'antd'
-import { Button } from '@nextui-org/react'
+import { Button, Input } from 'antd'
 
 export default function EmailForm() {
   const formRef = useRef()
@@ -30,7 +29,7 @@ export default function EmailForm() {
         />
       </FormItem>
       <FormItem>
-        <Button type="submit">Отправить</Button>
+        <Button>Отправить</Button>
       </FormItem>
     </form>
   )

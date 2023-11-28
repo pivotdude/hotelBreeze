@@ -1,7 +1,7 @@
-import { request } from 'graphql-request'
 import gql from 'graphql-tag'
+import sendRequest from '@/core/sendRequest'
 
-export interface PostQuery {
+interface IPost {
   id: number
   title: string
   content: string
@@ -11,7 +11,7 @@ export interface PostQuery {
 }
 
 export interface PostsQuery {
-  posts: PostQuery[]
+  posts: IPost[]
 }
 
 export const fetchPosts = async (): Promise<PostsQuery> => {
@@ -27,5 +27,5 @@ export const fetchPosts = async (): Promise<PostsQuery> => {
       }
     }
   `
-  return request('http://localhost:3005/graphql', query)
+  return sendRequest<PostsQuery>(query)
 }
