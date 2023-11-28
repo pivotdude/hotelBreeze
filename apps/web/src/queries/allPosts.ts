@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import sendRequest from '@/core/sendRequest'
 
-interface IPost {
+export interface PostQuery {
   id: number
   title: string
   content: string
@@ -11,7 +11,7 @@ interface IPost {
 }
 
 export interface PostsQuery {
-  posts: IPost[]
+  posts: PostQuery[]
 }
 
 export const fetchPosts = async (): Promise<PostsQuery> => {
