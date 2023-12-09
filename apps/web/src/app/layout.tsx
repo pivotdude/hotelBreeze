@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Providers } from '@/components/app/core/providers'
 import NavBar from '@/components/app/core/NavBar'
 import { ReactNode } from 'react'
 
@@ -16,11 +15,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <Providers>
-          <NavBar />
-          <main className="px-80">{children}</main>
-          <footer></footer>
-        </Providers>
+        {/*<Providers>*/}
+        <NavBar />
+        <main className="px-80">{children}</main>
+        {/*</Providers>*/}
       </body>
     </html>
   )
