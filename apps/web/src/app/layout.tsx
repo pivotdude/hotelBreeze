@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from '@/components/app/core/NavBar'
 import { ReactNode } from 'react'
+import { ConfigProvider } from 'antd'
+import ruRu from 'antd/locale/ru_RU'
+import Footer from '@/components/app/core/footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,10 +18,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru">
       <body className={inter.className}>
-        {/*<Providers>*/}
-        <NavBar />
-        <main className="px-80">{children}</main>
-        {/*</Providers>*/}
+        <ConfigProvider locale={ruRu}>
+          <NavBar />
+          <main className="min-h-screen">{children}</main>
+          <footer className="bg-gray-50 px-32 mt-24">
+            <Footer />
+          </footer>
+        </ConfigProvider>
       </body>
     </html>
   )
