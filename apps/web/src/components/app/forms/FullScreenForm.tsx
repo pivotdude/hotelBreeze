@@ -6,6 +6,8 @@ interface FullScreenFormProps {
 
 export default function FullScreenForm({ children }: FullScreenFormProps) {
   return (
-    <div className="h-screen flex justify-center items-center">{children}</div>
+    <div className="h-screen flex justify-center items-center w-screen">
+      {children}
+    </div>
   )
 }

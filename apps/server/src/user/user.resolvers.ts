@@ -1,14 +1,6 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Subscription,
-  Int,
-} from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UserService } from './user.service'
-import { PubSub } from 'graphql-subscriptions'
-import { User, Prisma } from '@prisma/client'
+import { User } from '@prisma/client'
 import { UserModel } from './user.model'
 import { UserCreateInput } from './models/UserCreateInput'
 

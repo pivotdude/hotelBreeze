@@ -1,10 +1,9 @@
 'use client'
-import FormItem from '@/components/app/forms/FormItem'
 import { FormEvent, useRef, useState } from 'react'
 import getErrors, { IEmailFormData } from '@/schemes/EmailSchema'
-import { Button, Input } from 'antd'
+import { Button, Card, Form, Input } from 'antd'
 
-export default function EmailForm() {
+export default function EmailForm(props: { title: string }) {
   const formRef = useRef()
   const [errors, setErrors] = useState<IEmailFormData>({})
 
@@ -18,19 +17,18 @@ export default function EmailForm() {
   }
 
   return (
-    // @ts-ignore
-    <form onSubmit={onSubmit} ref={formRef}>
-      <FormItem>
-        <Input
-          type="string"
-          placeholder="mail@example.com"
-          className="max-w-xs"
-          name="email"
-        />
-      </FormItem>
-      <FormItem>
+    <Card className="w-96" title={props.title}>
+      <Form onFinish={onSubmit} layout="vertical">
+        <Form.Item name="email" label="Введите email адрес">
+          <Input
+            type="string"
+            placeholder="mail@example.com"
+            className="max-w-xs"
+            name="email"
+          />
+        </Form.Item>
         <Button>Отправить</Button>
-      </FormItem>
-    </form>
+      </Form>
+    </Card>
   )
 }

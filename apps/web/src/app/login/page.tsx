@@ -4,7 +4,7 @@ import EmailForm from '@/components/app/forms/EmailForm'
 export default function LoginPage() {
   return (
     <FullScreenForm>
-      <EmailForm />
+      <EmailForm title="Вход" />
     </FullScreenForm>
   )
 }
