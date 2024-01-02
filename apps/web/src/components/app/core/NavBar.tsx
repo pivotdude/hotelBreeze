@@ -1,13 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Menu } from 'antd'
-import {
-  AppstoreOutlined,
-  ContactsOutlined,
-  LoginOutlined,
-  MailOutlined,
-  ProfileOutlined,
-} from '@ant-design/icons'
+import { AppstoreOutlined, ContactsOutlined, LoginOutlined, MailOutlined, ProfileOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
 
 type MenuItemT = 'home' | 'app' | 'contacts'
@@ -50,6 +44,11 @@ export default function NavBar() {
       key: 'profile',
       icon: <ProfileOutlined />,
     },
+    {
+      label: 'Посты',
+      key: 'posts',
+      icon: <ProfileOutlined />,
+    },
   ]
 
   const isAuth = false
@@ -59,13 +58,5 @@ export default function NavBar() {
     setCurrent(e.key)
     router.push('/' + e.key)
   }
-  return (
-    <Menu
-      className="w-screen"
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
-  )
+  return <Menu className="w-screen" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
 }
