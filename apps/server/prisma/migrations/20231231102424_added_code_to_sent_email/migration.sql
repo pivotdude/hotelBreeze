@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "sentEmail" ADD COLUMN     "code" VARCHAR(6) NOT NULL DEFAULT '000000';

@@ -1,0 +1,87 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoleModel {
+  id: Int!
+  uid: String!
+  code: String!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserModel {
+  id: Int!
+  uid: String!
+  name: String!
+  email: String!
+  password: String!
+  isVerified: Boolean!
+  roleId: Int!
+  role: RoleModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PostModel {
+  id: Int!
+  uid: String!
+  title: String!
+  content: String!
+  isPublished: Boolean!
+  text: String!
+  publishedAt: String!
+  userId: Int!
+  user: UserModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AuthModel {
+  message: String!
+  type: String!
+}
+
+type Query {
+  posts: [PostModel!]!
+  post(id: Int!): PostModel!
+  users: [UserModel!]!
+  user(id: Int!): UserModel!
+  roles: [RoleModel!]!
+  role(id: Int!): RoleModel!
+}
+
+type Mutation {
+  confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
+  signup(email: String!): AuthModel!
+  signin(email: String!): AuthModel!
+  postCreate(input: PostCreateInput!): PostModel!
+  userCreate(input: UserCreateInput!): UserModel!
+  roleCreate(input: RoleCreateInput!): RoleModel!
+}
+
+input PostCreateInput {
+  title: String!
+  content: String!
+  isPublished: Boolean
+  userId: Int!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String!
+  roleId: Int!
+}
+
+input RoleCreateInput {
+  code: String!
+  name: String!
+  description: String!
+}
