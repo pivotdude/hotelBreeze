@@ -15,12 +15,12 @@ export class UserResolvers {
 
   @Query((returns) => UserModel)
   async user(@Args('id', { type: () => Int }) id: number): Promise<User> {
-    return this.userService.find(id)
+    return this.userService.findWhere({ id })
   }
 
   @Mutation((returns) => UserModel)
   async userCreate(@Args('input') args: UserCreateInput): Promise<User> {
-    return this.userService.create(args)
+    return this.userService.createUser(args)
   }
 
   // @Mutation('updateUser')

@@ -44,6 +44,11 @@ type PostModel {
   updatedAt: DateTime!
 }
 
+type AuthModel {
+  message: String!
+  type: String!
+}
+
 type Query {
   posts: [PostModel!]!
   post(id: Int!): PostModel!
@@ -54,6 +59,9 @@ type Query {
 }
 
 type Mutation {
+  confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
+  signup(email: String!): AuthModel!
+  signin(email: String!): AuthModel!
   postCreate(input: PostCreateInput!): PostModel!
   userCreate(input: UserCreateInput!): UserModel!
   roleCreate(input: RoleCreateInput!): RoleModel!
@@ -67,10 +75,8 @@ input PostCreateInput {
 }
 
 input UserCreateInput {
-  password: String!
   email: String!
   name: String!
-  isVerified: Boolean
   roleId: Int!
 }
 

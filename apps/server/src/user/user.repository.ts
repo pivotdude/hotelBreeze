@@ -8,9 +8,9 @@ import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 export class UserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async find(data: DefaultWhereInput): Promise<User | null> {
-    return this.prisma.user.findUnique({
-      where: data,
+  async findWhere(where: Partial<User>): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where,
       include: {
         role: true,
       },
@@ -25,19 +25,22 @@ export class UserRepository {
     })
   }
 
-  async create(data: UserCreateInput): Promise<User> {
+  async createUser(data: UserCreateInput): Promise<User> {
     return this.prisma.user.create({
       data,
     })
   }
 
-  async update(
-    where: DefaultWhereInput,
-    data: Prisma.UserUpdateInput
-  ): Promise<User> {
+  async update(where: DefaultWhereInput, data: Prisma.UserUpdateInput): Promise<User> {
     return this.prisma.user.update({
       data,
       where,
+    })
+  }
+
+  async findUser(data: any): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where: data,
     })
   }
 

@@ -3,6 +3,7 @@ import prisma from '../../src/core/libs/prisma'
 export default class RoleSeed {
   async run() {
     try {
+      console.log('Running RoleSeed')
       return await prisma.role.createMany({
         data: [
           {
