@@ -1,18 +1,11 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Subscription,
-  Int,
-} from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { PostService } from './post.service'
-import { Post, Prisma } from '@prisma/client'
+import { Post } from '@prisma/client'
 import { PostModel } from './post.model'
 import { PostCreateInput } from './models/PostCreateInput'
 
 @Resolver((of) => PostModel)
-export class PostResolvers {
+export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
   @Query((returns) => [PostModel])

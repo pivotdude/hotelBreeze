@@ -25,12 +25,10 @@ model Post {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  uid        String   @default(uuid())
-  name       String
-  email      String
-  password   String
-  isVerified Boolean? @default(false)
+  id    Int    @id @default(autoincrement())
+  uid   String @default(uuid())
+  name  String @unique
+  email String @unique
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
@@ -52,4 +50,44 @@ model Role {
   createdAt DateTime @default(now())
 
   users User[]
+}
+
+model SentEmail {
+  id       Int    @id @default(autoincrement())
+  uid      String @unique @default(uuid())
+  theme    String
+  email    String
+  template String
+  context  Json?
+  data     Json?
+  // code     String? @db.VarChar(6)
+
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  verificationCode VerificationCode?
+}
+
+model VerificationCodeType {
+  id               Int                @id @default(autoincrement())
+  uid              String             @unique @default(uuid())
+  name             String
+  code             String             @unique
+  VerificationCode VerificationCode[]
+}
+
+model VerificationCode {
+  id      Int      @id @default(autoincrement())
+  uid     String   @unique @default(uuid())
+  code    String
+  expired DateTime
+  attempt Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sentEmailId Int        @unique
+  sentEmail   SentEmail? @relation(fields: [sentEmailId], references: [id])
+
+  typeId Int
+  type   VerificationCodeType? @relation(fields: [typeId], references: [id])
 }

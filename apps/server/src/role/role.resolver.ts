@@ -1,19 +1,11 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Subscription,
-  Int,
-} from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { RoleService } from './role.service'
-import { PubSub } from 'graphql-subscriptions'
-import { Role, Prisma } from '@prisma/client'
+import { Role } from '@prisma/client'
 import { RoleModel } from './role.model'
 import { RoleCreateInput } from './models/RoleCreateInput'
 
 @Resolver((of) => RoleModel)
-export class RoleResolvers {
+export class RoleResolver {
   constructor(private readonly roleService: RoleService) {}
 
   @Query((returns) => [RoleModel])
