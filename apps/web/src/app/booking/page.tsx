@@ -128,6 +128,56 @@ export default function Booking() {
         },
       },
     },
+    {
+      id: 1,
+      title: 'Hotel 1',
+      src: 'https://placehold.co/600x400',
+      description: 'Description',
+      address: 'Address',
+      country: {
+        name: 'Angola',
+      },
+      city: 'City',
+      price: 100,
+      reviews: {
+        rating: 3,
+        count: 10,
+      },
+      data: {
+        guests: '1-10',
+        isEntireHome: true,
+        rooms: {
+          beds: 5,
+          bath: 3,
+          extras: ['Wifi', 'Kitchen', 'Free Parking'],
+        },
+      },
+    },
+    {
+      id: 1,
+      title: 'Hotel 1',
+      src: 'https://placehold.co/600x400',
+      description: 'Description',
+      address: 'Address',
+      country: {
+        name: 'Angola',
+      },
+      city: 'City',
+      price: 100,
+      reviews: {
+        rating: 3,
+        count: 10,
+      },
+      data: {
+        guests: '1-10',
+        isEntireHome: true,
+        rooms: {
+          beds: 5,
+          bath: 3,
+          extras: ['Wifi', 'Kitchen', 'Free Parking'],
+        },
+      },
+    },
   ] as IHotel[]
 
   return (
@@ -144,9 +194,9 @@ export default function Booking() {
         </Form>
       </Col>
       <Col xs={24}>
-        <Row gutter={[32, 32]}>
+        <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-2">
           <HotelList hotels={hotelList} />
-        </Row>
+        </div>
       </Col>
     </Row>
   )

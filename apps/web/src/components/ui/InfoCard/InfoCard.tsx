@@ -6,6 +6,7 @@ export interface InfoCardProps {
   src: string
   title: string
   description: string
+  width?: number
 }
 
 export default function InfoCard(props: InfoCardProps) {
@@ -13,7 +14,7 @@ export default function InfoCard(props: InfoCardProps) {
     <Card
       hoverable
       style={{
-        width: 250,
+        width: props.width,
       }}
       cover={
         <img alt={props.title} src={props.src} /> // TODO change on Image

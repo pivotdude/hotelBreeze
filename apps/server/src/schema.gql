@@ -46,7 +46,7 @@ type PostModel {
 
 type AuthModel {
   message: String!
-  type: String!
+  access_token: String
 }
 
 type Query {
@@ -60,8 +60,9 @@ type Query {
 
 type Mutation {
   confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
-  signup(email: String!): AuthModel!
-  signin(email: String!): AuthModel!
+  confirmAuthorization(email: String!, code: String!): AuthModel!
+  registration(email: String!): AuthModel!
+  login(email: String!): AuthModel!
   postCreate(input: PostCreateInput!): PostModel!
   userCreate(input: UserCreateInput!): UserModel!
   roleCreate(input: RoleCreateInput!): RoleModel!

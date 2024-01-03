@@ -1,7 +1,7 @@
-import { Button, Col, Divider, Rate, Row, Space, Typography } from 'antd'
-import { ArrowDownOutlined, HeartOutlined } from '@ant-design/icons'
+import { Card, Col, Row } from 'antd'
 import { useRouter } from 'next/navigation'
-import DotList from '@/components/ui/Dot/DotList'
+import { StarFilled } from '@ant-design/icons'
+import { trimText } from '@/helpers/utils'
 
 export interface IHotel {
   id: number
@@ -31,56 +31,40 @@ export interface IHotel {
 export interface HotelCardProps {
   hotel: IHotel
 }
-
 export default function HotelCard({ hotel }: HotelCardProps) {
   const router = useRouter()
   const id = 1
   return (
-    <>
-      <Col xs={9}>
-        <img src={hotel.src} alt="" className="w-full h-full" />
-      </Col>
-      <Col xs={15}>
-        <Row justify="space-between" className="h-full">
-          <Col xs={24}>
-            <Typography.Title>{hotel.title}</Typography.Title>
-            <Divider type="horizontal" />
-            <p>{hotel.description}</p>
-            <DotList>
-              <p>{hotel.data.rooms.bath} ван</p>
-              <p>{hotel.data.rooms.beds} кроватей</p>
-              {hotel.data.rooms.extras.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
-            </DotList>
-            <Divider type="horizontal" />
-          </Col>
-          <Col xs={24}>
-            <div className="flex items-center">
-              <p className="mr-2">{hotel.reviews.rating}</p>
-              <Rate disabled value={hotel.reviews.rating} className="mr-2" />
-              <p>({hotel.reviews.count} отзывов)</p>
-            </div>
-          </Col>
-          <Col xs={24}>
-            <Typography.Title level={4}>315$/ноч</Typography.Title>
-          </Col>
-          <Col xs={24} className="flex items-end">
-            <Space direction="horizontal" size={20}>
-              <Button icon={<HeartOutlined />} size="large">
-                В избранное
-              </Button>
-              <Button
-                icon={<ArrowDownOutlined />}
-                size="large"
-                onClick={() => router.push(`/hotel/${id}`)}
-              >
-                Подробнее
-              </Button>
-            </Space>
-          </Col>
-        </Row>
-      </Col>
-    </>
+    <Card
+      bordered={true}
+      style={{
+        width: '380px',
+      }}
+      cover={
+        <img
+          src="https://imgs.search.brave.com/2ZW4UwyX7JuMUjBWs92yMAFTko98GxRRug6ZjJIicWo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI4/NjIxNTk1Mi9waG90/by9idXNpbmVzcy1o/b3RlbC5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9WWFPVnQ4/OEVMa2JGQTFic2E0/bndqMUZER1p4WWda/d1JkdlFyc2VhY1lB/cz0"
+          alt=""
+        />
+      }
+    >
+      <Row gutter={[8, 8]}>
+        <Col xs={24}>
+          <Row gutter={[16, 16]} justify="space-between">
+            <Col>{hotel.title}</Col>
+            <Col>
+              <StarFilled />
+              <span className="ml-[120] mr-1.5">{hotel.reviews.rating}</span>
+              <span>({hotel.reviews.rating})</span>
+            </Col>
+          </Row>
+        </Col>
+        <Col xs={24}>
+          <div>{trimText(hotel.description, 100)}</div>
+        </Col>
+        <Col xs={24}>
+          <div>{hotel.price} Р за ночь</div>
+        </Col>
+      </Row>
+    </Card>
   )
 }

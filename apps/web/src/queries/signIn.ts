@@ -1,21 +1,18 @@
 import { gql } from 'graphql-tag'
 import sendRequest from '@/core/sendRequest'
 import { IEmailFormData } from '@/components/app/forms/EmailForm'
-import { NotificationType } from '@/models'
 
 export interface SignInQuery {
-  signin: {
+  signIn: {
     message: string
-    type: NotificationType
   }
 }
 
-export const signIn = async ({ email }: IEmailFormData): Promise<SignInQuery | undefined> => {
+export const signIn = async ({ email }: IEmailFormData): Promise<SignInQuery> => {
   const query = gql`
-    mutation signin($email: String!) {
-      signin(email: $email) {
+    mutation signIn($email: String!) {
+      signIn(email: $email) {
         message
-        type
       }
     }
   `

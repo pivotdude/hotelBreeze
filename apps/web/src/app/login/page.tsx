@@ -2,18 +2,27 @@
 import FullScreenForm from '@/components/app/forms/FullScreenForm'
 import EmailForm, { IEmailFormData } from '@/components/app/forms/EmailForm'
 import { signIn } from '@/queries/signIn'
-import { getNotification } from '@/helpers/utils'
+import { useState } from 'react'
+import CodeForm from '@/components/app/forms/CodeForm'
+import Notification from '@/helpers/Notification'
+import { confirmAuthorization } from '@/queries/confirmAuthorization'
 
 export default function LoginPage() {
+  const [step, setStep] = useState(1)
   const onSubmit = async ({ email }: IEmailFormData) => {
-    const result = await signIn({ email })
-    console.log('rrr1', result)
-    if (!result) return
-    getNotification(result.signin)
+    await signIn({ email }).then((result) => {
+      Notification.success(result.signIn.message)
+      setStep(2)
+    })
   }
+
+  const verifySignIn = async ({ code, email }: { code: string }) => {
+    await confirmAuthorization()
+  }
+
   return (
-    <FullScreenForm>
-      <EmailForm title="Вход" onSubmit={onSubmit} />
+    <FullScreenForm title="Авторизация">
+      {step === 1 ? <EmailForm onSubmit={onSubmit} /> : <CodeForm onSubmit={verifySignIn} />}
     </FullScreenForm>
   )
 }

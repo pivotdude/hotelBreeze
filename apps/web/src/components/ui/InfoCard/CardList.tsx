@@ -2,6 +2,7 @@ import InfoCard, { InfoCardProps } from '@/components/ui/InfoCard/InfoCard'
 
 interface CardListProps {
   items: InfoCardProps[]
+  width?: number
 }
 
 export default function CardList(props: CardListProps) {
@@ -13,6 +14,7 @@ export default function CardList(props: CardListProps) {
           src={country.src}
           title={country.title}
           description={country.description}
+          width={props.width || 250}
         />
       ))}
     </>

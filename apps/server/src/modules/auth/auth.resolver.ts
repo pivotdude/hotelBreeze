@@ -16,14 +16,20 @@ export class AuthResolver {
   }
 
   @Mutation((returns) => AuthModel)
-  async signup(@Args('email', { type: () => String }) email: string) {
+  async confirmAuthorization(
+    @Args('email', { type: () => String }) email: string,
+    @Args('code', { type: () => String }) code: string // Добавлен аргумент code
+  ) {
+    return this.authService.confirmAuthorization({ email, code })
+  }
+
+  @Mutation((returns) => AuthModel)
+  async registration(@Args('email', { type: () => String }) email: string) {
     return this.authService.register({ email })
   }
 
   @Mutation((returns) => AuthModel)
-  async signin(@Args('email', { type: () => String }) email: string) {
-    const result = await this.authService.login({ email })
-    console.log('rws', result)
-    return result
+  async login(@Args('email', { type: () => String }) email: string) {
+    return this.authService.login({ email })
   }
 }
