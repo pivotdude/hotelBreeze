@@ -1,0 +1,88 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type AuthModel {
+    message: String!
+    type: String!
+}
+
+type Mutation {
+    confirmRegistration(code: String!, email: String!, name: String!): AuthModel!
+    postCreate(input: PostCreateInput!): PostModel!
+    roleCreate(input: RoleCreateInput!): RoleModel!
+    signin(email: String!): AuthModel!
+    signup(email: String!): AuthModel!
+    userCreate(input: UserCreateInput!): UserModel!
+}
+
+type PostModel {
+    content: String!
+    createdAt: DateTime!
+    id: Int!
+    isPublished: Boolean!
+    publishedAt: String!
+    text: String!
+    title: String!
+    uid: String!
+    updatedAt: DateTime!
+    user: UserModel!
+    userId: Int!
+}
+
+type Query {
+    post(id: Int!): PostModel!
+    posts: [PostModel!]!
+    role(id: Int!): RoleModel!
+    roles: [RoleModel!]!
+    user(id: Int!): UserModel!
+    users: [UserModel!]!
+}
+
+type RoleModel {
+    code: String!
+    createdAt: DateTime!
+    description: String!
+    id: Int!
+    name: String!
+    uid: String!
+    updatedAt: DateTime!
+}
+
+type UserModel {
+    createdAt: DateTime!
+    email: String!
+    id: Int!
+    isVerified: Boolean!
+    name: String!
+    password: String!
+    role: RoleModel!
+    roleId: Int!
+    uid: String!
+    updatedAt: DateTime!
+}
+
+"A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
+scalar DateTime
+
+input PostCreateInput {
+    content: String!
+    isPublished: Boolean
+    title: String!
+    userId: Int!
+}
+
+input RoleCreateInput {
+    code: String!
+    description: String!
+    name: String!
+}
+
+input UserCreateInput {
+    email: String!
+    name: String!
+    roleId: Int!
+}

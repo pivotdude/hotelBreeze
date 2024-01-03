@@ -21,3 +21,7 @@ export const getNotification = (args: IMessage) => {
     return Notification.info(args.message)
   }
 }
+
+export const trimText = (text: string, length: number, char: string = '...') => {
+  return text.length > length ? text.slice(0, length) + char : text
+}

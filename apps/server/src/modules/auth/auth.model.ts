@@ -4,6 +4,6 @@ import { Field, ObjectType } from '@nestjs/graphql'
 export class AuthModel {
   @Field()
   message: string
-  @Field()
-  type: string
+  @Field({ nullable: true })
+  access_token: string
 }

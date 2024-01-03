@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { EmailInput } from './models/EmailInput'
 import { MailService } from '../../mail/mail.service'
 import { FindArgs } from '../../mail/mail.repository'
 import { UserService } from '../../user/user.service'
 import { RegistrationInput } from './models/RegistrationInput'
 import { JwtService } from '@nestjs/jwt'
-import { IMessage } from '../../Models'
+import { CodeInput } from './models/CodeInput'
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
     const code = this.#generateFourDigitCode()
     const user = await this.userService.findWhere({ email: input.email })
     if (user) {
-      return { message: 'Пользователь с такой почтой уже существует', type: 'error' } as IMessage
+      throw new Error('Пользователь с такой почтой уже существует')
     }
     await this.mailService.sendVerificationEmail({
       email: input.email,
@@ -28,23 +28,21 @@ export class AuthService {
       context: { code },
       code,
     })
-    return { message: 'Код отправлен на почту', type: 'info' } as IMessage
+    return { message: 'Код отправлен на почту' }
   }
 
   async confirmRegistration(loginData: RegistrationInput) {
     console.log('lD', loginData)
-    const result = await this.#checkCode({
+    await this.#checkCode({
       email: loginData.email,
       code: loginData.code,
       template: 'confirmationRegistration',
     })
-    console.log('result', result)
-    if (result) {
-      const user = await this.userService.createUser({ email: loginData.email, roleId: 2, name: loginData.name })
-      console.log(user)
-      return { message: 'Вы успешно зарегистрировались', type: 'success' } as IMessage
-    }
-    return { message: 'Неверный код подтверждения', type: 'error' } as IMessage
+
+    const user = await this.userService.createUser({ email: loginData.email, roleId: 2, name: loginData.name })
+    console.log(user)
+    return { message: 'Вы успешно зарегистрировались' }
+    throw new UnauthorizedException('Неверный код подтверждения')
   }
 
   #generateFourDigitCode() {
@@ -59,26 +57,49 @@ export class AuthService {
   async #checkCode(args: FindArgs) {
     const email = await this.mailService.findEmail(args)
     if (!email) {
-      return { message: 'Время истекло, запросите новый код', type: 'error' } as IMessage
+      throw new UnauthorizedException('Время истекло, запросите новый код')
     }
 
     if (email.verificationCode.attempt > 3) {
-      return { message: 'Количество попыток исчерпано, запросите новый код', type: 'error' } as IMessage
+      throw new UnauthorizedException('Количество попыток исчерпано')
     }
 
     await this.mailService.addAttempt(email.id)
     console.log(email.verificationCode.code + '===' + args.code)
-    return email.verificationCode.code === args.code
+
+    if (email.verificationCode.code !== args.code) {
+      throw new UnauthorizedException('Неверный код')
+    }
   }
 
   async login(input: EmailInput) {
-    console.log(input)
+    const code = this.#generateFourDigitCode()
     const user = await this.userService.findUser({ email: input.email })
     console.log('user', user)
-    if (user) {
-      const payload = { sub: user.uid, username: user.name }
-      return { access_token: await this.jwtService.signAsync(payload) }
+    console.log('user', input)
+    if (!user) {
+      throw new Error('Пользователь с такой почтой не найден')
     }
-    return { message: 'Пользователь не найден', type: 'error' } as IMessage
+    await this.mailService.sendVerificationEmail({
+      email: input.email,
+      theme: 'Авторизация',
+      template: 'confirmationLogin',
+      context: { code, name: user.name },
+      code,
+    })
+    console.log('user', user)
+    return { message: 'Код отправлен на почту' }
+  }
+
+  async confirmAuthorization({ email, code }: CodeInput) {
+    const user = await this.userService.findUser({ email: email })
+    if (!user) {
+      throw new Error('Пользователь с такой почтой не найден')
+    }
+
+    await this.#checkCode({ email, code, template: 'confirmationLogin' })
+
+    const payload = { sub: user.uid, username: user.name }
+    return { access_token: await this.jwtService.signAsync(payload) }
   }
 }
