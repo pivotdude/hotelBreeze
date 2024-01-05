@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Post } from '@prisma/client'
 import { UserModel } from '../user/user.model'
+import { ImageModel } from '../models/image.model'
 
 @ObjectType()
 export class PostModel implements Post {
@@ -30,6 +31,11 @@ export class PostModel implements Post {
 
   @Field((type) => UserModel)
   user: UserModel
+
+  @Field((type) => Int)
+  previewImageId: number
+  @Field((type) => ImageModel)
+  previewImage: ImageModel
 
   @Field()
   createdAt: Date

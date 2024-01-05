@@ -3,7 +3,7 @@ import prisma from '../../src/core/libs/prisma'
 export default class RoleSeed {
   async run() {
     try {
-      console.log('Running RoleSeed')
+      console.log('Running RoleSeed...')
       return await prisma.role.createMany({
         data: [
           {
@@ -20,7 +20,7 @@ export default class RoleSeed {
       })
     } catch (error) {
       console.error('Error in RoleSeed.run: ', error)
-      throw error // rethrow the error after logging
+      throw error
     }
   }
 }

@@ -59,28 +59,18 @@ export default function HotelPage({ params, searchParams }: HotelPageProps) {
             <HotelDopInfoList hotel={hotel} />
           </Col>
           <Col>
-            <Avatar
-              src="https://i.pinimg.com/736x/22/6f/fb/226ffb62d48c9db63c563ff82e472b8c.jpg"
-              size={48}
-            />
+            <Avatar src="https://i.pinimg.com/736x/22/6f/fb/226ffb62d48c9db63c563ff82e472b8c.jpg" size={48} />
           </Col>
           <Divider type="horizontal" />
         </Row>
-        {/*<Row justify="space-between" gutter={[32, 32]}>*/}
-        {/*  <Col span={14}>*/}
-        {/*    <Row justify="space-between">*/}
-
-        {/*    </Row>*/}
-        {/*  </Col>*/}
-        {/*  <Col span={10}>*/}
-        {/*    <Card className="w-full">*/}
-        {/*      <BookingForm />*/}
-        {/*    </Card>*/}
-        {/*  </Col>*/}
-        {/*</Row>*/}
       </Col>
       <Col xs={24}>
-        <BookingForm />
+        <Row gutter={[32, 32]}>
+          <Col xs={4}>
+            <BookingForm />
+          </Col>
+          <Col xs={20}>wasd</Col>
+        </Row>
       </Col>
     </Row>
   )

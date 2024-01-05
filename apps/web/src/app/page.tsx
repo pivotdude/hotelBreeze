@@ -1,26 +1,25 @@
 import { Col, Row } from 'antd'
-import image from './../components/app/home/banner/Big Card.png'
+import image from '@/modules/main/source/card.png'
 import Image from 'next/image'
-import PickCountry from '@/components/app/home/PickCountry/PickCountry'
-import PickHotel from '@/components/app/home/PickHotel/PickHotel'
-import DiscoverBanner from '@/components/app/home/Banners/DiscoverBanner'
+import DiscoverBanner from '@/modules/main/components/DiscoverBanner'
+import { fetchCountries } from '@/modules/main/queries/fetchCountries'
+import GridCardList from '@/components/ui/InfoCard/GridCardList'
 
 export default async function Home() {
-  // const posts = await fetchPosts()
+  const countries = await fetchCountries()
+  // console.log(countries.countries[0].previewImage)
+
   return (
     <Row gutter={[64, 64]} className="px-32">
       <Col xs={24}>
         <div className="bg-sky-300">
           <Image alt="ss" src={image} />
-          {/*<img className="object-cover h-[720px] w-full" src={image} />*/}
+          {/*<source className="object-cover h-[720px] w-full" src={image} />*/}
         </div>
       </Col>
 
       <Col xs={24}>
-        <PickCountry />
-      </Col>
-      <Col xs={24}>
-        <PickHotel />
+        <GridCardList items={countries.countries} title="Страны" href="/country" />
       </Col>
       <Col xs={24}>
         <DiscoverBanner />

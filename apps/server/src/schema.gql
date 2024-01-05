@@ -26,8 +26,18 @@ type UserModel {
   isVerified: Boolean!
   roleId: Int!
   role: RoleModel!
+  avatarId: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type ImageModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String!
+  name: String!
 }
 
 type PostModel {
@@ -40,6 +50,8 @@ type PostModel {
   publishedAt: String!
   userId: Int!
   user: UserModel!
+  previewImageId: Int!
+  previewImage: ImageModel!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -49,7 +61,37 @@ type AuthModel {
   access_token: String
 }
 
+type LanguageModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  avatarId: Int!
+  name: String!
+  code: String!
+}
+
+type CountryModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  code: String!
+  description: String!
+  languageId: Float!
+  englishName: String!
+  avatarId: Int!
+  previewImageId: Int!
+  previewImage: ImageModel!
+  bannerImageId: Int!
+  bannerImage: ImageModel!
+  language: LanguageModel!
+}
+
 type Query {
+  countries: [CountryModel!]!
+  country(uid: Int!): CountryModel!
   posts: [PostModel!]!
   post(id: Int!): PostModel!
   users: [UserModel!]!

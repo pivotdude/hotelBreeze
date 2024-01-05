@@ -12,14 +12,14 @@ type AuthModel {
 
 type Mutation {
     confirmRegistration(code: String!, email: String!, name: String!): AuthModel!
-    postCreate(input: PostCreateInput!): PostModel!
+    postCreate(input: PostCreateInput!): CountryModel!
     roleCreate(input: RoleCreateInput!): RoleModel!
     signin(email: String!): AuthModel!
     signup(email: String!): AuthModel!
     userCreate(input: UserCreateInput!): UserModel!
 }
 
-type PostModel {
+type CountryModel {
     content: String!
     createdAt: DateTime!
     id: Int!
@@ -34,8 +34,8 @@ type PostModel {
 }
 
 type Query {
-    post(id: Int!): PostModel!
-    posts: [PostModel!]!
+    post(id: Int!): CountryModel!
+    posts: [CountryModel!]!
     role(id: Int!): RoleModel!
     roles: [RoleModel!]!
     user(id: Int!): UserModel!

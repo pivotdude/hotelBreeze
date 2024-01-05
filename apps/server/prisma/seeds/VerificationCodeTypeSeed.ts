@@ -19,7 +19,7 @@ export default class VerificationCodeTypeSeed {
         ],
       })
     } catch (error) {
-      console.error('Error in RoleSeed.run: ', error)
+      console.error('Error in VerificationCodeTypeSeed: ', error)
       throw error // rethrow the error after logging
     }
   }

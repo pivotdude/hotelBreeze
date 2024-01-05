@@ -36,7 +36,7 @@ export default function HotelCard({ hotel }: HotelCardProps) {
   const id = 1
   return (
     <Card
-      bordered={true}
+      hoverable
       style={{
         width: '380px',
       }}
@@ -46,6 +46,7 @@ export default function HotelCard({ hotel }: HotelCardProps) {
           alt=""
         />
       }
+      onClick={() => router.push(`/hotel/${hotel.id}`)}
     >
       <Row gutter={[8, 8]}>
         <Col xs={24}>
