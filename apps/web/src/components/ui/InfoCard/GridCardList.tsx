@@ -2,6 +2,7 @@
 import { Typography } from 'antd'
 import CardList from '@/components/ui/InfoCard/CardList'
 import { InfoCardItem } from '@/components/ui/InfoCard/InfoCard'
+import { useSession } from 'next-auth/react'
 
 interface PickerProps {
   title: string
@@ -10,6 +11,8 @@ interface PickerProps {
 }
 
 export default function GridCardList(props: PickerProps) {
+  const session = useSession()
+  console.log('ses', session)
   return (
     <>
       <Typography.Title level={3}>{props.title}</Typography.Title>

@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Country } from '@prisma/client'
 import { LanguageModel } from '../models/language.model'
 import { ImageModel } from '../models/image.model'
+import { CityModel } from '../models/city.model'
 
 @ObjectType()
 export class CountryModel implements Country {
@@ -27,9 +28,6 @@ export class CountryModel implements Country {
   description: string
 
   @Field()
-  languageId: number
-
-  @Field()
   englishName: string
 
   @Field((type) => Int)
@@ -45,6 +43,11 @@ export class CountryModel implements Country {
   @Field((type) => ImageModel)
   bannerImage: ImageModel
 
+  @Field()
+  languageId: number
   @Field((type) => LanguageModel)
   language: LanguageModel
+
+  @Field((type) => [CityModel], { nullable: true })
+  cities: CityModel[]
 }

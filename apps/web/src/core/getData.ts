@@ -1,6 +1,6 @@
 import 'server-only'
-import { BACKEND_URL } from '@/constants/proccess'
 import { httpMethods } from '@/models/CoreModels'
+import constants from '@/constants'
 
 export default async function getData<T>(
   url: string,
@@ -17,7 +17,7 @@ export default async function getData<T>(
     fetchOptions.body = JSON.stringify(body)
   }
 
-  const response: Response = await fetch(BACKEND_URL + url, fetchOptions)
+  const response: Response = await fetch(constants.BACKEND_URL + url, fetchOptions)
   const data: T = await response.json()
   return data as T
 }

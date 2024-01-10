@@ -2,6 +2,7 @@
 import Meta from 'antd/es/card/Meta'
 import { Card } from 'antd'
 import { useRouter } from 'next/navigation'
+import Image from '@/components/ui/Image'
 
 export interface InfoCardItem {
   uid: string
@@ -10,6 +11,7 @@ export interface InfoCardItem {
   description: string
   previewImage: {
     url: string
+    name: string
   }
 }
 
@@ -28,7 +30,7 @@ export default function InfoCard({ item, width, href }: InfoCardProps) {
         width,
       }}
       cover={
-        <img alt={item.name} src={item?.previewImage?.url} /> // TODO change on Image
+        <Image alt={item.previewImage.name} src={item?.previewImage?.url} /> // TODO change on Image
       }
       onClick={() => href && router.push(href + '/' + item.englishName)}
     >

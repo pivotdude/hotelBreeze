@@ -1,16 +1,16 @@
-import { IsEmail, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsObject, IsOptional, IsString } from 'class-validator'
 
 export class SendEmailDto {
   @IsEmail()
-  email: string;
+  email: string
 
   @IsString()
-  theme: string;
+  theme: string
 
   @IsString()
-  template: string;
+  template: string
 
   // @IsOptional()
   @IsObject()
-  context: any;
+  context: any
 }

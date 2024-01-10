@@ -1,4 +1,16 @@
 import postsHandlers from '@/mocks/postsHandlers'
-import { STABS_ENABLE } from '@/constants/proccess'
+import constants from '@/constants'
+import countriesHandlers from '@/mocks/countriesHandlers'
+import countriesCitiesHandlers from '@/mocks/countriesCitiesHandlers'
+import ImagesHandlers from '@/mocks/ImagesHandlers'
+import confirmAuthorizationHandler from '@/mocks/confirmAuthorizationHandler'
 
-export const handlers = STABS_ENABLE ? [...postsHandlers] : []
+export const handlers = constants.STABS_ENABLE
+  ? [
+      ...postsHandlers,
+      ...countriesHandlers,
+      ...countriesCitiesHandlers,
+      ...ImagesHandlers,
+      ...confirmAuthorizationHandler,
+    ]
+  : []

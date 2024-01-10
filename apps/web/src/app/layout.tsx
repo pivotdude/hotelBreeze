@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
-import { ConfigProvider } from 'antd'
-import ruRu from 'antd/locale/ru_RU'
+
 import NavBar from '@/components/app/core/NavBar'
 import Footer from '@/components/app/core/footer/Footer'
+import { Providers } from '@/components/app/core/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
@@ -17,13 +17,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <ConfigProvider locale={ruRu}>
+        <Providers>
           <NavBar />
           <main className="min-h-screen max-w-full">{children}</main>
           <footer className="bg-gray-50 px-32 mt-24">
             <Footer />
           </footer>
-        </ConfigProvider>
+        </Providers>
       </body>
     </html>
   )

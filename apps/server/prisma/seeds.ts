@@ -4,9 +4,21 @@ import VerificationCodeTypeSeed from './seeds/VerificationCodeTypeSeed'
 import CountrySeed from './seeds/CountrySeed'
 import LanguageSeed from './seeds/LanguageSeed'
 import ImageSeed from './seeds/ImageSeed'
+import HotelSeed from './seeds/HotelSeed'
+import CitySeed from './seeds/CitySeed'
+import ImageHotelSeed from './seeds/ImageHotelSeed'
 
 async function main() {
-  const seeds = [RoleSeed, VerificationCodeTypeSeed, ImageSeed, LanguageSeed, CountrySeed]
+  const seeds = [
+    RoleSeed,
+    VerificationCodeTypeSeed,
+    ImageSeed,
+    LanguageSeed,
+    CountrySeed,
+    CitySeed,
+    HotelSeed,
+    ImageHotelSeed,
+  ]
 
   try {
     for (const Seed of seeds) {

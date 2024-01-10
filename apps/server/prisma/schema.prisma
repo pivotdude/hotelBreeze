@@ -111,7 +111,7 @@ model Country {
   languageId     Int?
   language       Language? @relation(fields: [languageId], references: [id])
   previewImageId Int?
-  previewImage   Image?    @relation("preview", fields: [previewImageId], references: [id])
+  previewImage   Image?    @relation("view", fields: [previewImageId], references: [id])
   bannerImageId  Int?
   bannerImage    Image?    @relation("banner", fields: [bannerImageId], references: [id])
   cities         City[]
@@ -141,11 +141,12 @@ model City {
   englishName String
 
   previewImageId Int?
-  previewImage   Image?  @relation("preview", fields: [previewImageId], references: [id])
+  previewImage   Image?  @relation("view", fields: [previewImageId], references: [id])
   bannerImageId  Int?
   bannerImage    Image?  @relation("banner", fields: [bannerImageId], references: [id])
   countryId      Int
   country        Country @relation(fields: [countryId], references: [id])
+  hotels         Hotel[]
 }
 
 model Image {
@@ -157,11 +158,34 @@ model Image {
   url  String
   name String
 
+  hotelId        Int?
+  hotel          Hotel?    @relation("hotelImage", fields: [hotelId], references: [id])
   countryBanner  Country[] @relation("banner")
-  countryPreview Country[] @relation("preview")
+  countryPreview Country[] @relation("view")
   language       Language?
   user           User[]
   post           Post[]
   cityBanner     City[]    @relation("banner")
-  cityPreview    City[]    @relation("preview")
+  cityPreview    City[]    @relation("view")
+  hotelPreview   Hotel[]
+}
+
+model Hotel {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title        String
+  description  String?
+  price        Int
+  data         Json
+  reviewRating Decimal? @default(0) @db.Decimal(2, 2)
+  reviewCount  Int?     @default(0)
+
+  images         Image[] @relation("hotelImage")
+  cityId         Int
+  city           City    @relation(fields: [cityId], references: [id])
+  previewImageId Int?
+  previewImage   Image?  @relation(fields: [previewImageId], references: [id])
 }

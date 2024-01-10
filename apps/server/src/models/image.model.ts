@@ -20,4 +20,7 @@ export class ImageModel implements Image {
 
   @Field()
   name: string
+
+  @Field((type) => Int, { nullable: true })
+  hotelId: number
 }

@@ -38,6 +38,7 @@ type ImageModel {
   updatedAt: DateTime!
   url: String!
   name: String!
+  hotelId: Int
 }
 
 type PostModel {
@@ -58,7 +59,12 @@ type PostModel {
 
 type AuthModel {
   message: String!
-  access_token: String
+}
+
+type ConfirmAuthorizationModel {
+  access_token: String!
+  message: String!
+  user: UserModel!
 }
 
 type LanguageModel {
@@ -71,6 +77,21 @@ type LanguageModel {
   code: String!
 }
 
+type CityModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  englishName: String!
+  previewImageId: Int
+  previewImage: ImageModel!
+  bannerImageId: Int
+  bannerImage: ImageModel!
+  countryId: Int!
+  country: CountryModel!
+}
+
 type CountryModel {
   id: Int!
   uid: String!
@@ -79,19 +100,53 @@ type CountryModel {
   name: String!
   code: String!
   description: String!
-  languageId: Float!
   englishName: String!
   avatarId: Int!
   previewImageId: Int!
   previewImage: ImageModel!
   bannerImageId: Int!
   bannerImage: ImageModel!
+  languageId: Float!
   language: LanguageModel!
+  cities: [CityModel!]
+}
+
+type RoomsModel {
+  beds: Float!
+  bath: Float!
+  extras: [String!]!
+}
+
+type DataModel {
+  maxGuests: Float!
+  isEntireHome: Boolean!
+  rooms: RoomsModel!
+}
+
+type HotelModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  description: String
+  price: Float!
+  reviewRating: Float!
+  reviewCount: Int!
+  data: DataModel!
+  cityId: Int!
+  city: CityModel!
+  previewImageId: Int!
+  previewImage: ImageModel!
+  images: [ImageModel!]!
 }
 
 type Query {
+  hotels: [HotelModel!]!
+  hotel(uid: String!): HotelModel!
   countries: [CountryModel!]!
   country(uid: Int!): CountryModel!
+  profile: UserModel!
   posts: [PostModel!]!
   post(id: Int!): PostModel!
   users: [UserModel!]!
@@ -102,7 +157,7 @@ type Query {
 
 type Mutation {
   confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
-  confirmAuthorization(email: String!, code: String!): AuthModel!
+  confirmAuthorization(email: String!, code: String!): ConfirmAuthorizationModel!
   registration(email: String!): AuthModel!
   login(email: String!): AuthModel!
   postCreate(input: PostCreateInput!): PostModel!

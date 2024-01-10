@@ -1,4 +1,12 @@
 /*@tailwind base;*/
 @tailwind components;
 @tailwind utilities;
-@import 'antd/dist/reset.css';
+/*@import 'antd/dist/reset.css';*/
+
+p {
+    margin: 0;
+}
+.ant-image {
+    width: 100%;
+    height: 100%;
+}

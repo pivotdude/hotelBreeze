@@ -6,6 +6,7 @@ export interface CountryQuery {
   name: string
   description: string
   englishName: string
+  code: string
   language: {
     name: string
   }
@@ -19,7 +20,7 @@ export interface CountriesQuery {
   countries: CountryQuery[]
 }
 
-export const fetchCountries = async (): Promise<CountriesQuery> => {
+export const fetchCountries = async (): Promise<CountriesQuery | void> => {
   const query = gql`
     query GetCountries {
       countries {
@@ -27,6 +28,7 @@ export const fetchCountries = async (): Promise<CountriesQuery> => {
         name
         description
         englishName
+        code
         language {
           name
         }
