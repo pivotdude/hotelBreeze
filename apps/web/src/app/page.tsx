@@ -1,4 +1,3 @@
-'use client'
 import { Col, Row } from 'antd'
 import image from '@/modules/main/source/card.png'
 import Image from 'next/image'
