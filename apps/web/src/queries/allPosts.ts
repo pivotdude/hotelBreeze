@@ -14,7 +14,7 @@ export interface PostsQuery {
   posts: PostQuery[]
 }
 
-export const fetchPosts = async (): Promise<PostsQuery> => {
+export const fetchPosts = async (): Promise<PostsQuery | void> => {
   const query = gql`
     query GetPosts {
       posts {

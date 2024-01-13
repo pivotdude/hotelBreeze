@@ -1,12 +1,18 @@
-import 'server-only'
-import { BACKEND_URL, STABS_ENABLE } from '@/constants/proccess'
-import request from 'graphql-request'
+// import 'server-only'
+import constants from '@/constants'
 import initMocks from '@/mocks/server'
+import client from '@/libs/graphql'
+import processGraphqlError from '@/helpers/processGraphqlError'
 
-if (STABS_ENABLE) {
+if (constants.STABS_ENABLE === 'enabled') {
   initMocks()
 }
 
-export default async function sendRequest<T>(query: any): Promise<T> {
-  return request(BACKEND_URL + '/graphql', query)
+export default async function sendRequest<T>(query: any, vars: any = {}, withToken: boolean = false) {
+  try {
+    return (await client.request(query, vars)) as T
+  } catch (error: any) {
+    console.log('initial error', error)
+    return processGraphqlError(error)
+  }
 }

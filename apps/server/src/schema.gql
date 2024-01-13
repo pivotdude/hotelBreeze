@@ -26,8 +26,19 @@ type UserModel {
   isVerified: Boolean!
   roleId: Int!
   role: RoleModel!
+  avatarId: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type ImageModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String!
+  name: String!
+  hotelId: Int
 }
 
 type PostModel {
@@ -40,11 +51,102 @@ type PostModel {
   publishedAt: String!
   userId: Int!
   user: UserModel!
+  previewImageId: Int!
+  previewImage: ImageModel!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
 
+type AuthModel {
+  message: String!
+}
+
+type ConfirmAuthorizationModel {
+  access_token: String!
+  message: String!
+  user: UserModel!
+}
+
+type LanguageModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  avatarId: Int!
+  name: String!
+  code: String!
+}
+
+type CityModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  englishName: String!
+  previewImageId: Int
+  previewImage: ImageModel!
+  bannerImageId: Int
+  bannerImage: ImageModel!
+  countryId: Int!
+  country: CountryModel!
+}
+
+type CountryModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  code: String!
+  description: String!
+  englishName: String!
+  avatarId: Int!
+  previewImageId: Int!
+  previewImage: ImageModel!
+  bannerImageId: Int!
+  bannerImage: ImageModel!
+  languageId: Float!
+  language: LanguageModel!
+  cities: [CityModel!]
+}
+
+type RoomsModel {
+  beds: Float!
+  bath: Float!
+  extras: [String!]!
+}
+
+type DataModel {
+  maxGuests: Float!
+  isEntireHome: Boolean!
+  rooms: RoomsModel!
+}
+
+type HotelModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  description: String
+  price: Float!
+  reviewRating: Float!
+  reviewCount: Int!
+  data: DataModel!
+  cityId: Int!
+  city: CityModel!
+  previewImageId: Int!
+  previewImage: ImageModel!
+  images: [ImageModel!]!
+}
+
 type Query {
+  hotels: [HotelModel!]!
+  hotel(uid: String!): HotelModel!
+  countries: [CountryModel!]!
+  country(uid: Int!): CountryModel!
+  profile: UserModel!
   posts: [PostModel!]!
   post(id: Int!): PostModel!
   users: [UserModel!]!
@@ -54,6 +156,10 @@ type Query {
 }
 
 type Mutation {
+  confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
+  confirmAuthorization(email: String!, code: String!): ConfirmAuthorizationModel!
+  registration(email: String!): AuthModel!
+  login(email: String!): AuthModel!
   postCreate(input: PostCreateInput!): PostModel!
   userCreate(input: UserCreateInput!): UserModel!
   roleCreate(input: RoleCreateInput!): RoleModel!
@@ -67,10 +173,8 @@ input PostCreateInput {
 }
 
 input UserCreateInput {
-  password: String!
   email: String!
   name: String!
-  isVerified: Boolean
   roleId: Int!
 }
 

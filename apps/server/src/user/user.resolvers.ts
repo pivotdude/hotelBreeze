@@ -1,14 +1,6 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Subscription,
-  Int,
-} from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UserService } from './user.service'
-import { PubSub } from 'graphql-subscriptions'
-import { User, Prisma } from '@prisma/client'
+import { User } from '@prisma/client'
 import { UserModel } from './user.model'
 import { UserCreateInput } from './models/UserCreateInput'
 
@@ -23,12 +15,12 @@ export class UserResolvers {
 
   @Query((returns) => UserModel)
   async user(@Args('id', { type: () => Int }) id: number): Promise<User> {
-    return this.userService.find(id)
+    return this.userService.findWhere({ id })
   }
 
   @Mutation((returns) => UserModel)
   async userCreate(@Args('input') args: UserCreateInput): Promise<User> {
-    return this.userService.create(args)
+    return this.userService.createUser(args)
   }
 
   // @Mutation('updateUser')
