@@ -1,5 +1,5 @@
 Схема базы данных
-
+ 
 ```mermaid
 erDiagram
     Country {
