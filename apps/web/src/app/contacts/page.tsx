@@ -1,8 +1,0 @@
-export default async function Home() {
-  // const posts = await fetchPosts()
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
-  )
-}

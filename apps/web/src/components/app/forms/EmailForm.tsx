@@ -2,7 +2,7 @@
 import { Button, Form, Input } from 'antd'
 
 export interface IEmailFormData {
-  email?: string
+  email: string
 }
 
 interface EmailFormProps {

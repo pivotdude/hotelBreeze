@@ -1,5 +1,5 @@
 schema: schema.qpl
-documents: 'apps/server/src/*.gql'
+documents: '/apps/server/src/schema.gql'
 extensions:
   endpoints:
     One:

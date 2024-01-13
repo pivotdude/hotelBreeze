@@ -11,6 +11,9 @@ import { MailModule } from './mail/mail.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
 import { RolesGuard } from './modules/auth/roles.guard'
+import { CountryModule } from './country/country.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { HotelModule } from './hotel/hotel.module'
 
 @Module({
   providers: [
@@ -26,17 +29,23 @@ import { RolesGuard } from './modules/auth/roles.guard'
     PostModule,
     AuthModule,
     MailModule,
+    CountryModule,
+    HotelModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      include: [RoleModule, UserModule, PostModule, AuthModule],
+      include: [RoleModule, UserModule, PostModule, AuthModule, CountryModule, HotelModule],
     }),
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/static',
     }),
   ],
 })

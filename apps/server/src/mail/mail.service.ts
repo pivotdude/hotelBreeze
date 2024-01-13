@@ -16,10 +16,7 @@ export interface sendEmailProps {
 
 @Injectable()
 export class MailService {
-  constructor(
-    private readonly mailerService: MailerService,
-    private readonly mailRepository: MailRepository
-  ) {}
+  constructor(private readonly mailerService: MailerService, private readonly mailRepository: MailRepository) {}
   async sendEmail(emailData: sendEmailProps) {
     const statusMessageData = await this.mailerService.sendMail({
       to: emailData.email,

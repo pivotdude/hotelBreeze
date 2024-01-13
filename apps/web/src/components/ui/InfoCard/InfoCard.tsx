@@ -1,26 +1,40 @@
 'use client'
 import Meta from 'antd/es/card/Meta'
 import { Card } from 'antd'
+import { useRouter } from 'next/navigation'
+import Image from '@/components/ui/Image'
+
+export interface InfoCardItem {
+  uid: string
+  name: string
+  englishName: string
+  description: string
+  previewImage: {
+    url: string
+    name: string
+  }
+}
 
 export interface InfoCardProps {
-  src: string
-  title: string
-  description: string
+  item: InfoCardItem
+  href?: string
   width?: number
 }
 
-export default function InfoCard(props: InfoCardProps) {
+export default function InfoCard({ item, width, href }: InfoCardProps) {
+  const router = useRouter()
   return (
     <Card
       hoverable
       style={{
-        width: props.width,
+        width,
       }}
       cover={
-        <img alt={props.title} src={props.src} /> // TODO change on Image
+        <Image alt={item.previewImage.name} src={item?.previewImage?.url} /> // TODO change on Image
       }
+      onClick={() => href && router.push(href + '/' + item.englishName)}
     >
-      <Meta title={props.title} description={props.description} />
+      <Meta title={item.name} description={item.description} />
     </Card>
   )
 }

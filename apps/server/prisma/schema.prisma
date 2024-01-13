@@ -11,83 +11,181 @@ generator client {
 }
 
 model Post {
-  id          Int     @id @default(autoincrement())
-  uid         String  @default(uuid())
+  id        Int      @id @default(autoincrement())
+  uid       String   @default(uuid())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
   title       String
   content     String
   isPublished Boolean @default(false)
 
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
-
   userId Int?
   user   User? @relation(fields: [userId], references: [id])
+
+  previewImageId Int?
+  previewImage   Image? @relation(fields: [previewImageId], references: [id])
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  uid   String @default(uuid())
-  name  String @unique
-  email String @unique
-
+  id        Int      @id @default(autoincrement())
+  uid       String   @default(uuid())
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 
-  roleId Int?
-  role   Role? @relation(fields: [roleId], references: [id])
+  name     String @unique
+  email    String @unique
+  avatarId Int?
+  avatar   Image? @relation(fields: [avatarId], references: [id])
 
-  posts Post[]
+  roleId Int?
+  role   Role?  @relation(fields: [roleId], references: [id])
+  posts  Post[]
 }
 
 model Role {
-  id          Int     @id @default(autoincrement())
-  uid         String  @default(uuid())
+  id        Int      @id @default(autoincrement())
+  uid       String   @default(uuid())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
   code        String  @unique
   name        String
   description String?
-
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
 
   users User[]
 }
 
 model SentEmail {
-  id       Int    @id @default(autoincrement())
-  uid      String @unique @default(uuid())
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   theme    String
   email    String
   template String
   context  Json?
   data     Json?
-  // code     String? @db.VarChar(6)
 
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
   verificationCode VerificationCode?
 }
 
 model VerificationCodeType {
-  id               Int                @id @default(autoincrement())
-  uid              String             @unique @default(uuid())
-  name             String
-  code             String             @unique
-  VerificationCode VerificationCode[]
+  id  Int    @id @default(autoincrement())
+  uid String @unique @default(uuid())
+
+  name String
+  code String @unique
+
+  verificationCode VerificationCode[]
 }
 
 model VerificationCode {
-  id      Int      @id @default(autoincrement())
-  uid     String   @unique @default(uuid())
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   code    String
   expired DateTime
   attempt Int      @default(0)
 
+  sentEmailId Int                   @unique
+  sentEmail   SentEmail?            @relation(fields: [sentEmailId], references: [id])
+  typeId      Int
+  type        VerificationCodeType? @relation(fields: [typeId], references: [id])
+}
+
+model Country {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sentEmailId Int        @unique
-  sentEmail   SentEmail? @relation(fields: [sentEmailId], references: [id])
+  name        String
+  code        String  @unique
+  description String?
+  englishName String
 
-  typeId Int
-  type   VerificationCodeType? @relation(fields: [typeId], references: [id])
+  languageId     Int?
+  language       Language? @relation(fields: [languageId], references: [id])
+  previewImageId Int?
+  previewImage   Image?    @relation("view", fields: [previewImageId], references: [id])
+  bannerImageId  Int?
+  bannerImage    Image?    @relation("banner", fields: [bannerImageId], references: [id])
+  cities         City[]
+}
+
+model Language {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  code String @unique
+
+  avatarId  Int?      @unique
+  avatar    Image?    @relation(fields: [avatarId], references: [id])
+  countries Country[]
+}
+
+model City {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  englishName String
+
+  previewImageId Int?
+  previewImage   Image?  @relation("view", fields: [previewImageId], references: [id])
+  bannerImageId  Int?
+  bannerImage    Image?  @relation("banner", fields: [bannerImageId], references: [id])
+  countryId      Int
+  country        Country @relation(fields: [countryId], references: [id])
+  hotels         Hotel[]
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  url  String
+  name String
+
+  hotelId        Int?
+  hotel          Hotel?    @relation("hotelImage", fields: [hotelId], references: [id])
+  countryBanner  Country[] @relation("banner")
+  countryPreview Country[] @relation("view")
+  language       Language?
+  user           User[]
+  post           Post[]
+  cityBanner     City[]    @relation("banner")
+  cityPreview    City[]    @relation("view")
+  hotelPreview   Hotel[]
+}
+
+model Hotel {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title        String
+  description  String?
+  price        Int
+  data         Json
+  reviewRating Decimal? @default(0) @db.Decimal(2, 2)
+  reviewCount  Int?     @default(0)
+
+  images         Image[] @relation("hotelImage")
+  cityId         Int
+  city           City    @relation(fields: [cityId], references: [id])
+  previewImageId Int?
+  previewImage   Image?  @relation(fields: [previewImageId], references: [id])
 }

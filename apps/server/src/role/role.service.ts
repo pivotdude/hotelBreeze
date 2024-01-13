@@ -7,14 +7,6 @@ import { RoleCreateInput } from './models/RoleCreateInput'
 export class RoleService {
   constructor(private readonly roleRepository: RoleRepository) {}
 
-  // async findOne(id: string): Promise<Role | null> {
-  //   return this.prisma.post.findUnique({
-  //     where: {
-  //       id,
-  //     },
-  //   });
-  // }
-
   async findAll(): Promise<Role[]> {
     return this.roleRepository.findAll()
   }
@@ -26,9 +18,4 @@ export class RoleService {
   async create(input: RoleCreateInput): Promise<Role> {
     return this.roleRepository.create(input)
   }
-  //
-  // async update(params: UpdateRole): Promise<Role> {
-  //   const { id, ...params_without_id } = params;
-  //
-  // }
 }

@@ -1,11 +1,9 @@
-import { Col, Divider, Row } from 'antd'
+import { Col, Divider, Row } from '@/ui'
 import FooterLinks from '@/components/app/core/footer/FooterLinks'
 import DotList from '@/components/ui/Dot/DotList'
 import Link from 'next/link'
 
-interface FooterProps {}
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   return (
     <Row className="bg-gray-50 py-4">
       <Col xs={24} className="pt-16 pb-8">

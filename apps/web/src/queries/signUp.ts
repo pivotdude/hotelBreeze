@@ -3,15 +3,15 @@ import sendRequest from '@/core/sendRequest'
 import { IEmailFormData } from '@/components/app/forms/EmailForm'
 
 export interface SignUpQuery {
-  signUp: {
+  registration: {
     message: string
   }
 }
 
-export const signUp = async ({ email }: IEmailFormData): Promise<SignUpQuery> => {
+export const signUp = async ({ email }: IEmailFormData): Promise<SignUpQuery | void> => {
   const query = gql`
-    mutation signUp($email: String!) {
-      signUp(email: $email) {
+    mutation registration($email: String!) {
+      registration(email: $email) {
         message
       }
     }
