@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import { Col, Row } from '@/ui'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import SearchForm from '@/modules/bookig/components/SearchForm'
 import { fetchCountries } from '@/modules/bookig/queries/fetchCountry'

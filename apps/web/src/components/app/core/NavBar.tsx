@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode, useEffect, useState } from 'react'
 import { Menu } from 'antd'
-import { AppstoreOutlined, ContactsOutlined, LoginOutlined, MailOutlined, ProfileOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, LoginOutlined, MailOutlined, ProfileOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { ISession } from '@/models'
@@ -29,11 +29,6 @@ export default function NavBar() {
       label: 'Бронирование',
       key: 'booking',
       icon: <AppstoreOutlined />,
-    },
-    {
-      label: 'Контакты',
-      key: 'contacts',
-      icon: <ContactsOutlined />,
     },
     {
       label: 'Посты',

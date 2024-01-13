@@ -1,4 +1,4 @@
-import AntdImage from '@/components/ui/AntdImage'
+import { AntdImage } from '@/ui'
 
 interface HotelImageProps {
   alt: string

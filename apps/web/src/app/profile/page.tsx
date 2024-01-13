@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'antd'
+import { Card, Col, Row } from '@/ui'
 
 export default async function Profile() {
   return (

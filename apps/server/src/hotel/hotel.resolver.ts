@@ -2,6 +2,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql'
 import { HotelService } from './hotel.service'
 import { HotelModel } from './models/hotel.model'
 import { Hotel } from '@prisma/client'
+import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
 @Resolver((of) => HotelModel)
 export class HotelResolver {
@@ -13,7 +14,7 @@ export class HotelResolver {
   }
 
   @Query((returns) => HotelModel)
-  async hotel(@Args('uid', { type: () => String }) uid: string): Promise<Hotel> {
-    return await this.hotelService.find(uid)
+  async hotel(@Args('uid', { type: () => String }) input: DefaultWhereInput) {
+    return await this.hotelService.find(input)
   }
 }

@@ -1,11 +1,11 @@
-import { Col, Row } from 'antd'
+import { Col, Row } from '@/ui'
 import image from '@/modules/main/source/card.png'
 import Image from 'next/image'
-import DiscoverBanner from '@/modules/main/components/DiscoverBanner'
 import { fetchCountries } from '@/modules/main/queries/fetchCountries'
 import GridCardList from '@/components/ui/InfoCard/GridCardList'
+import DiscoverBanner from '@/modules/main/components/DiscoverBanner'
 
-export default async function HomePage() {
+export default async function Home() {
   const rawCountries = await fetchCountries()
   const countries = rawCountries ? rawCountries.countries : []
 
@@ -20,13 +20,10 @@ export default async function HomePage() {
           <Image alt="ss" src={image} />
         </div>
       </Col>
-      {countries.length ? (
-        <Col xs={24}>
-          <GridCardList items={countries} title="Страны" href="/country" />
-        </Col>
-      ) : (
-        <div>Стран нет</div>
-      )}
+
+      <Col xs={24}>
+        <GridCardList items={countries} title="Страны" href="/country" />
+      </Col>
       <Col xs={24}>
         <DiscoverBanner />
       </Col>

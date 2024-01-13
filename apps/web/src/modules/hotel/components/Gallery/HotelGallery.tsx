@@ -10,11 +10,6 @@ interface HotelGalleryProps {
 }
 
 export default function HotelGallery(props: HotelGalleryProps) {
-  const mockHotel = {
-    src: 'https://hotels.sletat.ru/i/f/25910_37.jpg',
-    alt: 'Header',
-  }
-  console.log('props', props)
   return (
     <>
       <div

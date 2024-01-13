@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import { Col, Row } from '@/ui'
 import { IHotel } from '@/modules/hotel/queries/fetchHotel'
 import ReserveCard from '@/modules/hotel/components/Content/ReserveCard'
 import HotelInfo from '@/modules/hotel/components/Content/HotelInfo'

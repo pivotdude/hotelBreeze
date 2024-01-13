@@ -1,5 +1,5 @@
 'use client'
-import { Card, Col, Row } from 'antd'
+import { Card, Col, Row } from '@/ui'
 import { useRouter } from 'next/navigation'
 import { trimText } from '@/helpers/utils'
 import ReviewsStar from '@/components/ui/Review/ReviewsStar'

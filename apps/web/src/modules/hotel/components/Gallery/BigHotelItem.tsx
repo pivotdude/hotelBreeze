@@ -1,4 +1,4 @@
-import HotelImage from './HotelImage'
+import HotelImage from '@/modules/hotel/components/Gallery/HotelImage'
 
 interface BigHotelImageProps {
   alt: string

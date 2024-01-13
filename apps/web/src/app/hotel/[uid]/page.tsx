@@ -1,8 +1,8 @@
-import { Col, Row } from 'antd'
+import { Col, Row } from '@/ui'
 import { fetchHotel } from '@/modules/hotel/queries/fetchHotel'
 import HotelHeader from '@/modules/hotel/components/Header/HotelHeader'
-import HotelContent from '@/modules/hotel/components/Content/HotelContent'
 import HotelGallery from '@/modules/hotel/components/Gallery/HotelGallery'
+import HotelContent from '@/modules/hotel/components/Content/HotelContent'
 
 interface HotelPageProps {
   params: {

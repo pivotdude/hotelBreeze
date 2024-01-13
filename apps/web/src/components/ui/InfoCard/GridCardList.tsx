@@ -1,8 +1,5 @@
-'use client'
-import { Typography } from 'antd'
 import CardList from '@/components/ui/InfoCard/CardList'
 import { InfoCardItem } from '@/components/ui/InfoCard/InfoCard'
-import { useSession } from 'next-auth/react'
 
 interface PickerProps {
   title: string
@@ -11,11 +8,9 @@ interface PickerProps {
 }
 
 export default function GridCardList(props: PickerProps) {
-  const session = useSession()
-  console.log('ses', session)
   return (
     <>
-      <Typography.Title level={3}>{props.title}</Typography.Title>
+      <h2>{props.title}</h2>
       <div className="grid xxl:grid-cols-6 2xl:grid-cols-6 xl:grid-cols-3 lg:grid-cols-2 gap-2">
         <CardList items={props.items} href={props.href} />
       </div>

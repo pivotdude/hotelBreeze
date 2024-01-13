@@ -1,4 +1,4 @@
-import { Col, Row, Space } from 'antd'
+import { Col, Row, Space } from '@/ui'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 

@@ -1,5 +1,5 @@
 import MiniBanner from '@/components/ui/Banners/MiniBanner'
-import { Col, Row } from 'antd'
+import { Col, Row } from '@/ui'
 
 export default function DiscoverBanner() {
   return (
