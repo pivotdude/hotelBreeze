@@ -82,5 +82,5 @@ export default function NavBar() {
     setCurrent(e.key)
     router.push('/' + e.key)
   }
-  return <Menu className="w-screen" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
+  return <Menu className="w-full" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
 }

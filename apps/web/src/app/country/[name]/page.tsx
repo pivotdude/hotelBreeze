@@ -5,10 +5,6 @@ interface CountryPageProps {
     name: string
   }
 }
-export default function CountrзyPage({ params }: CountryPageProps) {
-  return (
-    <Row gutter={[64, 64]} className="px-32">
-      {params.name}
-    </Row>
-  )
+export default function CountryPage({ params }: CountryPageProps) {
+  return <Row gutter={[64, 64]}>{params.name}</Row>
 }

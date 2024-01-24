@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import sendRequest from '@/core/sendRequest'
+import sendRequest from '@/libs/graphql/sendRequest'
 
 export interface IHotel {
   uid: string

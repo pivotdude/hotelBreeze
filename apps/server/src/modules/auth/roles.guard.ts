@@ -1,22 +1,18 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
-import { RolesT } from '../../Models'
+import { GqlExecutionContext } from '@nestjs/graphql'
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
-  private matchRoles(roles: RolesT[], userRole: RolesT) {
-    return roles.includes(userRole)
-  }
 
-  canActivate(context: ExecutionContext): boolean {
-    const roles = this.reflector.get<RolesT[]>('roles', context.getHandler())
-    if (!roles) {
-      return true
-    }
-    const request = context.switchToHttp().getRequest()
-    const user = request.user
-    const roleName = user.Role.name as RolesT
-    return this.matchRoles(roles, roleName)
+  canActivate(context: ExecutionContext) {
+    const roles = this.reflector.get<string[]>('roles', context.getHandler())
+    const ctx = GqlExecutionContext.create(context)
+    console.log('roles: ', roles)
+    console.log('context: ', context.switchToHttp().getRequest())
+    console.log('gqlContext: ', ctx.getContext().req)
+
+    return true
   }
 }

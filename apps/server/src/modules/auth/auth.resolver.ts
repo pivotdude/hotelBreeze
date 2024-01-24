@@ -1,15 +1,19 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { AuthService } from './auth.service'
-import { AuthModel } from './auth.model'
+import { AuthModel } from './models/auth.model'
+import { ConfirmAuthorizationModel } from './models/confirmAuthorization.model'
 import { UserModel } from '../../user/user.model'
-import { User } from '@prisma/client'
-import { Query } from '@nestjs/graphql/dist/decorators/query.decorator'
-import { Headers } from '@nestjs/common'
-import { ConfirmAuthorizationModel } from './confirmAuthorization.model'
+import { AuthInterceptor } from './auth.interceptor'
+import { UseInterceptors } from '@nestjs/common'
+import { UserService } from '../../user/user.service'
 
 @Resolver((of) => AuthModel)
+@UseInterceptors(AuthInterceptor)
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UserService
+  ) {}
 
   @Mutation((returns) => AuthModel)
   async confirmRegistration(
@@ -39,8 +43,7 @@ export class AuthResolver {
   }
 
   @Query((returns) => UserModel)
-  async profile(@Headers('Authorization') token: string): Promise<User> {
-    console.log('token', token)
-    return this.authService.getProfile(token)
+  async profile(@Context('user') user: { uid: string; username: string }): Promise<any> {
+    return this.userService.findUser({ uid: user.uid })
   }
 }

@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-import sendRequest from '@/core/sendRequest'
+import sendRequest from '@/libs/graphql/sendRequest'
 
 export interface IProfile {
+  id: string
   uid: string
   name: string
 }
@@ -15,6 +16,7 @@ export const fetchProfile = async (): Promise<ProfileResponse | void> => {
     query GetProfile {
       profile {
         uid
+        id
         name
       }
     }

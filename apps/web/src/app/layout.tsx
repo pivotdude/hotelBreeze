@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <Providers>
           <NavBar />
-          <main className="min-h-screen max-w-full">{children}</main>
+          <main className="min-h-screen max-w-full mx-32">{children}</main>
           <footer className="bg-gray-50 px-32 mt-24">
             <Footer />
           </footer>

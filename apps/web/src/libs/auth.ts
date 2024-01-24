@@ -20,9 +20,11 @@ export const authOptions: NextAuthOptions = {
         try {
           if (!credentials?.email || !credentials?.code) return null
           const { email, code } = credentials
-          const result = await confirmAuthorization({ email, code })
-          if (!result) return null
-          return result.confirmAuthorization
+          const rawResult = await confirmAuthorization({ email, code })
+          if (!rawResult) return null
+          const result = rawResult.confirmAuthorization
+          console.log(result)
+          return result
         } catch (error) {
           // @ts-ignore
           throw new Error(error.message)
@@ -39,16 +41,17 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     // @ts-ignore
-    async jwt({ token, user }: { token: any; data: ConfirmAuthorization }) {
-      user && (token.access_token = user.access_token)
-      user && (token.user = user.user)
+    async jwt({ token, user, data }: { token: any; data: ConfirmAuthorization }) {
+      user && (token.accessToken = user.access_token)
+      // user && (token.user = user.user)
+
       return token
     },
     async session({ session, token }: { session: any; token: any }) {
-      console.log('session token', token)
-      session.access_token = token.access_token
-      session.user = token.user
-      console.log('return session', session)
+      // console.log('session token', token)
+      session.accessToken = token.accessToken
+      // session.user = token.user
+      // console.log('return session', session)
       return session
     },
   },

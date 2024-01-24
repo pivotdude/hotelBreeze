@@ -38,6 +38,9 @@ import { HotelModule } from './hotel/hotel.module'
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       include: [RoleModule, UserModule, PostModule, AuthModule, CountryModule, HotelModule],
+      context: ({ req }) => {
+        return { token: req.headers.Authorization }
+      },
     }),
     ConfigModule.forRoot({
       envFilePath: '.env',

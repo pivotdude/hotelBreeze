@@ -21,7 +21,7 @@ export default async function HotelPage({ params, searchParams }: HotelPageProps
   }
 
   return (
-    <Row gutter={[16, 16]} className="px-32 py-8">
+    <Row gutter={[16, 16]} className="py-8">
       <Col xs={24}>
         <HotelHeader hotel={hotel} />
       </Col>

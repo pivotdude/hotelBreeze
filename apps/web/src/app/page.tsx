@@ -2,8 +2,8 @@ import { Col, Row } from '@/ui'
 import image from '@/modules/main/source/card.png'
 import Image from 'next/image'
 import { fetchCountries } from '@/modules/main/queries/fetchCountries'
-import GridCardList from '@/components/ui/InfoCard/GridCardList'
 import DiscoverBanner from '@/modules/main/components/DiscoverBanner'
+import CardList from '@/components/ui/InfoCard/CardList'
 
 export default async function Home() {
   const rawCountries = await fetchCountries()
@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <Row gutter={[64, 64]} className="px-32">
+    <Row gutter={[64, 64]}>
       <Col xs={24}>
         <div className="bg-sky-300">
           <Image alt="ss" src={image} />
@@ -22,7 +22,10 @@ export default async function Home() {
       </Col>
 
       <Col xs={24}>
-        <GridCardList items={countries} title="Страны" href="/country" />
+        <h2>Страны</h2>
+        <div className="grid xxl:grid-cols-5 2xl:grid-cols-5 xl:grid-cols-3 lg:grid-cols-2 gap-2">
+          <CardList items={countries} href="/country" />
+        </div>
       </Col>
       <Col xs={24}>
         <DiscoverBanner />

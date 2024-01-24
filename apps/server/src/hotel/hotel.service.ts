@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { HotelRepository } from './hotel.repository'
 import { Hotel } from '@prisma/client'
-import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
 @Injectable()
 export class HotelService {
@@ -13,7 +12,7 @@ export class HotelService {
     return hotels
   }
 
-  async find(input: DefaultWhereInput): Promise<Hotel> {
-    return this.hotelRepository.find(input)
+  async find(uid: string): Promise<Hotel> {
+    return this.hotelRepository.find(uid)
   }
 }

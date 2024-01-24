@@ -8,9 +8,20 @@ import { UserService } from '../../user/user.service'
 import { UserRepository } from '../../user/user.repository'
 import { JwtModule } from '@nestjs/jwt'
 import { constants } from '../../core/libs/constants'
+import { AuthInterceptor } from './auth.interceptor'
 
 @Module({
-  providers: [AuthResolver, AuthService, UserService, UserRepository, MailService, MailRepository, PrismaService],
+  providers: [
+    AuthResolver,
+    AuthService,
+    UserService,
+    UserRepository,
+    MailService,
+    MailRepository,
+    PrismaService,
+    AuthInterceptor,
+    UserService,
+  ],
   imports: [
     JwtModule.register({
       global: true,

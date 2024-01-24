@@ -22,19 +22,4 @@ export class UserResolvers {
   async userCreate(@Args('input') args: UserCreateInput): Promise<User> {
     return this.userService.createUser(args)
   }
-
-  // @Mutation('updateUser')
-  // async update(@Args('input') args: UpdateUser): Promise<User> {
-  //   return this.userService.update(args);
-  // }
-  //
-  // @Mutation('deleteUser')
-  // async delete(@Args('id') args: string): Promise<User> {
-  //   return this.userService.delete(args);
-  // }
-  //
-  // @Subscription('postCreated')
-  // postCreated() {
-  //   return pubSub.asyncIterator('postCreated');
-  // }
 }

@@ -38,9 +38,10 @@ model User {
   avatarId Int?
   avatar   Image? @relation(fields: [avatarId], references: [id])
 
-  roleId Int?
-  role   Role?  @relation(fields: [roleId], references: [id])
-  posts  Post[]
+  roleId    Int?
+  role      Role?      @relation(fields: [roleId], references: [id])
+  posts     Post[]
+  favorites Favorite[]
 }
 
 model Role {
@@ -183,9 +184,23 @@ model Hotel {
   reviewRating Decimal? @default(0) @db.Decimal(2, 2)
   reviewCount  Int?     @default(0)
 
-  images         Image[] @relation("hotelImage")
+  images         Image[]    @relation("hotelImage")
   cityId         Int
-  city           City    @relation(fields: [cityId], references: [id])
+  city           City       @relation(fields: [cityId], references: [id])
   previewImageId Int?
-  previewImage   Image?  @relation(fields: [previewImageId], references: [id])
+  previewImage   Image?     @relation(fields: [previewImageId], references: [id])
+  favorites      Favorite[]
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  hotelId Int
+  hotel   Hotel @relation(fields: [hotelId], references: [id])
 }
