@@ -23,11 +23,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "echo 'No e2e tests implemented yet.'",
-    "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
-    "prisma:migrate:dev": "prisma migrate dev --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "prisma:migrate:reset": "prisma migrate reset -f --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "prisma:migrate:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate"
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "prisma:migrate:dev": "prisma migrate dev --schema=prisma/schema.prisma && npm run prisma:generate",
+    "prisma:migrate:reset": "prisma migrate reset -f --schema=prisma/schema.prisma && npm run prisma:generate",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema=prisma/schema.prisma",
+    "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate",
   },
   "dependencies": {
     "@apollo/server": "4.9.3",
