@@ -19,7 +19,7 @@ export const createReview = async (input: CreateReviewInput): Promise<HotelQuery
       createReview(input: $input) {
         id
       }
-    }`
+    }
   `
   return sendRequest<HotelQuery>(query, { input })
 }
