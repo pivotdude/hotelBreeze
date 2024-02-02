@@ -5,8 +5,9 @@ interface ImageProps {
   src: string
   alt: string
   className?: string
+  style?: React.CSSProperties
 }
 
 export default function Image(props: ImageProps) {
-  return <img className={props.className} alt={props.alt} src={constants.BACKEND_URL + props.src} />
+  return <img className={props.className} alt={props.alt} style={props.style} src={constants.BACKEND_URL + props.src} />
 }

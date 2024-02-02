@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "pnpm run deploy && pnpm run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "dist",
+  "public": true,
   "builds": [
     {
       "src": "src/main.ts",

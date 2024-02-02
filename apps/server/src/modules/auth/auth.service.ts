@@ -100,7 +100,7 @@ export class AuthService {
 
     await this.#checkCode({ email, code, template: 'confirmationLogin' })
 
-    const payload = { sub: user.uid, username: user.name }
+    const payload = { sub: user.id, username: user.name }
     return { access_token: await this.jwtService.signAsync(payload), message: 'Авторизация прошла успешно', user: user }
   }
 

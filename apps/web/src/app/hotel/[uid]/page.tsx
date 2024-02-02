@@ -3,6 +3,7 @@ import { fetchHotel } from '@/modules/hotel/queries/fetchHotel'
 import HotelHeader from '@/modules/hotel/components/Header/HotelHeader'
 import HotelGallery from '@/modules/hotel/components/Gallery/HotelGallery'
 import HotelContent from '@/modules/hotel/components/Content/HotelContent'
+import Review from '@/modules/hotel/components/Review'
 
 interface HotelPageProps {
   params: {
@@ -15,6 +16,7 @@ interface HotelPageProps {
 export default async function HotelPage({ params, searchParams }: HotelPageProps) {
   const rawHotel = await fetchHotel(params.uid)
   const hotel = rawHotel ? rawHotel.hotel : null
+  console.log(hotel)
 
   if (!hotel) {
     return null
@@ -30,6 +32,15 @@ export default async function HotelPage({ params, searchParams }: HotelPageProps
       </Col>
       <Col xs={24}>
         <HotelContent hotel={hotel} />
+      </Col>
+      <Col xs={24}>
+        <Review
+          reviewRating={hotel.reviewRating}
+          reviewCount={hotel.reviewCount}
+          reviews={hotel.reviews}
+          userReview={hotel.userReview}
+          hotelUid={hotel.uid}
+        />
       </Col>
     </Row>
   )

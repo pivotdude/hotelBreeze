@@ -1,7 +1,6 @@
-'use client'
-import { Typography } from 'antd'
 import HotelCup from '@/modules/hotel/components/Header/HotelCup'
 import { IHotel } from '@/modules/hotel/queries/fetchHotel'
+import { Title } from '@/ui'
 
 interface HotelHeaderProps {
   hotel: IHotel
@@ -10,7 +9,7 @@ interface HotelHeaderProps {
 export default function HotelHeader({ hotel }: HotelHeaderProps) {
   return (
     <>
-      <Typography.Title className="mb-0">{hotel.title}</Typography.Title>
+      <Title className="mb-0">{hotel.title}</Title>
       <HotelCup hotel={hotel} />
     </>
   )

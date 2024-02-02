@@ -31,6 +31,19 @@ export interface IHotel {
     maxGuests: number
     isEntireHome: boolean
   }
+  favorites: {
+    uid: string
+  }[]
+  isFollow: boolean
+  reviews: {
+    description: string
+    rating: number
+  }[]
+  userReview: {
+    uid
+    description: string
+    rating: number
+  }[]
 }
 
 export interface HotelQuery {
@@ -70,6 +83,19 @@ export const fetchHotel = async (uid: string): Promise<HotelQuery | void> => {
           url
           name
         }
+        favorites {
+          uid
+        }
+        reviews {
+          description
+          rating
+        }
+        userReview {
+          uid
+          description
+          rating
+        }
+        isFollow
       }
     }
   `

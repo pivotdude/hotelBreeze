@@ -3,9 +3,10 @@ import { AuthService } from './auth.service'
 import { AuthModel } from './models/auth.model'
 import { ConfirmAuthorizationModel } from './models/confirmAuthorization.model'
 import { UserModel } from '../../user/user.model'
+import { UserService } from '../../user/user.service'
+import { ContextUser } from '../../Models'
 import { AuthInterceptor } from './auth.interceptor'
 import { UseInterceptors } from '@nestjs/common'
-import { UserService } from '../../user/user.service'
 
 @Resolver((of) => AuthModel)
 @UseInterceptors(AuthInterceptor)
@@ -43,7 +44,7 @@ export class AuthResolver {
   }
 
   @Query((returns) => UserModel)
-  async profile(@Context('user') user: { uid: string; username: string }): Promise<any> {
-    return this.userService.findUser({ uid: user.uid })
+  async profile(@Context('user') user: ContextUser): Promise<any> {
+    return this.userService.getUserForProfile(user.id)
   }
 }

@@ -44,6 +44,40 @@ export class UserRepository {
     })
   }
 
+  async findByIdForProfile(id: number): Promise<User | null> {
+    const params = {
+      include: {
+        favorites: {
+          include: {
+            hotel: {
+              include: {
+                previewImage: true,
+              },
+            },
+          },
+        },
+      },
+    }
+    return this.findById(id, params)
+  }
+
+  async findById(id: number, params: { include?: Prisma.UserInclude } = {}): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+      ...params,
+    })
+  }
+
+  findByUid(uid: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        uid,
+      },
+    })
+  }
+
   // async delete(where: Prisma.UserWhereUniqueInput): Promise<User> {
   //   return this.prisma.user.delete({
   //     where,

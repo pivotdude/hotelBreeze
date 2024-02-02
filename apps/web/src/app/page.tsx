@@ -1,4 +1,4 @@
-import { Col, Row } from '@/ui'
+import { Col, Row, Title } from '@/ui'
 import image from '@/modules/main/source/card.png'
 import Image from 'next/image'
 import { fetchCountries } from '@/modules/main/queries/fetchCountries'
@@ -22,8 +22,8 @@ export default async function Home() {
       </Col>
 
       <Col xs={24}>
-        <h2>Страны</h2>
-        <div className="grid xxl:grid-cols-5 2xl:grid-cols-5 xl:grid-cols-3 lg:grid-cols-2 gap-2">
+        <Title level={3}>Страны</Title>
+        <div className="flex flex-wrap gap-3">
           <CardList items={countries} href="/country" />
         </div>
       </Col>

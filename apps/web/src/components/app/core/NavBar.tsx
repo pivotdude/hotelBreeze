@@ -30,11 +30,6 @@ export default function NavBar() {
       key: 'booking',
       icon: <AppstoreOutlined />,
     },
-    {
-      label: 'Посты',
-      key: 'posts',
-      icon: <ProfileOutlined />,
-    },
   ] as MenuItem[]
 
   const authItems = [

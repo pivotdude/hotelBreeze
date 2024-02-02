@@ -31,6 +31,10 @@ export class UserService {
     return this.userRepository.findUser(data)
   }
 
+  async getUserForProfile(id: number): Promise<User | null> {
+    return this.userRepository.findByIdForProfile(id)
+  }
+
   //
   // async update(params: UpdateUser): Promise<User> {
   //   const { id, ...params_without_id } = params;

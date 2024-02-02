@@ -6,7 +6,7 @@ import { Hotel } from '@prisma/client'
 export class HotelRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async find(uid: string): Promise<Hotel | null> {
+  async find(uid: string, userId: number | null): Promise<Hotel | null> {
     return this.prismaService.hotel.findUnique({
       where: {
         uid,
@@ -19,6 +19,14 @@ export class HotelRepository {
             country: true,
           },
         },
+        reviews: true,
+        ...(userId && {
+          favorites: {
+            where: {
+              userId,
+            },
+          },
+        }),
       },
     })
   }
@@ -34,6 +42,22 @@ export class HotelRepository {
           },
         },
       },
+    })
+  }
+  async findByUid(uid: string): Promise<Hotel | null> {
+    return this.prismaService.hotel.findUnique({
+      where: {
+        uid,
+      },
+    })
+  }
+
+  update(hotel: Partial<Hotel>) {
+    return this.prismaService.hotel.update({
+      where: {
+        id: hotel.id,
+      },
+      data: hotel,
     })
   }
 }

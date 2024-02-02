@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { User } from '@prisma/client'
 import { RoleModel } from '../role/role.model'
+import { FavoriteModel } from '../favorite/favorite.model'
 
 @ObjectType()
 export class UserModel implements User {
@@ -35,4 +36,7 @@ export class UserModel implements User {
 
   @Field()
   updatedAt: Date
+
+  @Field((type) => [FavoriteModel])
+  favorites: RoleModel
 }

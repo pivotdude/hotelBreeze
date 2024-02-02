@@ -23,7 +23,7 @@ export class AuthInterceptor implements NestInterceptor {
     // Log user information
     const req = ctx.getContext()
     req.user = {}
-    req.user.uid = user.sub
+    req.user.id = user.sub
     req.user.username = user.username
     return next.handle()
   }

@@ -1,10 +1,14 @@
 import gql from 'graphql-tag'
 import sendRequest from '@/libs/graphql/sendRequest'
+import { Hotel } from '@/modules/bookig/queries/fetchHotels'
 
 export interface IProfile {
   id: string
   uid: string
   name: string
+  favorites: {
+    hotel: Hotel[]
+  }[]
 }
 
 export interface ProfileResponse {
@@ -18,6 +22,20 @@ export const fetchProfile = async (): Promise<ProfileResponse | void> => {
         uid
         id
         name
+        favorites {
+          hotel {
+            uid
+            title
+            description
+            price
+            reviewRating
+            reviewCount
+            previewImage {
+              url
+              name
+            }
+          }
+        }
       }
     }
   `

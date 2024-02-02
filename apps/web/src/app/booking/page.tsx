@@ -20,7 +20,7 @@ export default async function Page() {
       </Col>
       {hotels?.length ? (
         <Col xs={24}>
-          <div className="grid 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 gap-2">
+          <div className="flex flex-wrap gap-3">
             <HotelList hotels={hotels} />
           </div>
         </Col>

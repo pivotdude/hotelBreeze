@@ -1,42 +1,50 @@
-import { Card, Col, Row } from '@/ui'
+import { Button, Col, Row } from '@/ui'
 import { fetchProfile } from '@/modules/profile/queries/fetchProfile'
-import Image from '@/components/ui/Image'
-import Title from '@/ui/Typography'
+import Title from '@/ui/Title'
+import { Hotel } from '@/modules/bookig/queries/fetchHotels'
+import HotelList from '@/modules/bookig/components/Hotel/HotelList'
+import authGateServer from '@/gate/authGate'
+import EditProfileForm from '@/components/app/forms/EditProfileForm'
 
 export default async function Profile() {
-  // const session: any = await getServerSession(authOptions)
+  await authGateServer()
   const rawProfile = await fetchProfile()
 
   if (!rawProfile) {
     return <p>Профиля нету</p>
   }
   const profile = rawProfile.profile
+  const favorites = profile.favorites
+  const hotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
+  console.log(hotels)
 
   return (
-    <Row gutter={[64, 64]} className="py-4">
-      <Col xs={24} className="w-full">
-        <pre>{JSON.stringify(profile, null, 2)}</pre>
-        <Card
-          bordered
-          className="relative"
-          cover={
-            <Image
-              src="https://catherineasquithgallery.com/uploads/posts/2021-02/1613216205_166-p-foni-sinie-abstraktnie-210.jpg"
-              alt="wasd"
-              className="h-72 object-cover "
-            />
-          }
-        >
-          <div className="absolute bottom-2 left-4">
+    <Row gutter={[64, 64]} className="py-4 items-center">
+      <Col xs={20}>
+        <Row className="items-center">
+          <Col span={4}>
             <img className="w-40 h-40 rounded-full" src="https://via.placeholder.com/160x160" />
-          </div>
-          <div className="mx-48">
+          </Col>
+          <Col span={12}>
             <Title>{profile.name}</Title>
-          </div>
-        </Card>
+          </Col>
+        </Row>
+      </Col>
+      <Col span={4}>
+        <Button>Edit profile</Button>
+      </Col>
+      <Col span={24}>
+        <EditProfileForm />
       </Col>
       <Col xs={24}>
         <Title level={3}>Избранное</Title>
+        {hotels?.length ? (
+          <div className="flex flex-wrap gap-3">
+            <HotelList hotels={hotels} />
+          </div>
+        ) : (
+          <div>Отелей нет</div>
+        )}
       </Col>
     </Row>
   )

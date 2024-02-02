@@ -1,88 +1,197 @@
 # This file was generated. Do not edit manually.
 
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 type AuthModel {
-    message: String!
-    type: String!
+  message: String!
 }
 
-type Mutation {
-    confirmRegistration(code: String!, email: String!, name: String!): AuthModel!
-    postCreate(input: PostCreateInput!): HotelModel!
-    roleCreate(input: RoleCreateInput!): RoleModel!
-    signin(email: String!): AuthModel!
-    signup(email: String!): AuthModel!
-    userCreate(input: UserCreateInput!): UserModel!
+type CityModel {
+  bannerImage: ImageModel!
+  bannerImageId: Int
+  country: CountryModel!
+  countryId: Int!
+  createdAt: DateTime!
+  englishName: String!
+  id: Int!
+  name: String!
+  previewImage: ImageModel!
+  previewImageId: Int
+  uid: String!
+  updatedAt: DateTime!
+}
+
+type ConfirmAuthorizationModel {
+  access_token: String!
+  message: String!
+  user: UserModel!
+}
+
+type CountryModel {
+  avatarId: Int!
+  bannerImage: ImageModel!
+  bannerImageId: Int!
+  cities: [CityModel!]
+  code: String!
+  createdAt: DateTime!
+  description: String!
+  englishName: String!
+  id: Int!
+  language: LanguageModel!
+  languageId: Float!
+  name: String!
+  previewImage: ImageModel!
+  previewImageId: Int!
+  uid: String!
+  updatedAt: DateTime!
+}
+
+type DataModel {
+  isEntireHome: Boolean!
+  maxGuests: Float!
+  rooms: RoomsModel!
+}
+
+type FavoriteModel {
+  createdAt: DateTime!
+  hotelId: Int!
+  id: Int!
+  uid: String!
+  updatedAt: DateTime!
+  userId: Int!
 }
 
 type HotelModel {
-    content: String!
-    createdAt: DateTime!
-    id: Int!
-    isPublished: Boolean!
-    publishedAt: String!
-    text: String!
-    title: String!
-    uid: String!
-    updatedAt: DateTime!
-    user: UserModel!
-    userId: Int!
+  city: CityModel!
+  cityId: Int!
+  createdAt: DateTime!
+  data: DataModel!
+  description: String
+  id: Int!
+  images: [ImageModel!]!
+  previewImage: ImageModel!
+  previewImageId: Int!
+  price: Float!
+  reviewCount: Int!
+  reviewRating: Float!
+  title: String!
+  uid: String!
+  updatedAt: DateTime!
+}
+
+type ImageModel {
+  createdAt: DateTime!
+  hotelId: Int
+  id: Int!
+  name: String!
+  uid: String!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type LanguageModel {
+  avatarId: Int!
+  code: String!
+  createdAt: DateTime!
+  id: Int!
+  name: String!
+  uid: String!
+  updatedAt: DateTime!
+}
+
+type Mutation {
+  confirmAuthorization(code: String!, email: String!): ConfirmAuthorizationModel!
+  confirmRegistration(code: String!, email: String!, name: String!): AuthModel!
+  login(email: String!): AuthModel!
+  postCreate(input: PostCreateInput!): PostModel!
+  registration(email: String!): AuthModel!
+  roleCreate(input: RoleCreateInput!): RoleModel!
+  userCreate(input: UserCreateInput!): UserModel!
+}
+
+type PostModel {
+  content: String!
+  createdAt: DateTime!
+  id: Int!
+  isPublished: Boolean!
+  previewImage: ImageModel!
+  previewImageId: Int!
+  publishedAt: String!
+  text: String!
+  title: String!
+  uid: String!
+  updatedAt: DateTime!
+  user: UserModel!
+  userId: Int!
 }
 
 type Query {
-    post(id: Int!): HotelModel!
-    posts: [HotelModel!]!
-    role(id: Int!): RoleModel!
-    roles: [RoleModel!]!
-    user(id: Int!): UserModel!
-    users: [UserModel!]!
+  countries: [CountryModel!]!
+  country(uid: Int!): CountryModel!
+  follow(hotelUid: String!): FavoriteModel!
+  hotel(uid: String!): HotelModel!
+  hotels: [HotelModel!]!
+  post(id: Int!): PostModel!
+  posts: [PostModel!]!
+  profile: UserModel!
+  role(id: Int!): RoleModel!
+  roles: [RoleModel!]!
+  unfollow(uid: String!): FavoriteModel!
+  user(id: Int!): UserModel!
+  users: [UserModel!]!
 }
 
 type RoleModel {
-    code: String!
-    createdAt: DateTime!
-    description: String!
-    id: Int!
-    name: String!
-    uid: String!
-    updatedAt: DateTime!
+  code: String!
+  createdAt: DateTime!
+  description: String!
+  id: Int!
+  name: String!
+  uid: String!
+  updatedAt: DateTime!
+}
+
+type RoomsModel {
+  bath: Float!
+  beds: Float!
+  extras: [String!]!
 }
 
 type UserModel {
-    createdAt: DateTime!
-    email: String!
-    id: Int!
-    isVerified: Boolean!
-    name: String!
-    password: String!
-    role: RoleModel!
-    roleId: Int!
-    uid: String!
-    updatedAt: DateTime!
+  avatarId: Int!
+  createdAt: DateTime!
+  email: String!
+  id: Int!
+  isVerified: Boolean!
+  name: String!
+  password: String!
+  role: RoleModel!
+  roleId: Int!
+  uid: String!
+  updatedAt: DateTime!
 }
 
 "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
 scalar DateTime
 
 input PostCreateInput {
-    content: String!
-    isPublished: Boolean
-    title: String!
-    userId: Int!
+  content: String!
+  isPublished: Boolean
+  title: String!
+  userId: Int!
 }
 
 input RoleCreateInput {
-    code: String!
-    description: String!
-    name: String!
+  code: String!
+  description: String!
+  name: String!
 }
 
 input UserCreateInput {
-    email: String!
-    name: String!
-    roleId: Int!
+  email: String!
+  name: String!
+  roleId: Int!
 }

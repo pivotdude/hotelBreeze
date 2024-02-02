@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common'
 import { HotelResolver } from './hotel.resolver'
 import { HotelService } from './hotel.service'
 import { HotelRepository } from './hotel.repository'
-import { PrismaService } from '../prisma/prisma.service'
+import { AuthModule } from '../modules/auth/auth.module'
 
 @Module({
-  providers: [HotelResolver, HotelService, HotelRepository, PrismaService],
-  imports: [],
+  providers: [HotelResolver, HotelService, HotelRepository],
+  imports: [AuthModule],
+  exports: [HotelService, HotelRepository],
 })
 export class HotelModule {}
