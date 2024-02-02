@@ -15,7 +15,7 @@ interface CreateReviewInput {
 
 export const createReview = async (input: CreateReviewInput): Promise<HotelQuery | void> => {
   const query = gql`
-`    mutation createReview($input: CreateReviewInput!) {
+    mutation createReview($input: CreateReviewInput!) {
       createReview(input: $input) {
         id
       }
