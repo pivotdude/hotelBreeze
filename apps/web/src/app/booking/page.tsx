@@ -1,3 +1,4 @@
+'use client'
 import { Col, Row } from '@/ui'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import SearchForm from '@/modules/bookig/components/SearchForm'
