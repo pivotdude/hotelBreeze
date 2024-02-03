@@ -1,5 +1,5 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
-import { Hotel } from '@prisma/client'
+import { Hotel } from '../../prisma/generated/client'
 import { ContextUser } from '../Models'
 import { FavoriteService } from './favorite.service'
 import { FavoriteModel } from './favorite.model'

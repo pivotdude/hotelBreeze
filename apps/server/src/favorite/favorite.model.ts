@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Favorite } from '@prisma/client'
+import { Favorite } from '../../prisma/generated/client'
 import { UserModel } from '../user/user.model'
 import { HotelModel } from '../hotel/models/hotel.model'
 

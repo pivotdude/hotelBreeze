@@ -1,6 +1,6 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { PostService } from './post.service'
-import { Post } from '@prisma/client'
+import { Post } from '../../prisma/generated/client'
 import { PostModel } from './post.model'
 import { PostCreateInput } from './models/PostCreateInput'
 

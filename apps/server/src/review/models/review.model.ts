@@ -1,5 +1,5 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
-import { Review } from '@prisma/client'
+import { Review } from '../../../prisma/generated/client'
 import { UserModel } from '../../user/user.model'
 import { HotelModel } from '../../hotel/models/hotel.model'
 

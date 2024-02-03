@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { Prisma, User } from '@prisma/client'
+import { Prisma, User } from '../../prisma/generated/client'
 import { UserCreateInput } from './models/UserCreateInput'
 import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 

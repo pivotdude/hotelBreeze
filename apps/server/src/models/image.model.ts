@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Image } from '@prisma/client'
+import { Image } from '../../prisma/generated/client'
 
 @ObjectType()
 export class ImageModel implements Image {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { HotelRepository } from './hotel.repository'
-import { Hotel } from '@prisma/client'
+import { Hotel } from '../../prisma/generated/client'
 
 @Injectable()
 export class HotelService {

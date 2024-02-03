@@ -1,7 +1,7 @@
 import { Args, Context, Query, Resolver } from '@nestjs/graphql'
 import { HotelService } from './hotel.service'
 import { HotelModel } from './models/hotel.model'
-import { Hotel } from '@prisma/client'
+import { Hotel } from '../../prisma/generated/client'
 import { AuthInterceptor } from '../modules/auth/auth.interceptor'
 import { ContextUser } from '../Models'
 import { UseInterceptors } from '@nestjs/common'
