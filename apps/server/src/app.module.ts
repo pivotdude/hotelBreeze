@@ -16,6 +16,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { HotelModule } from './hotel/hotel.module'
 import { FavoriteModule } from './favorite/favorite.module'
 import { ReviewModule } from './review/review.module'
+import { RootResolver } from './root.resolver'
 
 @Module({
   providers: [
@@ -23,6 +24,7 @@ import { ReviewModule } from './review/review.module'
       provide: 'ROLES_GUARD',
       useClass: RolesGuard,
     },
+    RootResolver,
   ],
   imports: [
     PrismaModule,
