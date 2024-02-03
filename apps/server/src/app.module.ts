@@ -39,8 +39,8 @@ import { RootResolver } from './root.resolver'
     ReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      // autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      typeDefs: [join(process.cwd(), 'src/schema.gql')],
+      autoSchemaFile: true, //join(process.cwd(), 'src/schema.gql'),
+      // typeDefs: [join(process.cwd(), 'src/schema.gql')],
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
