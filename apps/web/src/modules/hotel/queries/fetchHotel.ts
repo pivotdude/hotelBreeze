@@ -36,14 +36,23 @@ export interface IHotel {
   }[]
   isFollow: boolean
   reviews: {
+    uid: string
     description: string
+    createdAt: string
     rating: number
+    user: {
+      name: string
+    }
   }[]
   userReview: {
-    uid
+    uid: string
     description: string
+    createdAt: string
     rating: number
-  }[]
+    user: {
+      name: string
+    }
+  }
 }
 
 export interface HotelQuery {
@@ -87,13 +96,22 @@ export const fetchHotel = async (uid: string): Promise<HotelQuery | void> => {
           uid
         }
         reviews {
+          uid
+          createdAt
           description
           rating
+          user {
+            name
+          }
         }
         userReview {
           uid
+          createdAt
           description
           rating
+          user {
+            name
+          }
         }
         isFollow
       }

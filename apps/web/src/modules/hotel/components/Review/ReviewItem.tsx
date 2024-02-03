@@ -5,7 +5,9 @@ import ReviewInfoItem from '@/modules/hotel/components/Review/ReviewInfoItem'
 
 export interface IReviewItem {
   uid: string
-  name: string
+  user: {
+    name: string
+  }
   createdAt: string
   rating: number
   description: string
@@ -22,7 +24,7 @@ export default function ReviewItem(props: ReviewItemProps) {
       <ReviewInfoItem review={props.review} />
       <Col span={24}>
         {props?.setEdit && (
-          <Button icon={<EditOutlined />} type="link" onClick={() => props.setEdit(true)}>
+          <Button icon={<EditOutlined />} type="link" onClick={() => props.setEdit && props.setEdit(true)}>
             Редактировать
           </Button>
         )}

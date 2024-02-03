@@ -19,7 +19,11 @@ export class HotelRepository {
             country: true,
           },
         },
-        reviews: true,
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
         ...(userId && {
           favorites: {
             where: {

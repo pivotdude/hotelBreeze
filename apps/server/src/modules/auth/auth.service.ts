@@ -105,8 +105,10 @@ export class AuthService {
   }
 
   async getUser(token: string) {
-    return this.jwtService.verifyAsync(token, {
-      secret: constants.JWT_SECRET,
-    })
+    if (token) {
+      return this.jwtService.verifyAsync(token, {
+        secret: constants.JWT_SECRET,
+      })
+    }
   }
 }

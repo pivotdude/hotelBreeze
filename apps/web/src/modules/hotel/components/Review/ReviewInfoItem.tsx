@@ -8,7 +8,6 @@ interface ReviewInfoItemProps {
 }
 
 export default function ReviewInfoItem(props: ReviewInfoItemProps) {
-  console.log(props)
   return (
     <>
       <Col span={24}>
@@ -17,7 +16,7 @@ export default function ReviewInfoItem(props: ReviewInfoItemProps) {
             <Avatar size={48} />
           </Col>
           <Col>
-            <p className="font-medium">{props.review.name}</p>
+            <p className="font-medium">{props.review.user.name}</p>
             <p className="font-light">{dayjs(props.review.createdAt).format('DD MMMM YYYY')}</p>
           </Col>
         </Row>
