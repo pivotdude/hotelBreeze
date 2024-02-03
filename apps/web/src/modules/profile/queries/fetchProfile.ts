@@ -39,5 +39,5 @@ export const fetchProfile = async (): Promise<ProfileResponse | void> => {
       }
     }
   `
-  return sendRequest<ProfileResponse>(query, {}, true)
+  return sendRequest<ProfileResponse>(query, {})
 }
