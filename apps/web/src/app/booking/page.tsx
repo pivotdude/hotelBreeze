@@ -14,13 +14,13 @@ export default async function Page() {
   console.log('hotels', hotels)
 
   return (
-    <Row gutter={[16, 16]} className="px-32">
-      <Col xs={24}>
+    <Row gutter={[16, 16]}>
+      <Col xs={24} className="my-20 m-auto">
         <SearchForm countries={countries} />
       </Col>
       {hotels?.length ? (
         <Col xs={24}>
-          <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 gap-2">
+          <div className="flex flex-wrap gap-3">
             <HotelList hotels={hotels} />
           </div>
         </Col>

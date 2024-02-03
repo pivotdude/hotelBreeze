@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { Hotel } from '@prisma/client'
-import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
+import { Hotel } from '../../prisma/generated/client'
 
 @Injectable()
 export class HotelRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async find(filter: DefaultWhereInput): Promise<Hotel | null> {
+  async find(uid: string, userId: number | null): Promise<Hotel | null> {
     return this.prismaService.hotel.findUnique({
-      where: filter,
+      where: {
+        uid,
+      },
       include: {
         previewImage: true,
         images: true,
@@ -18,6 +19,18 @@ export class HotelRepository {
             country: true,
           },
         },
+        reviews: {
+          include: {
+            user: true,
+          },
+        },
+        ...(userId && {
+          favorites: {
+            where: {
+              userId,
+            },
+          },
+        }),
       },
     })
   }
@@ -33,6 +46,22 @@ export class HotelRepository {
           },
         },
       },
+    })
+  }
+  async findByUid(uid: string): Promise<Hotel | null> {
+    return this.prismaService.hotel.findUnique({
+      where: {
+        uid,
+      },
+    })
+  }
+
+  update(hotel: Partial<Hotel>) {
+    return this.prismaService.hotel.update({
+      where: {
+        id: hotel.id,
+      },
+      data: hotel,
     })
   }
 }

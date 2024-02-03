@@ -1,5 +1,5 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "server",
   "version": "1.0.0",
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
@@ -24,10 +24,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "echo 'No e2e tests implemented yet.'",
     "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
-    "prisma:migrate:dev": "prisma migrate dev --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "prisma:migrate:reset": "prisma migrate reset -f --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "prisma:migrate:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma && npm run prisma:generate",
-    "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate"
+    "prisma:migrate:dev": "prisma migrate dev --schema=prisma/schema.prisma && prisma generate",
+    "prisma:migrate:reset": "prisma migrate reset -f --schema=prisma/schema.prisma && prisma generate",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate",
+    "postinstall": "npm run deploy"
   },
   "dependencies": {
     "@apollo/server": "4.9.3",
@@ -46,6 +47,7 @@
     "class-validator": "^0.14.0",
     "dayjs": "^1.11.10",
     "dayjs-plugin-utc": "^0.1.2",
+    "decimal.js": "^10.4.3",
     "graphql": "16.8.1",
     "graphql-subscriptions": "2.0.0",
     "handlebars": "^4.7.8",

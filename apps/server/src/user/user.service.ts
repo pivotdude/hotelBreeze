@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { UserRepository } from './user.repository'
-import { User } from '@prisma/client'
+import { User } from '../../prisma/generated/client'
 import { UserCreateInput } from './models/UserCreateInput'
 
 @Injectable()
@@ -29,6 +29,10 @@ export class UserService {
 
   async findUser(data: any) {
     return this.userRepository.findUser(data)
+  }
+
+  async getUserForProfile(id: number): Promise<User | null> {
+    return this.userRepository.findByIdForProfile(id)
   }
 
   //

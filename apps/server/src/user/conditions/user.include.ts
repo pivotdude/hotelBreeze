@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from '../../../prisma/generated/client'
 
 // : Prisma.UserDelegate
 export const findManyInclude: Prisma.UserFindManyArgs = {

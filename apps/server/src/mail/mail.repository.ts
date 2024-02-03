@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { sendEmailProps } from './mail.service'
 import { mailTemplatesT } from '../Models'
-import dayjs from '../core/libs/dayjs'
 
 export interface FindArgs {
   email: string
@@ -27,6 +26,9 @@ export class MailRepository {
   }
 
   async createVerificationEmail(emailData: sendEmailProps, statusMessageData) {
+    const currentDate = new Date()
+    currentDate.setMinutes(currentDate.getMinutes() + 3)
+    const isoString = currentDate.toISOString()
     return this.prismaService.sentEmail.create({
       data: {
         theme: emailData.theme,
@@ -37,7 +39,7 @@ export class MailRepository {
         verificationCode: {
           create: {
             code: emailData.code,
-            expired: dayjs().add(3, 'minutes').toDate(),
+            expired: isoString,
             type: {
               connect: {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,7 +65,7 @@ export class MailRepository {
             code: template,
           },
           expired: {
-            gt: dayjs().toDate(),
+            gt: new Date(),
           },
         },
       },

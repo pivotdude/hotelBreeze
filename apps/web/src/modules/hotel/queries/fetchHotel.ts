@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import sendRequest from '@/core/sendRequest'
+import sendRequest from '@/libs/graphql/sendRequest'
 
 export interface IHotel {
   uid: string
@@ -30,6 +30,28 @@ export interface IHotel {
     }
     maxGuests: number
     isEntireHome: boolean
+  }
+  favorites: {
+    uid: string
+  }[]
+  isFollow: boolean
+  reviews: {
+    uid: string
+    description: string
+    createdAt: string
+    rating: number
+    user: {
+      name: string
+    }
+  }[]
+  userReview: {
+    uid: string
+    description: string
+    createdAt: string
+    rating: number
+    user: {
+      name: string
+    }
   }
 }
 
@@ -70,6 +92,28 @@ export const fetchHotel = async (uid: string): Promise<HotelQuery | void> => {
           url
           name
         }
+        favorites {
+          uid
+        }
+        reviews {
+          uid
+          createdAt
+          description
+          rating
+          user {
+            name
+          }
+        }
+        userReview {
+          uid
+          createdAt
+          description
+          rating
+          user {
+            name
+          }
+        }
+        isFollow
       }
     }
   `

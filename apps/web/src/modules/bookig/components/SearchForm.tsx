@@ -4,6 +4,7 @@ import { IOptions } from '@/models'
 import { useState } from 'react'
 import { CountryQuery } from '@/modules/bookig/queries/fetchCountry'
 import MapFormat from '@/helpers/MapFormat'
+import { Col, Row } from '@/ui'
 
 const { RangePicker } = DatePicker
 
@@ -25,17 +26,27 @@ export default function SearchForm({ countries }: SearchFormProps) {
   }
 
   return (
-    <Form layout="inline" size="large" className="w-full">
-      <Form.Item label="Выберите даты">
-        <RangePicker format="DD.MM.YYYY" />
-      </Form.Item>
-      <Form.Item label="Страна">
-        <Select options={optionsCountry} onChange={changeCountry} />
-      </Form.Item>
-      <Form.Item label="Город">
-        <Select options={cities} className="w-60" />
-      </Form.Item>
-      <Button>Поиск</Button>
+    <Form size="large" className="w-full">
+      <Row gutter={[16, 16]}>
+        <Col xs={7}>
+          <Form.Item label="Выберите даты">
+            <RangePicker format="DD.MM.YYYY" />
+          </Form.Item>
+        </Col>
+        <Col xs={7}>
+          <Form.Item label="Страна">
+            <Select options={optionsCountry} onChange={changeCountry} />
+          </Form.Item>
+        </Col>
+        <Col xs={7}>
+          <Form.Item label="Город">
+            <Select options={cities} className="w-60" />
+          </Form.Item>
+        </Col>
+        <Col xs={2}>
+          <Button>Поиск</Button>
+        </Col>
+      </Row>
     </Form>
   )
 }

@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <Row className="bg-gray-50 py-4">
-      <Col xs={24} className="pt-16 pb-8">
+      <Col xs={24} className="pt-16 pb-8 flex justify-between w-full">
         <FooterLinks />
       </Col>
       <Divider type="horizontal" className="bg-gray-600" />

@@ -1,11 +1,9 @@
-import { Global, Module } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { MailerModule } from '@nestjs-modules/mailer'
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter'
 import { MailService } from './mail.service'
-import { PrismaService } from '../prisma/prisma.service'
 import { MailRepository } from './mail.repository'
 
-@Global()
 @Module({
   imports: [
     MailerModule.forRoot({
@@ -23,6 +21,7 @@ import { MailRepository } from './mail.repository'
       },
     }),
   ],
-  providers: [MailService, PrismaService, MailRepository],
+  providers: [MailService, MailRepository],
+  exports: [MailService, MailRepository],
 })
 export class MailModule {}

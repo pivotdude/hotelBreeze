@@ -30,11 +30,6 @@ export default function NavBar() {
       key: 'booking',
       icon: <AppstoreOutlined />,
     },
-    {
-      label: 'Посты',
-      key: 'posts',
-      icon: <ProfileOutlined />,
-    },
   ] as MenuItem[]
 
   const authItems = [
@@ -82,5 +77,5 @@ export default function NavBar() {
     setCurrent(e.key)
     router.push('/' + e.key)
   }
-  return <Menu className="w-screen" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
+  return <Menu className="w-full" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
 }

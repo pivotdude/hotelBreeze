@@ -14,6 +14,9 @@ import { RolesGuard } from './modules/auth/roles.guard'
 import { CountryModule } from './country/country.module'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { HotelModule } from './hotel/hotel.module'
+import { FavoriteModule } from './favorite/favorite.module'
+import { ReviewModule } from './review/review.module'
+import { RootResolver } from './root.resolver'
 
 @Module({
   providers: [
@@ -21,6 +24,7 @@ import { HotelModule } from './hotel/hotel.module'
       provide: 'ROLES_GUARD',
       useClass: RolesGuard,
     },
+    RootResolver,
   ],
   imports: [
     PrismaModule,
@@ -31,13 +35,28 @@ import { HotelModule } from './hotel/hotel.module'
     MailModule,
     CountryModule,
     HotelModule,
+    FavoriteModule,
+    ReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: true, //join(process.cwd(), 'src/schema.gql'),
+      // typeDefs: [join(process.cwd(), 'src/schema.gql')],
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      include: [RoleModule, UserModule, PostModule, AuthModule, CountryModule, HotelModule],
+      include: [
+        RoleModule,
+        UserModule,
+        PostModule,
+        AuthModule,
+        CountryModule,
+        HotelModule,
+        FavoriteModule,
+        ReviewModule,
+      ],
+      context: ({ req }) => {
+        return { token: req.headers.Authorization }
+      },
     }),
     ConfigModule.forRoot({
       envFilePath: '.env',

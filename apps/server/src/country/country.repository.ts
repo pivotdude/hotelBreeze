@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { Country } from '@prisma/client'
+import { Country } from '../../prisma/generated/client'
 import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
 @Injectable()

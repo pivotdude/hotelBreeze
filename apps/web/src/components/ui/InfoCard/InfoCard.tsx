@@ -26,9 +26,7 @@ export default function InfoCard({ item, width, href }: InfoCardProps) {
   return (
     <Card
       hoverable
-      style={{
-        width,
-      }}
+      className="sm:w-full md:w-[300px]"
       cover={
         <Image alt={item.previewImage.name} src={item?.previewImage?.url} /> // TODO change on Image
       }

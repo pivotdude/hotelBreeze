@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Country } from '@prisma/client'
+import { Country } from '../../prisma/generated/client'
 import { LanguageModel } from '../models/language.model'
 import { ImageModel } from '../models/image.model'
 import { CityModel } from '../models/city.model'
