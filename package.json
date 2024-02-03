@@ -11,6 +11,7 @@
     "start": "pnpm run --parallel start",
     "start:server": "pnpm --filter server start:prod",
     "start:web": "pnpm --filter web start",
+    "deploy": "pnpm run --filter server deploy",
     "format": "prettier apps",
     "format:fix": "prettier --write apps",
     "lint": "lerna run lint --stream"

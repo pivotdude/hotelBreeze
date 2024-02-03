@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag'
-import sendRequest from '@/core/sendRequest'
+import sendRequest from '@/libs/graphql/sendRequest'
 import { ICodeFormData } from '@/components/app/forms/CodeForm'
 
 export interface ConfirmAuthorizationResponse {

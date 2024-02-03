@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { Role } from '@prisma/client'
+import { Role } from '../../prisma/generated/client'
 import { RoleCreateInput } from './models/RoleCreateInput'
 import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 

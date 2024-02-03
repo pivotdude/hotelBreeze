@@ -1,6 +1,6 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { RoleService } from './role.service'
-import { Role } from '@prisma/client'
+import { Role } from '../../prisma/generated/client'
 import { RoleModel } from './role.model'
 import { RoleCreateInput } from './models/RoleCreateInput'
 

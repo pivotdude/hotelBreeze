@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Role, User } from '@prisma/client'
+import { Role } from '../../prisma/generated/client'
 
 @ObjectType()
 export class RoleModel implements Role {

@@ -8,6 +8,6 @@ export class RoomsModel {
   @Field()
   bath: number
 
-  @Field()
+  @Field(() => [String])
   extras: string[]
 }

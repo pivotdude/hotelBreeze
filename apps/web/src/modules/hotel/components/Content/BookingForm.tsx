@@ -18,13 +18,29 @@ export default function BookingForm(props: BookingFormProps) {
     setAmount(diffInDays * props.price)
   }
 
+  const onSubmit = () => {
+    console.log('submit')
+  }
+
   return (
-    <Form layout="vertical">
-      <Form.Item name="date" label="Даты бронирования">
+    <Form layout="vertical" onFinish={onSubmit}>
+      <Form.Item
+        name="date"
+        label="Даты бронирования"
+        rules={[{ required: true, message: 'Укажите даты бронирования' }]}
+      >
         {/*@ts-ignore*/}
         <RangePicker format="DD.MM.YYYY" className="w-full" onChange={onChange} />
       </Form.Item>
-      <Form.Item name="count" label="Количество человек">
+      <Form.Item
+        name="count"
+        label="Количество человек"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
         <InputNumber className="w-full" max={props.maxGuests} min={1} />
       </Form.Item>
       <Form.Item label="Итоговая стоимость">

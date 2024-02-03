@@ -1,8 +1,10 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
-import { Hotel } from '@prisma/client'
+import { Hotel } from '../../../prisma/generated/client'
 import { ImageModel } from '../../models/image.model'
 import { CityModel } from '../../models/city.model'
 import { DataModel } from './data.model'
+import { FavoriteModel } from '../../favorite/favorite.model'
+import { ReviewModel } from '../../review/models/review.model'
 
 @ObjectType()
 export class HotelModel implements Hotel {
@@ -50,4 +52,16 @@ export class HotelModel implements Hotel {
 
   @Field((type) => [ImageModel])
   images: ImageModel[]
+
+  @Field((type) => [FavoriteModel], { nullable: true })
+  favorites: FavoriteModel[]
+
+  @Field((type) => [ReviewModel], { nullable: true })
+  reviews: ReviewModel[]
+
+  @Field((type) => ReviewModel, { nullable: true })
+  userReview: ReviewModel
+
+  @Field()
+  isFollow: boolean
 }

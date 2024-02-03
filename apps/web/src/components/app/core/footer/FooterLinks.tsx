@@ -8,8 +8,8 @@ function Title({ children }: { children: ReactNode }) {
 
 export default function FooterLinks() {
   return (
-    <Row>
-      <Col xs={6}>
+    <Row gutter={[32, 32]} className="w-full">
+      <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>Support</Title>
           <Link href="/">Help center</Link>
@@ -20,7 +20,7 @@ export default function FooterLinks() {
           <Link href="/">Report a neighbourhood</Link>
         </Space>
       </Col>
-      <Col xs={6}>
+      <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>Community</Title>
           <Link href="/">Airbnb.org: disaster relief housing</Link>
@@ -28,7 +28,7 @@ export default function FooterLinks() {
           <Link href="/">Combating discriminatino</Link>
         </Space>
       </Col>
-      <Col xs={6}>
+      <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>Hosting</Title>
           <Link href="/">Try hosting</Link>
@@ -38,7 +38,7 @@ export default function FooterLinks() {
           <Link href="/">How to host responsibly</Link>
         </Space>
       </Col>
-      <Col xs={6}>
+      <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>About</Title>
           <Link href="/">Newsroom</Link>

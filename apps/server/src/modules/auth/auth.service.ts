@@ -81,13 +81,13 @@ export class AuthService {
     if (!user) {
       throw new Error('Пользователь с такой почтой не найден')
     }
-    // await this.mailService.sendVerificationEmail({
-    //   email: input.email,
-    //   theme: 'Авторизация',
-    //   template: 'confirmationLogin',
-    //   context: { code, name: user.name },
-    //   code,
-    // })
+    await this.mailService.sendVerificationEmail({
+      email: input.email,
+      theme: 'Авторизация',
+      template: 'confirmationLogin',
+      context: { code, name: user.name },
+      code,
+    })
     console.log('user', user)
     return { message: 'Код отправлен на почту' }
   }
@@ -100,14 +100,15 @@ export class AuthService {
 
     await this.#checkCode({ email, code, template: 'confirmationLogin' })
 
-    const payload = { sub: user.uid, username: user.name }
+    const payload = { sub: user.id, username: user.name }
     return { access_token: await this.jwtService.signAsync(payload), message: 'Авторизация прошла успешно', user: user }
   }
 
-  async getProfile(token: string) {
-    const payload = await this.jwtService.verifyAsync(token, {
-      secret: constants.JWT_SECRET,
-    })
-    return this.userService.findUser({ uid: payload.sub })
+  async getUser(token: string) {
+    if (token) {
+      return this.jwtService.verifyAsync(token, {
+        secret: constants.JWT_SECRET,
+      })
+    }
   }
 }

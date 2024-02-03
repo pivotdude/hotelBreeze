@@ -1,51 +1,16 @@
 import { ShareAltOutlined } from '@ant-design/icons'
-import { Button, Col, Row, Space } from 'antd'
+import { Button, Col, Row, Space } from '@/ui'
 import DotList from '@/components/ui/Dot/DotList'
-import { useState } from 'react'
-import FollowIcon from '@/components/ui/FollowIcon/FollowIcon'
 import ReviewsStar from '@/components/ui/Review/ReviewsStar'
 import ReviewCount from '@/components/ui/Review/ReviewCount'
-
-export interface IHotelInfo {
-  uid: string
-  price: number
-  description: string
-  title: string
-  reviewRating: number
-  reviewCount: number
-  previewImage: {
-    url: string
-    name: string
-  }
-  city: {
-    name: string
-    country: {
-      name: string
-    }
-  }
-}
+import { IHotel } from '@/modules/hotel/queries/fetchHotel'
+import FollowButton from '@/modules/hotel/components/Header/FollowButton'
 
 interface HotelInfoProps {
-  hotel: IHotelInfo
-}
-function FollowButton({ isFollow, onClick }: { isFollow: boolean; onClick: () => void }) {
-  return (
-    <Button
-      type={isFollow ? 'primary' : 'default'}
-      shape="round"
-      icon={<FollowIcon isFollowed={isFollow} />}
-      size="large"
-      onClick={onClick}
-    >
-      {isFollow ? 'Following' : 'Follow'}
-    </Button>
-  )
+  hotel: IHotel
 }
 
 export default function HotelCup({ hotel }: HotelInfoProps) {
-  const [isFollow, setIsFollow] = useState<boolean>(false)
-  const toggleFollow = () => setIsFollow((prev) => !prev)
-
   return (
     <Row justify="space-between" className="items-center">
       <Col>
@@ -60,7 +25,7 @@ export default function HotelCup({ hotel }: HotelInfoProps) {
           <Button icon={<ShareAltOutlined />} className="text-black" shape="round" size="large">
             Share
           </Button>
-          <FollowButton onClick={toggleFollow} isFollow={isFollow} />
+          <FollowButton isFollow={hotel.isFollow} uid={hotel.favorites?.[0]?.uid} hotelUid={hotel.uid} />
         </Space>
       </Col>
     </Row>

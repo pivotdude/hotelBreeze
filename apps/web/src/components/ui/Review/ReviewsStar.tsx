@@ -2,13 +2,14 @@ import { StarOutlined } from '@ant-design/icons'
 
 interface ReviewsPanelProps {
   rating: number | string
+  className?: string
 }
 
-export default function ReviewsStar({ rating }: ReviewsPanelProps) {
+export default function ReviewsStar({ rating, className }: ReviewsPanelProps) {
   return (
     <>
       <StarOutlined className="text-pink-400" />
-      <g>{rating}</g>
+      <a className={className}>{rating}</a>
     </>
   )
 }

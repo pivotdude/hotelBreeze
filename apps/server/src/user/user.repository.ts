@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { Prisma, User } from '@prisma/client'
+import { Prisma, User } from '../../prisma/generated/client'
 import { UserCreateInput } from './models/UserCreateInput'
 import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
 
@@ -41,6 +41,40 @@ export class UserRepository {
   async findUser(data: any): Promise<User | null> {
     return this.prisma.user.findFirst({
       where: data,
+    })
+  }
+
+  async findByIdForProfile(id: number): Promise<User | null> {
+    const params = {
+      include: {
+        favorites: {
+          include: {
+            hotel: {
+              include: {
+                previewImage: true,
+              },
+            },
+          },
+        },
+      },
+    }
+    return this.findById(id, params)
+  }
+
+  async findById(id: number, params: { include?: Prisma.UserInclude } = {}): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+      ...params,
+    })
+  }
+
+  findByUid(uid: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        uid,
+      },
     })
   }
 
