@@ -20,16 +20,16 @@ async function main() {
     ImageHotelSeed,
   ]
 
-  try {
-    for (const Seed of seeds) {
-      const seedInstance = new Seed()
+  for (const Seed of seeds) {
+    const seedInstance = new Seed()
+    try {
       await seedInstance.run()
+    } catch (error) {
+      console.error(error)
     }
-  } catch (error) {
-    console.error(error)
-  } finally {
-    await prisma.$disconnect()
   }
+  console.log('Done!')
+  await prisma.$disconnect()
 }
 
 main()
