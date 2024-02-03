@@ -28,7 +28,7 @@
     "prisma:migrate:reset": "prisma migrate reset -f --schema=prisma/schema.prisma && prisma generate",
     "prisma:migrate:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
     "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate",
-    "postinstall": "npm run deploy"
+    "postinstall": "npm run deploy && prisma db seed"
   },
   "dependencies": {
     "@apollo/server": "4.9.3",
