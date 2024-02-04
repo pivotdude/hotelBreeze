@@ -14,7 +14,8 @@ async function bootstrap() {
     allowedHeaders: ['*'],
   })
 
-  app.use(CorsMiddleware)
+  const corsMiddleware = new CorsMiddleware()
+  app.use(corsMiddleware)
 
   await app.listen(3005)
   console.log(`Application is running on: ${await app.getUrl()}`)
