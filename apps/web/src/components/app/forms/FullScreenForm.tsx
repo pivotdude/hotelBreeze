@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Card } from 'antd'
+import { Card } from '@/ui'
 
 interface FullScreenFormProps {
   children: ReactNode
