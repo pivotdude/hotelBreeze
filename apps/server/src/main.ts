@@ -10,8 +10,9 @@ async function bootstrap() {
     origin: ['*'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     credentials: true,
-    allowedHeaders: ['*'],
-    preflightContinue: true,
+    allowedHeaders: ['Accept', 'Content-Type', 'Authorization'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 
   await app.listen(3005)
