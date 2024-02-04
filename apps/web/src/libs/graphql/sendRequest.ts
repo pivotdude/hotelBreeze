@@ -1,4 +1,3 @@
-// import 'server-only'
 import constants from '@/constants'
 import initMocks from '@/mocks/server'
 import client from '@/libs/graphql/index'
@@ -8,7 +7,6 @@ import { authOptions } from '@/libs/auth'
 if (constants.STABS_ENABLE === 'enabled') {
   initMocks()
 }
-
 async function getToken() {
   if (typeof window === 'undefined') {
     const getSession = (await import('./serverSession')).getSession
@@ -23,7 +21,6 @@ export default async function sendRequest<T>(query: any, vars: any = {}) {
   const token = await getToken()
   // console.log('token', token)
   try {
-    // @ts-ignore
     return (await client.request(query, vars, { Authorization: token || '' })) as T
   } catch (error: any) {
     //   console.log('initial error', error)
