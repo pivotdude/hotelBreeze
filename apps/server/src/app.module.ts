@@ -17,6 +17,7 @@ import { HotelModule } from './hotel/hotel.module'
 import { FavoriteModule } from './favorite/favorite.module'
 import { ReviewModule } from './review/review.module'
 import { RootResolver } from './root.resolver'
+import { CorsMiddleware } from './cors.middleware'
 
 @Module({
   providers: [
@@ -25,6 +26,7 @@ import { RootResolver } from './root.resolver'
       useClass: RolesGuard,
     },
     RootResolver,
+    CorsMiddleware,
   ],
   imports: [
     PrismaModule,

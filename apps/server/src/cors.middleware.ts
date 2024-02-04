@@ -1,8 +1,8 @@
-import { NestMiddleware } from '@nestjs/common'
+import { NextFunction, Request, Response } from 'express'
 
 export class CorsMiddleware {
   resolve(): any {
-    return (req, res, next) => {
+    return (req: Request, res: Response, next: NextFunction) => {
       res.header('Access-Control-Allow-Origin', '*')
       res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
       if (req.method === 'OPTIONS') {
