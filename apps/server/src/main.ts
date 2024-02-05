@@ -15,7 +15,9 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
   })
 
-  await app.listen(3005, '0.0.0.0')
+  const port = process.env.PORT || 3005
+  await app.listen(port, '0.0.0.0')
+
   console.log(`Application is running on: ${await app.getUrl()}`)
   console.log(`GraphQL Playground: ${await app.getUrl()}/graphql`)
 }
