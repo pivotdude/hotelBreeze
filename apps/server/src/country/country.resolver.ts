@@ -1,7 +1,7 @@
 import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 import { CountryService } from './country.service'
 import { CountryModel } from './country.model'
-import { Country } from '../../prisma/generated/client'
+import { Country } from '@prisma/client'
 
 @Resolver((of) => CountryModel)
 export class CountryResolver {

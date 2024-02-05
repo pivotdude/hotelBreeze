@@ -1,7 +1,7 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
-import { Review } from '../../../prisma/generated/client'
-import { UserModel } from '../../user/user.model'
-import { HotelModel } from '../../hotel/models/hotel.model'
+import { Review } from '@prisma/client'
+import { UserModel } from '@/user/user.model'
+import { HotelModel } from '@/hotel/models/hotel.model'
 
 @ObjectType()
 export class ReviewModel implements Review {

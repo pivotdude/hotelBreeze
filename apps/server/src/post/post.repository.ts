@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '../prisma/prisma.service'
-import { Post } from '../../prisma/generated/client'
+import { PrismaService } from '@/prisma/prisma.service'
+import { Post } from '@prisma/client'
 import { PostCreateInput } from './models/PostCreateInput'
-import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
+import { DefaultWhereInput } from '@/core/Inputs/DefaultWhereInput'
 
 @Injectable()
 export class PostRepository {

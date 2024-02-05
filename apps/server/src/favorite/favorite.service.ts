@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { FavoriteRepository } from './favorite.repository'
-import { Hotel } from '../../prisma/generated/client'
+import { Hotel } from '@prisma/client'
 import { HotelRepository } from '../hotel/hotel.repository'
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { Prisma } from '../../../prisma/generated/client'
+import { Prisma } from '@prisma/client'
 import { Field, InputType, Int } from '@nestjs/graphql'
 
 @InputType()

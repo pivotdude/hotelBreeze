@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Language } from '../../prisma/generated/client'
+import { Language } from '@prisma/client'
 
 @ObjectType()
 export class LanguageModel implements Language {

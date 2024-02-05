@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '../prisma/prisma.service'
-import { Role } from '../../prisma/generated/client'
+import { PrismaService } from '@/prisma/prisma.service'
+import { Role } from '@prisma/client'
 import { RoleCreateInput } from './models/RoleCreateInput'
-import { DefaultWhereInput } from '../core/Inputs/DefaultWhereInput'
+import { DefaultWhereInput } from '@/core/Inputs/DefaultWhereInput'
 
 @Injectable()
 export class RoleRepository {
