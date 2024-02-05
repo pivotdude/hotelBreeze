@@ -17,6 +17,7 @@ import { HotelModule } from './hotel/hotel.module'
 import { FavoriteModule } from './favorite/favorite.module'
 import { ReviewModule } from './review/review.module'
 import { RootResolver } from './root.resolver'
+import { Request } from 'express'
 
 @Module({
   providers: [
@@ -39,8 +40,7 @@ import { RootResolver } from './root.resolver'
     ReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true, // process.env.NODE_ENV !== 'production' ? join(process.cwd(), 'src/schema.gql') : false,
-      // typeDefs: [join(process.cwd(), 'src/schema.gql')],
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       installSubscriptionHandlers: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
@@ -54,7 +54,7 @@ import { RootResolver } from './root.resolver'
         FavoriteModule,
         ReviewModule,
       ],
-      context: ({ req }) => {
+      context: ({ req }: { req: Request }) => {
         return { token: req.headers.Authorization }
       },
     }),
