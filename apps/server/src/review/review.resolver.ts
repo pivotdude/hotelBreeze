@@ -1,11 +1,11 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
 import { ReviewService } from './review.service'
-import { AuthInterceptor } from '../modules/auth/auth.interceptor'
+import { AuthInterceptor } from '@/modules/auth/auth.interceptor'
 import { UseInterceptors } from '@nestjs/common'
 import { ReviewModel } from './models/review.model'
 import { CreateReviewInput } from './inputs/CreateReviewInput'
 import { UpdateReviewInput } from './inputs/UpdateReviewInput'
-import { ContextUser } from '../Models'
+import { ContextUser } from '@/Models'
 
 @UseInterceptors(AuthInterceptor)
 @Resolver((of) => ReviewModel)

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { CountryRepository } from './country.repository'
-import { Country } from '../../prisma/generated/client'
+import { Country } from '@prisma/client'
 
 @Injectable()
 export class CountryService {

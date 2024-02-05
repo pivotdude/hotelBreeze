@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { ReviewRepository } from './review.repository'
 import { CreateReviewInput } from './inputs/CreateReviewInput'
-import { HotelRepository } from '../hotel/hotel.repository'
-import { Prisma } from '../../prisma/generated/client'
+import { HotelRepository } from '@/hotel/hotel.repository'
+import { Prisma } from '@prisma/client'
 import { UpdateReviewInput } from './inputs/UpdateReviewInput'
 
 @Injectable()

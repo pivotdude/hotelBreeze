@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Favorite } from '../../prisma/generated/client'
-import { UserModel } from '../user/user.model'
-import { HotelModel } from '../hotel/models/hotel.model'
+import { Favorite } from '@prisma/client'
+import { UserModel } from '@/user/user.model'
+import { HotelModel } from '@/hotel/models/hotel.model'
 
 @ObjectType()
 export class FavoriteModel implements Favorite {

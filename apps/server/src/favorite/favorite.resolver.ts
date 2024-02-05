@@ -1,9 +1,9 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
-import { Hotel } from '../../prisma/generated/client'
-import { ContextUser } from '../Models'
+import { Hotel } from '@prisma/client'
+import { ContextUser } from '@/Models'
 import { FavoriteService } from './favorite.service'
 import { FavoriteModel } from './favorite.model'
-import { AuthInterceptor } from '../modules/auth/auth.interceptor'
+import { AuthInterceptor } from '@/modules/auth/auth.interceptor'
 import { UseInterceptors } from '@nestjs/common'
 
 @UseInterceptors(AuthInterceptor)
