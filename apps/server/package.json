@@ -10,7 +10,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "nest start --host 0.0.0.0 --port ${PORT-3001}",
     "generate": "ts-node generate-typings",
     "migrate:dev": "prisma migrate dev",
     "dev": "nest start --watch",
