@@ -38,11 +38,6 @@ export default function SearchForm({ countries }: SearchFormProps) {
             <Select options={optionsCountry} onChange={changeCountry} />
           </Form.Item>
         </Col>
-        <Col xs={7}>
-          <Form.Item label="Город">
-            <Select options={cities} className="w-60" />
-          </Form.Item>
-        </Col>
         <Col xs={2}>
           <Button>Поиск</Button>
         </Col>

@@ -16,7 +16,6 @@ interface HotelPageProps {
 export default async function HotelPage({ params, searchParams }: HotelPageProps) {
   const rawHotel = await fetchHotel(params.uid)
   const hotel = rawHotel ? rawHotel.hotel : null
-  console.log(hotel)
 
   if (!hotel) {
     return null

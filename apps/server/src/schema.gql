@@ -24,7 +24,7 @@ type ImageModel {
   updatedAt: DateTime!
   url: String!
   name: String!
-  hotelId: Int
+  hotelId: Int!
 }
 
 type LanguageModel {
@@ -192,6 +192,8 @@ type Mutation {
   registration(email: String!): AuthModel!
   login(email: String!): AuthModel!
   userCreate(input: UserCreateInput!): UserModel!
+  userUpdate(input: UserUpdateInput!): UserModel!
+  uploadAvatar(file: Upload!): ImageModel!
   follow(hotelUid: String!): FavoriteModel!
   unfollow(uid: String!): FavoriteModel!
   postCreate(input: PostCreateInput!): PostModel!
@@ -215,6 +217,14 @@ input UserCreateInput {
   name: String!
   roleId: Int!
 }
+
+input UserUpdateInput {
+  avatar: String!
+  name: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 input PostCreateInput {
   title: String!

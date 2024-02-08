@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { MailerService } from '@nestjs-modules/mailer'
 import { FindArgs, MailRepository } from './mail.repository'
-import { mailTemplatesT } from '../Models'
+import { mailTemplatesT } from '@/Models'
 
 export interface sendEmailProps {
   email: string
@@ -16,7 +16,10 @@ export interface sendEmailProps {
 
 @Injectable()
 export class MailService {
-  constructor(private readonly mailerService: MailerService, private readonly mailRepository: MailRepository) {}
+  constructor(
+    private readonly mailerService: MailerService,
+    private readonly mailRepository: MailRepository
+  ) {}
   async sendEmail(emailData: sendEmailProps) {
     const statusMessageData = await this.mailerService.sendMail({
       to: emailData.email,

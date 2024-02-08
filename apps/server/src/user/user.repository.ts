@@ -2,11 +2,14 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@/prisma/prisma.service'
 import { Prisma, User } from '@prisma/client'
 import { UserCreateInput } from './models/UserCreateInput'
-import { DefaultWhereInput } from '@/core/Inputs/DefaultWhereInput'
+import { ImageService } from '@/image/image.service'
 
 @Injectable()
 export class UserRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly imageService: ImageService
+  ) {}
 
   async findWhere(where: Partial<User>): Promise<User | null> {
     return this.prisma.user.findFirst({
@@ -31,10 +34,12 @@ export class UserRepository {
     })
   }
 
-  async update(where: DefaultWhereInput, data: Prisma.UserUpdateInput): Promise<User> {
+  async update(id: number, data: { name: string; avatarId: number }): Promise<User> {
     return this.prisma.user.update({
+      where: {
+        id,
+      },
       data,
-      where,
     })
   }
 
@@ -78,9 +83,13 @@ export class UserRepository {
     })
   }
 
-  // async delete(where: Prisma.UserWhereUniqueInput): Promise<User> {
-  //   return this.prisma.user.delete({
-  //     where,
-  //   });
+  // async update(id: number, data: { email: string; avatar: Blob }): Promise<User> {
+  //   await this.imageService.uploadAvatar(data.avatar)
+  //   return this.prisma.user.update({
+  //     where: {
+  //       id,
+  //     },
+  //     data,
+  //   })
   // }
 }

@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { AuthResolver } from './auth.resolver'
 import { JwtModule } from '@nestjs/jwt'
-import { constants } from '../../core/libs/constants'
+import { constants } from '@/core/libs/constants'
 import { AuthInterceptor } from './auth.interceptor'
-import { UserModule } from '../../user/user.module'
-import { MailModule } from '../../mail/mail.module'
+import { UserModule } from '@/user/user.module'
+import { MailModule } from '@/mail/mail.module'
 
 @Module({
   providers: [AuthResolver, AuthService, AuthInterceptor],
@@ -16,7 +16,7 @@ import { MailModule } from '../../mail/mail.module'
       signOptions: { expiresIn: '120000s' },
     }),
     MailModule,
-    UserModule,
+    forwardRef(() => UserModule),
   ],
   exports: [AuthInterceptor, AuthService],
 })

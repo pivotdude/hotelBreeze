@@ -16,8 +16,9 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { HotelModule } from './hotel/hotel.module'
 import { FavoriteModule } from './favorite/favorite.module'
 import { ReviewModule } from './review/review.module'
-import { RootResolver } from './root.resolver'
 import { Request } from 'express'
+import { ImageModule } from '@/image/image.module'
+import { AppController } from '@/app.controller'
 
 @Module({
   providers: [
@@ -25,7 +26,7 @@ import { Request } from 'express'
       provide: 'ROLES_GUARD',
       useClass: RolesGuard,
     },
-    RootResolver,
+    AppController,
   ],
   imports: [
     PrismaModule,
@@ -38,6 +39,7 @@ import { Request } from 'express'
     HotelModule,
     FavoriteModule,
     ReviewModule,
+    ImageModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -53,6 +55,7 @@ import { Request } from 'express'
         HotelModule,
         FavoriteModule,
         ReviewModule,
+        ImageModule,
       ],
       context: ({ req }: { req: Request }) => {
         return { token: req.headers.Authorization }

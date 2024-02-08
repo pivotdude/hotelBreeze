@@ -1,6 +1,6 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
 import { Hotel } from '@prisma/client'
-import { ImageModel } from '@/models/image.model'
+import { ImageModel } from '@/image/image.model'
 import { CityModel } from '@/models/city.model'
 import { DataModel } from './data.model'
 import { FavoriteModel } from '@/favorite/favorite.model'

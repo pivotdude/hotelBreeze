@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// This is your Prisma schema image,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
@@ -166,7 +166,7 @@ model Image {
   countryBanner  Country[] @relation("banner")
   countryPreview Country[] @relation("view")
   language       Language?
-  user           User[]
+  users          User[]
   post           Post[]
   cityBanner     City[]    @relation("banner")
   cityPreview    City[]    @relation("view")

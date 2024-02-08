@@ -15,13 +15,13 @@ export interface ProfileResponse {
   profile: IProfile
 }
 
-export const updateProfile = async (): Promise<ProfileResponse | void> => {
+export const updateProfile = async (input: { name: string; avatar: Blob }): Promise<ProfileResponse | void> => {
   const query = gql`
-    mutation createReview($input: updateProfile!) {
-      updateProfile(input: $input) {
+    mutation userUpdate($input: UserUpdateInput!) {
+      userUpdate(input: $input) {
         id
       }
     }
   `
-  return sendRequest<ProfileResponse>(query, {})
+  return sendRequest<ProfileResponse>(query, { input })
 }

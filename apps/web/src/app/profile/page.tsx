@@ -4,7 +4,7 @@ import Title from '@/ui/Title'
 import { Hotel } from '@/modules/bookig/queries/fetchHotels'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import authGateServer from '@/gate/authGate'
-import EditProfileForm from '@/components/app/forms/EditProfileForm'
+import EditProfileForm from '@/modules/profile/components/EditProfileForm'
 
 export default async function Profile() {
   await authGateServer()
@@ -38,6 +38,16 @@ export default async function Profile() {
       </Col>
       <Col xs={24}>
         <Title level={3}>Избранное</Title>
+        {hotels?.length ? (
+          <div className="flex flex-wrap gap-3">
+            <HotelList hotels={hotels} />
+          </div>
+        ) : (
+          <div>Отелей нет</div>
+        )}
+      </Col>
+      <Col xs={24}>
+        <Title level={3}>Забронированные</Title>
         {hotels?.length ? (
           <div className="flex flex-wrap gap-3">
             <HotelList hotels={hotels} />

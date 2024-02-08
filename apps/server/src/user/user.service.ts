@@ -2,18 +2,15 @@ import { Injectable } from '@nestjs/common'
 import { UserRepository } from './user.repository'
 import { User } from '@prisma/client'
 import { UserCreateInput } from './models/UserCreateInput'
+import { UserUpdateInput } from './models/UserUpdateInput'
+import { ImageService } from '@/image/image.service'
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
-
-  // async findOne(id: string): Promise<User | null> {
-  //   return this.prisma.post.findUnique({
-  //     where: {
-  //       id,
-  //     },
-  //   });
-  // }
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly imageService: ImageService
+  ) {}
 
   async findAll(): Promise<User[]> {
     return this.userRepository.findAll()
@@ -35,9 +32,13 @@ export class UserService {
     return this.userRepository.findByIdForProfile(id)
   }
 
-  //
-  // async update(params: UpdateUser): Promise<User> {
-  //   const { id, ...params_without_id } = params;
-  //
-  // }
+  async update(params: UserUpdateInput, userId: number): Promise<User> {
+    // @ts-ignore
+    console.log(params)
+
+    throw new Error('Method not implemented.')
+    // await this.imageService.uploadAvatar(params.avatar, params.avatar.fileName)
+    //
+    // return this.userRepository.update(userId, { name: params.name, avatarId: 1 })
+  }
 }
