@@ -4,7 +4,7 @@ import client from '@/libs/graphql/index'
 import processGraphqlError from '@/helpers/processGraphqlError'
 import { authOptions } from '@/libs/auth'
 
-if (constants.STABS_ENABLE === 'enabled') {
+if (constants.STABS_ENABLE === 'true') {
   initMocks()
 }
 async function getToken() {
