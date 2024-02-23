@@ -3,7 +3,6 @@ import { notification } from 'antd'
 export default function processGraphqlError(error: any) {
   const errorMessages = [] as any
   if (error && error?.response) {
-    console.log(error.response)
     if (error?.response?.errors) {
       for (const err of error?.response?.errors) {
         errorMessages.push(err?.message)

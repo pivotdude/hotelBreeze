@@ -11,8 +11,6 @@ export default async function Page() {
   const rawHotels = await fetchHotels()
   const hotels = rawHotels ? rawHotels?.hotels : []
 
-  console.log('hotels', hotels)
-
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} className="my-20 m-auto">

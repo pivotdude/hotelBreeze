@@ -22,7 +22,6 @@ export default function LoginPage() {
 
   const login = async ({ email }: IEmailFormData) => {
     const result = await sendLogin({ email })
-
     if (result) {
       setEmail(email)
       Notification.info(result.login.message)
@@ -40,9 +39,9 @@ export default function LoginPage() {
     if (result) {
       if (result.ok) {
         Notification.success('Вы вошли в свою учетную запись')
+        router.push('/')
       } else {
-        const errorMessages = result.error
-        Notification.error(errorMessages)
+        Notification.error('Не удалось войти в учетную запись, пожалуйста, повторите попытку')
       }
     }
   }

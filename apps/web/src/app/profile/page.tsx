@@ -16,7 +16,6 @@ export default async function Profile() {
   const profile = rawProfile.profile
   const favorites = profile.favorites
   const hotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
-  console.log(hotels)
 
   return (
     <Row gutter={[64, 64]} className="py-4 items-center">

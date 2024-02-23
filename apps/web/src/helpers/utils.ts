@@ -12,7 +12,7 @@ export const trimText = (text: string, length: number, char: string = '...') => 
 
 export async function isAuthenticated() {
   const session = getSession()
-  console.log(session)
+  // console.log(session)
   // @ts-ignore
   return session.status === 'unauthenticated'
 }

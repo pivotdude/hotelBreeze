@@ -23,7 +23,6 @@ export default function RegisterPage() {
 
   const verifyRegistration = async ({ code, name }: { code: string; name: string }) => {
     const result = await confirmRegistration({ email, code, name })
-    console.log(result)
     if (result) {
       Notification.success(result.confirmRegistration.message)
     }

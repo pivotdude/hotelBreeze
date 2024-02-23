@@ -14,7 +14,6 @@ interface UpdateReviewInput {
 }
 
 export const updateReview = async (input: UpdateReviewInput): Promise<HotelQuery | void> => {
-  console.log('update', input)
   const query = gql`
     mutation updateReview($input: UpdateReviewInput!) {
       updateReview(input: $input) {

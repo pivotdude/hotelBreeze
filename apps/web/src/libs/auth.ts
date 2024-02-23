@@ -22,9 +22,7 @@ export const authOptions: NextAuthOptions = {
           const { email, code } = credentials
           const rawResult = await confirmAuthorization({ email, code })
           if (!rawResult) return null
-          const result = rawResult.confirmAuthorization
-          console.log(result)
-          return result
+          return rawResult.confirmAuthorization
         } catch (error) {
           // @ts-ignore
           throw new Error(error.message)

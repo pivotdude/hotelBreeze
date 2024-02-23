@@ -73,7 +73,6 @@ export default function NavBar() {
       signOut()
       return
     }
-    console.log('click ', e)
     setCurrent(e.key)
     router.push('/' + e.key)
   }
