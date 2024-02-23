@@ -24,7 +24,7 @@ npm-debug.log
 prisma/dev.db
 
 # secrets
-.env.*
+.env
 .vercel
 
 prisma/generated

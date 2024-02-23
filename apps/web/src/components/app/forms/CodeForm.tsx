@@ -18,7 +18,7 @@ export default function CodeForm(props: EmailFormProps) {
     <Form onFinish={props.onSubmit} layout="vertical">
       <Form.Item
         name="code"
-        label="Введите код отправленноый на почту"
+        label="Введите код отправленный на почту"
         rules={[
           {
             required: true,
@@ -30,7 +30,7 @@ export default function CodeForm(props: EmailFormProps) {
           },
         ]}
       >
-        <Input type="string" className="max-w-xs" name="code" />
+        <Input type="string" className="max-w-xs" maxLength={4} name="code" />
       </Form.Item>
       {props.withName && (
         <>
@@ -48,7 +48,7 @@ export default function CodeForm(props: EmailFormProps) {
               },
             ]}
           >
-            <Input type="string" className="max-w-xs" name="name" />
+            <Input type="string" maxLength={16} className="max-w-xs" name="name" />
           </Form.Item>
         </>
       )}

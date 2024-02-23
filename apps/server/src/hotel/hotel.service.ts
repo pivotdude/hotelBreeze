@@ -7,9 +7,7 @@ export class HotelService {
   constructor(private readonly hotelRepository: HotelRepository) {}
 
   async findAll(): Promise<Hotel[]> {
-    const hotels = await this.hotelRepository.findAll()
-    console.log(hotels)
-    return hotels
+    return this.hotelRepository.findAll()
   }
 
   async find(uid: string, userId: number | null): Promise<Hotel> {

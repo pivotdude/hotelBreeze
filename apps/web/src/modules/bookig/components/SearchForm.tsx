@@ -17,7 +17,6 @@ export default function SearchForm({ countries }: SearchFormProps) {
   const [cities, setCities] = useState<IOptions[]>([])
 
   const changeCountry = (value: string) => {
-    console.log(value)
     const rawCities = countries.find((item) => item.code === value)?.cities as unknown as {
       uid: string
       name: string
