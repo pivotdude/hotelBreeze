@@ -3,8 +3,8 @@ import { Hotel } from '@prisma/client'
 import { ImageModel } from '@/models/image.model'
 import { CityModel } from '@/models/city.model'
 import { DataModel } from './data.model'
-import { FavoriteModel } from '@/favorite/favorite.model'
-import { ReviewModel } from '@/review/models/review.model'
+import { FavoriteModel } from '@/modules/favorite/favorite.model'
+import { ReviewModel } from '@/modules/review/models/review.model'
 
 @ObjectType()
 export class HotelModel implements Hotel {

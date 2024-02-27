@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaService } from '../prisma/prisma.service'
+import { PrismaService } from '@/prisma/prisma.service'
 import { sendEmailProps } from './mail.service'
-import { mailTemplatesT } from '../Models'
+import { mailTemplatesT } from '@/Models'
 
 export interface FindArgs {
   email: string

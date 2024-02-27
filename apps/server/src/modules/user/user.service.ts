@@ -7,14 +7,6 @@ import { UserCreateInput } from './models/UserCreateInput'
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  // async findOne(id: string): Promise<User | null> {
-  //   return this.prisma.post.findUnique({
-  //     where: {
-  //       id,
-  //     },
-  //   });
-  // }
-
   async findAll(): Promise<User[]> {
     return this.userRepository.findAll()
   }
@@ -34,10 +26,4 @@ export class UserService {
   async getUserForProfile(id: number): Promise<User | null> {
     return this.userRepository.findByIdForProfile(id)
   }
-
-  //
-  // async update(params: UpdateUser): Promise<User> {
-  //   const { id, ...params_without_id } = params;
-  //
-  // }
 }

@@ -17,8 +17,11 @@ export class CountryRepository {
     })
   }
 
-  async findAll(): Promise<Country[]> {
+  async findAll(code?: string): Promise<Country[]> {
     return this.prismaService.country.findMany({
+      where: {
+        ...(code && { code }),
+      },
       include: {
         language: true,
         cities: true,

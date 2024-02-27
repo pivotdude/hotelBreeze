@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common'
 import { FavoriteResolver } from './favorite.resolver'
 import { FavoriteService } from './favorite.service'
 import { FavoriteRepository } from './favorite.repository'
-import { UserModule } from '../user/user.module'
-import { HotelModule } from '../hotel/hotel.module'
-import { AuthModule } from '../modules/auth/auth.module'
+import { UserModule } from '@/modules/user/user.module'
+import { HotelModule } from '@/modules/hotel/hotel.module'
+import { AuthModule } from '../auth/auth.module'
 
 @Module({
   providers: [FavoriteResolver, FavoriteService, FavoriteRepository],

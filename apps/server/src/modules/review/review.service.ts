@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { ReviewRepository } from './review.repository'
 import { CreateReviewInput } from './inputs/CreateReviewInput'
-import { HotelRepository } from '@/hotel/hotel.repository'
+import { HotelRepository } from '@/modules/hotel/hotel.repository'
 import { Prisma } from '@prisma/client'
 import { UpdateReviewInput } from './inputs/UpdateReviewInput'
 
 @Injectable()
 export class ReviewService {
-  constructor(
-    private readonly reviewRepository: ReviewRepository,
-    private readonly hotelRepository: HotelRepository
-  ) {}
+  constructor(private readonly reviewRepository: ReviewRepository, private readonly hotelRepository: HotelRepository) {}
 
   async create(input: CreateReviewInput, userId: number) {
     const hotel = await this.hotelRepository.findByUid(input.hotelUid)

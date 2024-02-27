@@ -12,6 +12,10 @@ export class HotelService {
 
   async find(uid: string, userId: number | null): Promise<Hotel> {
     const hotel = await this.hotelRepository.find(uid, userId)
+
+    if (!hotel) {
+      return null
+    }
     // @ts-ignore
     hotel.isFollow = hotel?.favorites?.length > 0
 

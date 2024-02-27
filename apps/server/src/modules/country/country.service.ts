@@ -6,8 +6,8 @@ import { Country } from '@prisma/client'
 export class CountryService {
   constructor(private readonly countryRepository: CountryRepository) {}
 
-  async findAll(): Promise<Country[]> {
-    return this.countryRepository.findAll()
+  async findAll(code?: string): Promise<Country[]> {
+    return this.countryRepository.findAll(code)
   }
 
   async find(uid: string): Promise<Country> {

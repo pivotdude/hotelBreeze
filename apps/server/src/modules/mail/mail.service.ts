@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { MailerService } from '@nestjs-modules/mailer'
 import { FindArgs, MailRepository } from './mail.repository'
-import { mailTemplatesT } from '../Models'
+import { mailTemplatesT } from '@/Models'
 
 export interface sendEmailProps {
   email: string

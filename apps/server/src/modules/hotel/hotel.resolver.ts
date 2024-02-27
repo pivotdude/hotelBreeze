@@ -16,8 +16,8 @@ export class HotelResolver {
     return this.hotelService.findAll()
   }
 
-  @Query((returns) => HotelModel)
+  @Query((returns) => HotelModel, { nullable: true })
   async hotel(@Args('uid', { type: () => String }) uid: string, @Context('user') user: ContextUser) {
-    return await this.hotelService.find(uid, user?.id)
+    return this.hotelService.find(uid, user?.id)
   }
 }

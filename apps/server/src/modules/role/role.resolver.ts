@@ -22,19 +22,4 @@ export class RoleResolver {
   async roleCreate(@Args('input') args: RoleCreateInput): Promise<Role> {
     return this.roleService.create(args)
   }
-
-  // @Mutation('updateRole')
-  // async update(@Args('input') args: UpdateRole): Promise<Role> {
-  //   return this.roleService.update(args);
-  // }
-  //
-  // @Mutation('deleteRole')
-  // async delete(@Args('id') args: string): Promise<Role> {
-  //   return this.roleService.delete(args);
-  // }
-  //
-  // @Subscription('postCreated')
-  // postCreated() {
-  //   return pubSub.asyncIterator('postCreated');
-  // }
 }
