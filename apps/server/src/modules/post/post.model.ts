@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Post } from '@prisma/client'
-import { UserModel } from '@/user/user.model'
+import { UserModel } from '@/modules/user/user.model'
 import { ImageModel } from '@/models/image.model'
 
 @ObjectType()
