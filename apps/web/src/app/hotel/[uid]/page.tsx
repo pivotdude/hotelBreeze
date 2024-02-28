@@ -18,8 +18,6 @@ export default async function HotelPage({ params, searchParams }: HotelPageProps
   const rawHotel = await fetchHotel(params.uid)
   const hotel = rawHotel ? rawHotel.hotel : null
 
-  console.log(JSON.stringify(hotel))
-
   if (!hotel) {
     return Errors.notFound()
   }
