@@ -30,7 +30,6 @@ export default function BookingWindow({ isAuth, route, isOverloaded }: BookingHo
 
   return (
     <>
-      wasd
       {step === 1 && <SubmitBooking isAuth={isAuth} route={route} setStep={setStep} />}
       {step === 2 && <PaymentBooking setStep={setStep} route={route} />}
       {step === 3 && (
