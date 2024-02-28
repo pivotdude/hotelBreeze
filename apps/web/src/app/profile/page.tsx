@@ -1,10 +1,10 @@
-import { Button, Col, Row } from '@/ui'
+import { Col, Row } from '@/ui'
 import { fetchProfile } from '@/modules/profile/queries/fetchProfile'
 import Title from '@/ui/Title'
 import { Hotel } from '@/modules/bookig/queries/fetchHotels'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import authGateServer from '@/gate/authGate'
-import EditProfileForm from '@/components/app/forms/EditProfileForm'
+import BookingList from '@/modules/profile/components/booking/BookingList'
 
 export default async function Profile() {
   await authGateServer()
@@ -15,34 +15,39 @@ export default async function Profile() {
   }
   const profile = rawProfile.profile
   const favorites = profile.favorites
-  const hotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
+  const bookings = profile.bookings
+  const favoritesHotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
 
   return (
     <Row gutter={[64, 64]} className="py-4 items-center">
-      <Col xs={20}>
-        <Row className="items-center">
-          <Col span={4}>
+      <Col xs={24}>
+        <Row className="items-center flex justify-center md:justify-start" gutter={[16, 16]}>
+          <Col>
             <img className="w-40 h-40 rounded-full" src="https://via.placeholder.com/160x160" />
           </Col>
-          <Col span={12}>
+          <Col>
             <Title>{profile.name}</Title>
           </Col>
         </Row>
       </Col>
-      <Col span={4}>
-        <Button>Edit profile</Button>
-      </Col>
-      <Col span={24}>
-        <EditProfileForm />
-      </Col>
       <Col xs={24}>
         <Title level={3}>Избранное</Title>
-        {hotels?.length ? (
+        {favoritesHotels?.length ? (
           <div className="flex flex-wrap gap-3">
-            <HotelList hotels={hotels} />
+            <HotelList hotels={favoritesHotels} />
           </div>
         ) : (
-          <div>Отелей нет</div>
+          <div>Отели отсутствуют</div>
+        )}
+      </Col>
+      <Col xs={24}>
+        <Title level={3}>Забранированные</Title>
+        {bookings?.length ? (
+          <div className="flex flex-wrap gap-3">
+            <BookingList bookings={bookings} />
+          </div>
+        ) : (
+          <div>Отели отсутствуют</div>
         )}
       </Col>
     </Row>

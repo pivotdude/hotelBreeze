@@ -96,6 +96,22 @@ type ReviewModel {
   hotel: HotelModel!
 }
 
+type BookingModel {
+  id: Int!
+  uid: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  startDate: DateTime!
+  endDate: DateTime!
+  guests: Int!
+  days: Int!
+  price: Float!
+  userId: Int!
+  user: UserModel!
+  hotelId: Int!
+  hotel: HotelModel!
+}
+
 type HotelModel {
   id: Int!
   uid: String!
@@ -116,6 +132,7 @@ type HotelModel {
   reviews: [ReviewModel!]
   userReview: ReviewModel
   isFollow: Boolean!
+  bookings: [BookingModel!]
 }
 
 type FavoriteModel {
@@ -142,6 +159,7 @@ type UserModel {
   createdAt: DateTime!
   updatedAt: DateTime!
   favorites: [FavoriteModel!]!
+  bookings: [BookingModel!]!
 }
 
 type PostModel {
@@ -171,11 +189,11 @@ type ConfirmAuthorizationModel {
 }
 
 type Query {
-  hotels: [HotelModel!]!
-  hotel(uid: String!): HotelModel!
   profile: UserModel!
   users: [UserModel!]!
   user(id: Int!): UserModel!
+  hotels(input: CountryFilterInput!): [HotelModel!]!
+  hotel(uid: String!): HotelModel
   countries: [CountryModel!]!
   country(uid: Int!): CountryModel!
   posts: [PostModel!]!
@@ -184,18 +202,36 @@ type Query {
   role(id: Int!): RoleModel!
 }
 
+input CountryFilterInput {
+  country: String
+}
+
 type Mutation {
-  createReview(input: CreateReviewInput!): ReviewModel!
-  updateReview(input: UpdateReviewInput!): ReviewModel!
+  confirmBooking(input: BookingCreateInput!): BookingModel!
   confirmRegistration(email: String!, code: String!, name: String!): AuthModel!
   confirmAuthorization(email: String!, code: String!): ConfirmAuthorizationModel!
   registration(email: String!): AuthModel!
   login(email: String!): AuthModel!
   userCreate(input: UserCreateInput!): UserModel!
+  createReview(input: CreateReviewInput!): ReviewModel!
+  updateReview(input: UpdateReviewInput!): ReviewModel!
   follow(hotelUid: String!): FavoriteModel!
   unfollow(uid: String!): FavoriteModel!
   postCreate(input: PostCreateInput!): PostModel!
   roleCreate(input: RoleCreateInput!): RoleModel!
+}
+
+input BookingCreateInput {
+  startDate: String!
+  endDate: String!
+  guests: String!
+  hotelUid: String!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String!
+  roleId: Int!
 }
 
 input CreateReviewInput {
@@ -208,12 +244,6 @@ input UpdateReviewInput {
   reviewUid: String!
   description: String!
   rating: Int!
-}
-
-input UserCreateInput {
-  email: String!
-  name: String!
-  roleId: Int!
 }
 
 input PostCreateInput {

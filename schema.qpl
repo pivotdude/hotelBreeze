@@ -12,7 +12,7 @@ type AuthModel {
 type CityModel {
   bannerImage: ImageModel!
   bannerImageId: Int
-  country: CountryModel!
+  country: BookingModel!
   countryId: Int!
   createdAt: DateTime!
   englishName: String!
@@ -30,7 +30,7 @@ type ConfirmAuthorizationModel {
   user: UserModel!
 }
 
-type CountryModel {
+type BookingModel {
   avatarId: Int!
   bannerImage: ImageModel!
   bannerImageId: Int!
@@ -129,8 +129,8 @@ type PostModel {
 }
 
 type Query {
-  countries: [CountryModel!]!
-  country(uid: Int!): CountryModel!
+  countries: [BookingModel!]!
+  country(uid: Int!): BookingModel!
   follow(hotelUid: String!): FavoriteModel!
   hotel(uid: String!): HotelModel!
   hotels: [HotelModel!]!

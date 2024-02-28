@@ -3,11 +3,7 @@ import sendRequest from '@/libs/graphql/sendRequest'
 
 export interface CountryQuery {
   name: string
-  code: string
-  cities: {
-    uid: string
-    name: string
-  }[]
+  englishName: string
 }
 
 export interface CountriesQuery {
@@ -19,11 +15,7 @@ export const fetchCountries = async (): Promise<CountriesQuery | void> => {
     query GetCountriesWithCity {
       countries {
         name
-        code
-        cities {
-          uid
-          name
-        }
+        englishName
       }
     }
   `

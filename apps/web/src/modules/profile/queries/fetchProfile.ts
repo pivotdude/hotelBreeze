@@ -1,6 +1,18 @@
 import gql from 'graphql-tag'
 import sendRequest from '@/libs/graphql/sendRequest'
-import { Hotel } from '@/modules/bookig/queries/fetchHotels'
+
+interface Hotel {
+  uid: string
+  price: number
+  title: string
+  description: string
+  reviewRating: number
+  reviewCount: number
+  previewImage: {
+    url: string
+    name: string
+  }
+}
 
 export interface IProfile {
   id: string
@@ -9,6 +21,17 @@ export interface IProfile {
   favorites: {
     hotel: Hotel[]
   }[]
+  bookings: IBooking[]
+}
+
+export interface IBooking {
+  uid: string
+  startDate: string
+  endDate: string
+  days: number
+  guests: number
+  price: number
+  hotel: Hotel
 }
 
 export interface ProfileResponse {
@@ -23,6 +46,26 @@ export const fetchProfile = async (): Promise<ProfileResponse | void> => {
         id
         name
         favorites {
+          hotel {
+            uid
+            title
+            description
+            price
+            reviewRating
+            reviewCount
+            previewImage {
+              url
+              name
+            }
+          }
+        }
+        bookings {
+          uid
+          startDate
+          endDate
+          days
+          guests
+          price
           hotel {
             uid
             title

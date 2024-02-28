@@ -1,5 +1,7 @@
 import prisma from '../../src/core/libs/prisma'
 
+type ExtensionType = 'jpg' | 'png' | 'webp' | 'jpeg'
+
 export default class ImageSeed {
   async run() {
     try {
@@ -43,13 +45,53 @@ export default class ImageSeed {
           },
           {
             id: 8,
-            url: '/static/placeholder/600x400.svg',
-            name: 'Placeholder 600x400',
+            url: this.getStaticUrl(1, 'jpg'),
+            name: 'Дом деревянный',
           },
           {
             id: 9,
-            url: '/static/hotel/view/1/wbtpbs51usq8rkfnl1yrqbb31zfx0g0c.png',
+            url: this.getStaticUrl(2, 'png'),
             name: 'Отель Таёжный',
+          },
+          {
+            id: 10,
+            url: this.getStaticUrl(3, 'png'),
+            name: 'Отель Гамма Измайлово',
+          },
+          {
+            id: 11,
+            url: this.getStaticUrl(4, 'jpg'),
+            name: 'DEL900 Hotel Boutique',
+          },
+          {
+            id: 12,
+            url: this.getStaticUrl(5, 'jpg'),
+            name: 'Sunworld Hotel Wangfujing',
+          },
+          {
+            id: 13,
+            url: this.getStaticUrl(6, 'jpg'),
+            name: 'Boutique Dedem Hotel Sultanahmet',
+          },
+          {
+            id: 14,
+            url: this.getStaticUrl(7, 'webp'),
+            name: 'Le Bosphorus Al Madinah',
+          },
+          {
+            id: 15,
+            url: this.getStaticUrl(8, 'webp'),
+            name: 'Гостинница Беларусь 3*',
+          },
+          {
+            id: 16,
+            url: this.getStaticUrl(9, 'jpeg'),
+            name: 'Pullman Zamzam Madina',
+          },
+          {
+            id: 17,
+            url: this.getStaticUrl(10, 'jpg'),
+            name: 'Sofitel Shahd Al Madinah',
           },
         ],
       })
@@ -57,5 +99,9 @@ export default class ImageSeed {
       console.error('Error in ImageSeed: ', error)
       throw error
     }
+  }
+
+  private getStaticUrl(id: number, extension: ExtensionType = 'jpg', type = 'hotel') {
+    return `/static/${type}/images/${id}/preview.${extension}`
   }
 }

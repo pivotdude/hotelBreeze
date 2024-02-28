@@ -28,7 +28,7 @@ function FollowButton({ isFollow, uid, hotelUid }: FollowButtonProps) {
       size="large"
       onClick={toggleFollow}
     >
-      {isFollow ? 'Following' : 'Follow'}
+      {isFollow ? 'Отписаться' : 'Подписаться'}
     </Button>
   )
 }

@@ -4,17 +4,23 @@ import SearchForm from '@/modules/bookig/components/SearchForm'
 import { fetchCountries } from '@/modules/bookig/queries/fetchCountry'
 import { fetchHotels } from '@/modules/bookig/queries/fetchHotels'
 
-export default async function Page() {
+export interface BookingPageProps {
+  searchParams: {
+    country: string
+  }
+}
+
+export default async function Page({ searchParams }: BookingPageProps) {
   const rawCountries = await fetchCountries()
   const countries = rawCountries ? rawCountries.countries : []
 
-  const rawHotels = await fetchHotels()
+  const rawHotels = await fetchHotels({ country: searchParams.country })
   const hotels = rawHotels ? rawHotels?.hotels : []
 
   return (
     <Row gutter={[16, 16]}>
-      <Col xs={24} className="my-20 m-auto">
-        <SearchForm countries={countries} />
+      <Col xs={24} className="my-10 m-auto">
+        <SearchForm countries={countries} urlCountry={searchParams.country} />
       </Col>
       {hotels?.length ? (
         <Col xs={24}>

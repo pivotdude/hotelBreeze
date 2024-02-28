@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { Card } from '@/ui'
 
 interface FullScreenFormProps {
   children: ReactNode
@@ -7,11 +6,5 @@ interface FullScreenFormProps {
 }
 
 export default function FullScreenForm({ children, title }: FullScreenFormProps) {
-  return (
-    <div className="h-screen flex justify-center items-center w-screen">
-      <Card className="w-96" title={title}>
-        {children}
-      </Card>
-    </div>
-  )
+  return <div className="h-screen flex flex-col justify-center items-center space-y-10">{children}</div>
 }

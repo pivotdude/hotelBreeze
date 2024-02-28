@@ -14,7 +14,12 @@ export default function HotelGallery(props: HotelGalleryProps) {
     <>
       <div
         className="grid grid-cols-5 gap-4"
-        style={{ gridTemplateColumns: 'repeat(5, 1fr)', gridTemplateRows: 'repeat(2, 1fr)' }}
+        style={{
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gridTemplateRows: 'repeat(3, 1fr)',
+          columnGap: '0.5rem',
+          rowGap: '0.3rem',
+        }}
       >
         <BigHotelItem alt={props.previewImage.name} src={props.previewImage.url} />
         <>

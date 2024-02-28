@@ -49,14 +49,20 @@ export interface HotelCardProps {
 }
 export default function HotelCard({ hotel }: HotelCardProps) {
   const router = useRouter()
-  const id = 1
   return (
     <Card
       hoverable
-      style={{
-        width: '380px',
-      }}
-      cover={<Image src={hotel.previewImage.url} alt={hotel.previewImage.name} />}
+      // style={{
+      //   width: '390px',
+      // }}
+      className="sm:w-full md:w-[300px]"
+      cover={
+        <Image
+          style={{ height: '280px', width: '100%', objectFit: 'cover' }}
+          src={hotel.previewImage.url}
+          alt={hotel.previewImage.name}
+        />
+      }
       onClick={() => router.push(`/hotel/${hotel.uid}`)}
     >
       <Row gutter={[8, 8]}>
@@ -64,7 +70,7 @@ export default function HotelCard({ hotel }: HotelCardProps) {
           <Row gutter={[16, 16]} justify="space-between">
             <Col>{hotel.title}</Col>
             <Col>
-              <ReviewsStar rating={hotel.reviewCount} />
+              <ReviewsStar rating={hotel.reviewCount} className="mr-2" />
               <span className="ml-2">({hotel.reviewRating})</span>
             </Col>
           </Row>
@@ -73,7 +79,7 @@ export default function HotelCard({ hotel }: HotelCardProps) {
           <div>{trimText(hotel.description, 100)}</div>
         </Col>
         <Col xs={24}>
-          <div>{hotel.price} Р за ночь</div>
+          <div>{hotel.price} Р за сутки</div>
         </Col>
       </Row>
     </Card>

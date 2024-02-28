@@ -10,15 +10,17 @@ interface HotelInfoProps {
 export default function HotelContent({ hotel }: HotelInfoProps) {
   return (
     <Row gutter={[64, 64]} justify="space-between">
-      <Col xs={16}>
+      <Col xs={24} xxl={17}>
         <HotelInfo hotel={hotel} />
       </Col>
-      <Col xs={8}>
+      <Col xs={24} xxl={7}>
         <ReserveCard
           price={hotel.price}
           maxGuests={hotel.data.maxGuests}
           reviewCount={hotel.reviewCount}
           reviewRating={hotel.reviewRating}
+          hotelUid={hotel.uid}
+          bookings={hotel.bookings}
         />
       </Col>
     </Row>

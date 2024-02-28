@@ -4,6 +4,7 @@ import HotelHeader from '@/modules/hotel/components/Header/HotelHeader'
 import HotelGallery from '@/modules/hotel/components/Gallery/HotelGallery'
 import HotelContent from '@/modules/hotel/components/Content/HotelContent'
 import Review from '@/modules/hotel/components/Review'
+import Errors from '@/helpers/Errors'
 
 interface HotelPageProps {
   params: {
@@ -18,7 +19,7 @@ export default async function HotelPage({ params, searchParams }: HotelPageProps
   const hotel = rawHotel ? rawHotel.hotel : null
 
   if (!hotel) {
-    return null
+    return Errors.notFound()
   }
 
   return (

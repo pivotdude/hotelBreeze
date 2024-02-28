@@ -1,4 +1,4 @@
-import { StarOutlined } from '@ant-design/icons'
+import { StarFilled } from '@ant-design/icons'
 
 interface ReviewsPanelProps {
   rating: number | string
@@ -8,8 +8,8 @@ interface ReviewsPanelProps {
 export default function ReviewsStar({ rating, className }: ReviewsPanelProps) {
   return (
     <>
-      <StarOutlined className="text-pink-400" />
-      <a className={className}>{rating}</a>
+      <StarFilled />
+      <a className={'ml-1 text-black hover:text-black'}>{rating}</a>
     </>
   )
 }
