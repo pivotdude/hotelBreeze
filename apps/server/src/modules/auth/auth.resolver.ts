@@ -2,19 +2,16 @@ import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { AuthService } from './auth.service'
 import { AuthModel } from './models/auth.model'
 import { ConfirmAuthorizationModel } from './models/confirmAuthorization.model'
-import { UserModel } from '../../user/user.model'
-import { UserService } from '../../user/user.service'
-import { ContextUser } from '../../Models'
+import { UserModel } from '@/modules/user/user.model'
+import { UserService } from '@/modules/user/user.service'
+import { ContextUser } from '@/Models'
 import { AuthInterceptor } from './auth.interceptor'
 import { UseInterceptors } from '@nestjs/common'
 
 @Resolver((of) => AuthModel)
 @UseInterceptors(AuthInterceptor)
 export class AuthResolver {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UserService
-  ) {}
+  constructor(private readonly authService: AuthService, private readonly userService: UserService) {}
 
   @Mutation((returns) => AuthModel)
   async confirmRegistration(

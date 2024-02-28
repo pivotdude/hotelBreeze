@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common'
 import { HotelRepository } from './hotel.repository'
 import { Hotel } from '@prisma/client'
+import { CountryFilterInput } from '@/modules/country/inputs/CountryFilterInput'
 
 @Injectable()
 export class HotelService {
   constructor(private readonly hotelRepository: HotelRepository) {}
 
-  async findAll(): Promise<Hotel[]> {
-    return this.hotelRepository.findAll()
+  async findAll(params: CountryFilterInput): Promise<Hotel[]> {
+    return this.hotelRepository.findAll(params)
   }
 
-  async find(uid: string, userId: number | null): Promise<Hotel> {
+  async find(uid: string, userId?: number | null): Promise<Hotel> {
     const hotel = await this.hotelRepository.find(uid, userId)
 
     if (!hotel) {

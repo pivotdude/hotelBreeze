@@ -8,6 +8,11 @@ interface ReserveFormProps {
   reviewRating: number
   reviewCount: number
   maxGuests: number
+  hotelUid: string
+  bookings: {
+    endDate: string
+    startDate: string
+  }[]
 }
 
 export default function ReserveCard(props: ReserveFormProps) {
@@ -25,7 +30,12 @@ export default function ReserveCard(props: ReserveFormProps) {
           </Row>
         </Col>
         <Col xs={24}>
-          <BookingForm maxGuests={props.maxGuests} price={props.price} />
+          <BookingForm
+            maxGuests={props.maxGuests}
+            price={props.price}
+            hotelUid={props.hotelUid}
+            bookings={props.bookings}
+          />
         </Col>
       </Row>
     </Card>

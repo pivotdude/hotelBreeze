@@ -56,6 +56,15 @@ export class UserRepository {
             },
           },
         },
+        bookings: {
+          include: {
+            hotel: {
+              include: {
+                previewImage: true,
+              },
+            },
+          },
+        },
       },
     }
     return this.findById(id, params)

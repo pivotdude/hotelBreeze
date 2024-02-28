@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { City } from '@prisma/client'
 import { ImageModel } from './image.model'
-import { CountryModel } from '@/country/country.model'
+import { CountryModel } from '@/modules/country/country.model'
 
 @ObjectType()
 export class CityModel implements City {

@@ -2,15 +2,14 @@ import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 import { CountryService } from './country.service'
 import { CountryModel } from './country.model'
 import { Country } from '@prisma/client'
-import { CountryFilterInput } from '@/modules/country/inputs/CountryFilterInput'
 
 @Resolver((of) => CountryModel)
 export class CountryResolver {
   constructor(private readonly postService: CountryService) {}
 
   @Query((returns) => [CountryModel])
-  async countries(@Args('input') args: CountryFilterInput): Promise<Country[]> {
-    return this.postService.findAll(args.country)
+  async countries(): Promise<Country[]> {
+    return this.postService.findAll()
   }
 
   @Query((returns) => CountryModel)

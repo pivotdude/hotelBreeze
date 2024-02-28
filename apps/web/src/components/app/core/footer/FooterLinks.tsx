@@ -1,6 +1,6 @@
 import { Col, Row, Space } from '@/ui'
-import Link from 'next/link'
 import { ReactNode } from 'react'
+import Link from '@/components/app/Link'
 
 function Title({ children }: { children: ReactNode }) {
   return <p className="font-bold text-md leading-normal">{children}</p>
@@ -8,43 +8,21 @@ function Title({ children }: { children: ReactNode }) {
 
 export default function FooterLinks() {
   return (
-    <Row gutter={[32, 32]} className="w-full">
+    <Row gutter={[32, 32]} className="w-full" justify="space-between">
       <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>Support</Title>
-          <Link href="/">Help center</Link>
-          <Link href="/">Safety information</Link>
-          <Link href="/">Cancellation options</Link>
-          <Link href="/">Our COVID-19 Response</Link>
-          <Link href="/">Supporting people with disabilities</Link>
-          <Link href="/">Report a neighbourhood</Link>
-        </Space>
-      </Col>
-      <Col xs={24} md={12} xxl={6}>
-        <Space direction="vertical" size={14}>
-          <Title>Community</Title>
-          <Link href="/">Airbnb.org: disaster relief housing</Link>
-          <Link href="/">Support: Afghan refugees</Link>
-          <Link href="/">Combating discriminatino</Link>
+          <p>Phone: +7 (912) 123-12-12</p>
+          <p>VK: HotelBrrze</p>
+          <p>TG: HotelBrrze</p>
+          <p>YouTube: HotelBrrze</p>
         </Space>
       </Col>
       <Col xs={24} md={12} xxl={6}>
         <Space direction="vertical" size={14}>
           <Title>Hosting</Title>
-          <Link href="/">Try hosting</Link>
-          <Link href="/">AirCover: protection for Hosts</Link>
-          <Link href="/">Explore hosting resources</Link>
-          <Link href="/">Visit our community forum</Link>
-          <Link href="/">How to host responsibly</Link>
-        </Space>
-      </Col>
-      <Col xs={24} md={12} xxl={6}>
-        <Space direction="vertical" size={14}>
-          <Title>About</Title>
-          <Link href="/">Newsroom</Link>
-          <Link href="/">Learn about new features</Link>
-          <Link href="/">Explore hosting resources</Link>
-          <Link href="/">Careers</Link>
+          <Link href="/booking/">Booking</Link>
+          <Link href="/profile/">Profile</Link>
         </Space>
       </Col>
     </Row>

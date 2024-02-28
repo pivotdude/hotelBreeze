@@ -44,6 +44,10 @@ export interface IHotel {
       name: string
     }
   }[]
+  bookings: {
+    startDate: string
+    endDate: string
+  }[]
   userReview: {
     uid: string
     description: string
@@ -103,6 +107,10 @@ export const fetchHotel = async (uid: string): Promise<HotelQuery | void> => {
           user {
             name
           }
+        }
+        bookings {
+          startDate
+          endDate
         }
         userReview {
           uid

@@ -1,80 +1,69 @@
-'use client'
-import { ReactNode, useEffect, useState } from 'react'
-import { Menu } from 'antd'
-import { AppstoreOutlined, LoginOutlined, MailOutlined, ProfileOutlined } from '@ant-design/icons'
-import { useRouter } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
-import { ISession } from '@/models'
+import { ReactNode } from 'react'
+import { Col, Row, Title } from '@/ui'
+import Link from 'next/link'
+import { isAuthenticated } from '@/helpers/utils'
+import LogoutButton from '@/components/app/LogoutButton'
 
-interface MenuItemEvent {
-  domEvent: any
-  key: string
-  keyPath: string[]
-}
 interface MenuItem {
   label: string
   key: string
   icon: ReactNode
 }
 
-export default function NavBar() {
-  const router = useRouter()
-  const items = [
+export default async function NavBar() {
+  const defaultItems = [
     {
       label: 'Главная',
       key: '',
-      icon: <MailOutlined />,
     },
     {
       label: 'Бронирование',
       key: 'booking',
-      icon: <AppstoreOutlined />,
     },
   ] as MenuItem[]
-
   const authItems = [
     {
       label: 'Личный кабинет',
       key: 'profile',
-      icon: <ProfileOutlined />,
     },
-    {
-      label: 'Выход',
-      key: 'logout',
-      icon: <LoginOutlined />,
-    },
-  ]
+  ] as MenuItem[]
   const notAuthItems = [
     {
       label: 'Авторизация',
       key: 'login',
-      icon: <LoginOutlined />,
     },
     {
       label: 'Регистрация',
       key: 'register',
-      icon: <LoginOutlined />,
     },
-  ]
+  ] as MenuItem[]
 
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
+  const isAuth = await isAuthenticated()
+  const items = [...defaultItems, ...(isAuth ? authItems : notAuthItems)] as MenuItem[]
 
-  const session = useSession() as ISession
-
-  useEffect(() => {
-    const isAuth = session.status === 'authenticated'
-    const dynamicItems = isAuth ? authItems : notAuthItems
-    setMenuItems([...items, ...dynamicItems])
-  }, [session])
-
-  const [current, setCurrent] = useState('')
-  const onClick = (e: MenuItemEvent) => {
-    if (e.key === 'logout') {
-      signOut()
-      return
-    }
-    setCurrent(e.key)
-    router.push('/' + e.key)
-  }
-  return <Menu className="w-full" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
+  return (
+    <Row className="my-4 px-32" justify="space-between">
+      <Col>
+        <Link href="/" className="hover:cursor-pointer">
+          <Title className="m-0" level={4}>
+            HotelBreeze
+          </Title>
+        </Link>
+      </Col>
+      <Col>
+        <Col xs={24} lg={24}>
+          <Row gutter={[64, 0]}>
+            {items.map((item) => (
+              <Col key={item.key}>
+                <Link className="text-lg text-black hover:text-sky-400 hover:cursor-pointer" href={'/' + item.key}>
+                  {item.label}
+                </Link>
+              </Col>
+            ))}
+            {isAuth && <LogoutButton />}
+          </Row>
+        </Col>
+      </Col>
+    </Row>
+  )
 }

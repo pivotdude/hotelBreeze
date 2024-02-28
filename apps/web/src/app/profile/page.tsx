@@ -1,10 +1,9 @@
-import { Button, Col, Row } from '@/ui'
+import { Col, Row } from '@/ui'
 import { fetchProfile } from '@/modules/profile/queries/fetchProfile'
 import Title from '@/ui/Title'
 import { Hotel } from '@/modules/bookig/queries/fetchHotels'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import authGateServer from '@/gate/authGate'
-import EditProfileForm from '@/components/app/forms/EditProfileForm'
 
 export default async function Profile() {
   await authGateServer()
@@ -15,7 +14,9 @@ export default async function Profile() {
   }
   const profile = rawProfile.profile
   const favorites = profile.favorites
-  const hotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
+  const bookings = profile.bookings
+  const favoritesHotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
+  const bookingsHotels = bookings.flatMap((bookings: { hotel: Hotel[] }) => bookings.hotel)
 
   return (
     <Row gutter={[64, 64]} className="py-4 items-center">
@@ -29,20 +30,24 @@ export default async function Profile() {
           </Col>
         </Row>
       </Col>
-      <Col span={4}>
-        <Button>Edit profile</Button>
-      </Col>
-      <Col span={24}>
-        <EditProfileForm />
-      </Col>
       <Col xs={24}>
         <Title level={3}>Избранное</Title>
-        {hotels?.length ? (
+        {favoritesHotels?.length ? (
           <div className="flex flex-wrap gap-3">
-            <HotelList hotels={hotels} />
+            <HotelList hotels={favoritesHotels} />
           </div>
         ) : (
-          <div>Отелей нет</div>
+          <div>Отели отсутствуют</div>
+        )}
+      </Col>
+      <Col xs={24}>
+        <Title level={3}>Забранированные</Title>
+        {bookingsHotels?.length ? (
+          <div className="flex flex-wrap gap-3">
+            <HotelList hotels={bookingsHotels} />
+          </div>
+        ) : (
+          <div>Отели отсутствуют</div>
         )}
       </Col>
     </Row>

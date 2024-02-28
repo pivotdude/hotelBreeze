@@ -5,6 +5,7 @@ import { CityModel } from '@/models/city.model'
 import { DataModel } from './data.model'
 import { FavoriteModel } from '@/modules/favorite/favorite.model'
 import { ReviewModel } from '@/modules/review/models/review.model'
+import { BookingModel } from '@/modules/booking/booking.model'
 
 @ObjectType()
 export class HotelModel implements Hotel {
@@ -64,4 +65,7 @@ export class HotelModel implements Hotel {
 
   @Field()
   isFollow: boolean
+
+  @Field((type) => [BookingModel], { nullable: true })
+  bookings: BookingModel
 }

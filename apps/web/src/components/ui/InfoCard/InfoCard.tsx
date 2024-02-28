@@ -30,7 +30,7 @@ export default function InfoCard({ item, width, href }: InfoCardProps) {
       cover={
         <Image alt={item.previewImage.name} src={item?.previewImage?.url} /> // TODO change on Image
       }
-      onClick={() => href && router.push(href + '/' + item.englishName)}
+      onClick={() => href && router.push(href + item.englishName)}
     >
       <Meta title={item.name} description={item.description} />
     </Card>

@@ -11,7 +11,7 @@ interface EmailFormProps {
 
 export default function EmailForm(props: EmailFormProps) {
   return (
-    <Form onFinish={props.onSubmit} layout="vertical">
+    <Form onFinish={props.onSubmit} layout="vertical" className="w-96">
       <Form.Item
         name="email"
         label="Введите email адрес"
@@ -26,7 +26,7 @@ export default function EmailForm(props: EmailFormProps) {
           },
         ]}
       >
-        <Input type="string" placeholder="mail@example.com" className="max-w-xs" name="email" />
+        <Input type="string" placeholder="mail@example.com" className="w-full" name="email" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">

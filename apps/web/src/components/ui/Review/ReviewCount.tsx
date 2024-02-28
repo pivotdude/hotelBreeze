@@ -3,5 +3,5 @@ interface ReviewCountProps {
 }
 
 export default function ReviewCount({ count }: ReviewCountProps) {
-  return <p>{count} reviews</p>
+  return <p>{count} отзывов</p>
 }

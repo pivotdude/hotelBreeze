@@ -9,3 +9,9 @@ export interface ISession {
   status: 'unauthenticated' | 'authenticated'
   update: (data: any) => void
 }
+
+export interface IUserSession {
+  user: {
+    isAuth: boolean
+  }
+}

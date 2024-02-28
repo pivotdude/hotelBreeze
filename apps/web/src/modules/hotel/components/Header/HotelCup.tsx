@@ -12,7 +12,7 @@ interface HotelInfoProps {
 
 export default function HotelCup({ hotel }: HotelInfoProps) {
   return (
-    <Row justify="space-between" className="items-center">
+    <Row justify="space-between" className="items-center" gutter={[16, 16]}>
       <Col>
         <DotList>
           <ReviewsStar rating={hotel.reviewRating} />
@@ -23,7 +23,7 @@ export default function HotelCup({ hotel }: HotelInfoProps) {
       <Col>
         <Space direction="horizontal" size={6}>
           <Button icon={<ShareAltOutlined />} className="text-black" shape="round" size="large">
-            Share
+            Поделиться
           </Button>
           <FollowButton isFollow={hotel.isFollow} uid={hotel.favorites?.[0]?.uid} hotelUid={hotel.uid} />
         </Space>

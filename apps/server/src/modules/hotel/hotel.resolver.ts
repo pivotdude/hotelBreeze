@@ -5,6 +5,7 @@ import { Hotel } from '@prisma/client'
 import { AuthInterceptor } from '@/modules/auth/auth.interceptor'
 import { ContextUser } from '@/Models'
 import { UseInterceptors } from '@nestjs/common'
+import { CountryFilterInput } from '@/modules/country/inputs/CountryFilterInput'
 
 @UseInterceptors(AuthInterceptor)
 @Resolver((of) => HotelModel)
@@ -12,8 +13,8 @@ export class HotelResolver {
   constructor(private readonly hotelService: HotelService) {}
 
   @Query((returns) => [HotelModel])
-  async hotels(): Promise<Hotel[]> {
-    return this.hotelService.findAll()
+  async hotels(@Args('input') args: CountryFilterInput): Promise<Hotel[]> {
+    return this.hotelService.findAll(args)
   }
 
   @Query((returns) => HotelModel, { nullable: true })

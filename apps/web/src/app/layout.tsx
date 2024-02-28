@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru">
-      <body className={inter.className}>
+      <body className={'m-0 ' + inter.className}>
         <Providers>
           <NavBar />
           <main className="min-h-screen max-w-full lg:mx-32 md:mx-24 sm:mx-8">

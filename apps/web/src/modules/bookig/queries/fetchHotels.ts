@@ -18,10 +18,14 @@ export interface HotelsQuery {
   hotels: Hotel[]
 }
 
-export const fetchHotels = async (): Promise<HotelsQuery | void> => {
+interface HotelFilterInput {
+  country: string
+}
+
+export const fetchHotels = async (input?: HotelFilterInput): Promise<HotelsQuery | void> => {
   const query = gql`
-    query GetHotels {
-      hotels {
+    query GetHotels($input: CountryFilterInput!) {
+      hotels(input: $input) {
         uid
         title
         description
@@ -36,5 +40,5 @@ export const fetchHotels = async (): Promise<HotelsQuery | void> => {
     }
   `
 
-  return sendRequest<HotelsQuery>(query)
+  return sendRequest<HotelsQuery>(query, { input })
 }

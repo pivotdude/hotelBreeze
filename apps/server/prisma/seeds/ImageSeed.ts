@@ -51,6 +51,11 @@ export default class ImageSeed {
             url: '/static/hotel/view/1/wbtpbs51usq8rkfnl1yrqbb31zfx0g0c.png',
             name: 'Отель Таёжный',
           },
+          {
+            id: 10,
+            url: '/static/hotel/images/2/preview.png',
+            name: 'Отель Гамма Измайлово',
+          },
         ],
       })
     } catch (error) {

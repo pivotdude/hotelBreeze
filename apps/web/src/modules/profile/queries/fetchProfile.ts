@@ -9,6 +9,9 @@ export interface IProfile {
   favorites: {
     hotel: Hotel[]
   }[]
+  bookings: {
+    hotel: Hotel[]
+  }[]
 }
 
 export interface ProfileResponse {
@@ -23,6 +26,20 @@ export const fetchProfile = async (): Promise<ProfileResponse | void> => {
         id
         name
         favorites {
+          hotel {
+            uid
+            title
+            description
+            price
+            reviewRating
+            reviewCount
+            previewImage {
+              url
+              name
+            }
+          }
+        }
+        bookings {
           hotel {
             uid
             title

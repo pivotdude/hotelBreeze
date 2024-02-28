@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { User } from '@prisma/client'
 import { RoleModel } from '@/modules/role/role.model'
 import { FavoriteModel } from '@/modules/favorite/favorite.model'
+import { BookingModel } from '@/modules/booking/booking.model'
 
 @ObjectType()
 export class UserModel implements User {
@@ -39,4 +40,7 @@ export class UserModel implements User {
 
   @Field((type) => [FavoriteModel])
   favorites: RoleModel
+
+  @Field((type) => [BookingModel])
+  bookings: BookingModel
 }

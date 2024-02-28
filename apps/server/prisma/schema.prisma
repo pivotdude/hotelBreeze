@@ -44,6 +44,7 @@ model User {
   posts     Post[]
   favorites Favorite[]
   reviews   Review[]
+  bookings  Booking[]
 }
 
 model Role {
@@ -193,6 +194,7 @@ model Hotel {
   previewImage   Image?     @relation(fields: [previewImageId], references: [id])
   favorites      Favorite[]
   reviews        Review[]
+  bookings       Booking[]
 }
 
 model Favorite {
@@ -226,4 +228,23 @@ model Review {
   hotel   Hotel @relation(fields: [hotelId], references: [id])
 
   @@unique([userId, hotelId])
+}
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  startDate DateTime
+  endDate   DateTime
+  guests    Int
+  days      Int
+  price     Decimal  @db.Decimal(6, 2)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  hotelId Int
+  hotel   Hotel @relation(fields: [hotelId], references: [id])
 }

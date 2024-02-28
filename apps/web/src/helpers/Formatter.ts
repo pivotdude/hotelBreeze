@@ -1,9 +1,11 @@
-function amount(amount: number) {
-  return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(amount)
-}
+import currency from 'currency.js'
 
-const Formatter = {
-  amount,
-}
+export default class Formatter {
+  static amount(amount: number) {
+    return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(amount)
+  }
 
-export default Formatter
+  static price(price: number) {
+    return currency(price).format({ separator: ' ', symbol: '₽', decimal: ',', pattern: `# !` })
+  }
+}
