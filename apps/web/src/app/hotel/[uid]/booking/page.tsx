@@ -1,11 +1,11 @@
 import React from 'react'
 import { Col, Result, Row } from '@/ui'
-import BookingInfo from '@/modules/bookingHotel/components/SubmitBooking/BookingInfo'
 import { fetchHotel } from '@/modules/bookingHotel/queries/fetchHotel'
 import { isAuthenticated } from '@/helpers/utils'
 import BookingWindow from '@/modules/bookingHotel/components/BookingWindow'
 import Errors from '@/helpers/Errors'
 import dayjs from '@/libs/dayjs'
+import BookingInfo from '@/modules/bookingHotel/components/SubmitBooking/BookingInfo'
 
 export interface BookingPageParams {
   params: {

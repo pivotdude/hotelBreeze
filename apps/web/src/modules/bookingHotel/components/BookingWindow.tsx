@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react'
-import SubmitBooking from '@/modules/bookingHotel/components/SubmitBooking/SubmitBooking'
-import PaymentBooking from '@/modules/bookingHotel/components/PaymentBooking/PaymentBooking'
 import { Result } from '@/ui'
-import Link from 'next/link'
+import Link from '@/components/app/Link'
+import PaymentBooking from '@/modules/bookingHotel/components/PaymentBooking/PaymentBooking'
+import SubmitBooking from '@/modules/bookingHotel/components/SubmitBooking/SubmitBooking'
 
 export interface BookingWindowRouteProps {
   params: {
@@ -30,6 +30,7 @@ export default function BookingWindow({ isAuth, route, isOverloaded }: BookingHo
 
   return (
     <>
+      wasd
       {step === 1 && <SubmitBooking isAuth={isAuth} route={route} setStep={setStep} />}
       {step === 2 && <PaymentBooking setStep={setStep} route={route} />}
       {step === 3 && (
@@ -37,7 +38,11 @@ export default function BookingWindow({ isAuth, route, isOverloaded }: BookingHo
           status="success"
           title="Оплата прошла успешно"
           subTitle="Вы успешно забранировали отель"
-          extra={[<Link href="/profile" title="Перейти в профиль" />]}
+          extra={[
+            <Link key="profile-link" href="/profile">
+              Перейти в профиль
+            </Link>,
+          ]}
         />
       )}
     </>
