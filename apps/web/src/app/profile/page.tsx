@@ -4,6 +4,7 @@ import Title from '@/ui/Title'
 import { Hotel } from '@/modules/bookig/queries/fetchHotels'
 import HotelList from '@/modules/bookig/components/Hotel/HotelList'
 import authGateServer from '@/gate/authGate'
+import BookingList from '@/modules/profile/components/booking/BookingList'
 
 export default async function Profile() {
   await authGateServer()
@@ -16,16 +17,15 @@ export default async function Profile() {
   const favorites = profile.favorites
   const bookings = profile.bookings
   const favoritesHotels = favorites.flatMap((favorite: { hotel: Hotel[] }) => favorite.hotel)
-  const bookingsHotels = bookings.flatMap((bookings: { hotel: Hotel[] }) => bookings.hotel)
 
   return (
     <Row gutter={[64, 64]} className="py-4 items-center">
-      <Col xs={20}>
-        <Row className="items-center">
-          <Col span={4}>
+      <Col xs={24}>
+        <Row className="items-center flex justify-center md:justify-start" gutter={[16, 16]}>
+          <Col>
             <img className="w-40 h-40 rounded-full" src="https://via.placeholder.com/160x160" />
           </Col>
-          <Col span={12}>
+          <Col>
             <Title>{profile.name}</Title>
           </Col>
         </Row>
@@ -42,9 +42,9 @@ export default async function Profile() {
       </Col>
       <Col xs={24}>
         <Title level={3}>Забранированные</Title>
-        {bookingsHotels?.length ? (
+        {bookings?.length ? (
           <div className="flex flex-wrap gap-3">
-            <HotelList hotels={bookingsHotels} />
+            <BookingList bookings={bookings} />
           </div>
         ) : (
           <div>Отели отсутствуют</div>

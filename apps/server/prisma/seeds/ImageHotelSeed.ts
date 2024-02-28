@@ -8,39 +8,57 @@ export default class ImageHotelSeed {
         data: [
           {
             id: 100,
-            url: '/static/hotel/images/1/1.jpg',
+            url: this.getStaticUrl(2, '1.jpg'),
             name: 'Отель Таёжный комната',
             hotelId: 1,
           },
           {
             id: 101,
-            url: '/static/hotel/images/1/2.jpg',
+            url: this.getStaticUrl(2, '2.jpg'),
             name: 'Отель Таёжный',
             hotelId: 2,
           },
           {
             id: 102,
-            url: '/static/hotel/images/1/3.jpg',
+            url: this.getStaticUrl(2, '3.jpg'),
             name: 'Отель Таёжный',
             hotelId: 2,
           },
           {
             id: 103,
-            url: '/static/hotel/images/1/4.jpg',
+            url: this.getStaticUrl(2, '4.jpg'),
             name: 'Отель Таёжный',
             hotelId: 2,
           },
           {
             id: 104,
-            url: '/static/hotel/images/2/1.png',
+            url: this.getStaticUrl(3, '1.png'),
             name: 'Отель Гамма Измайлово. Комната',
             hotelId: 3,
           },
           {
             id: 105,
-            url: '/static/hotel/images/2/2.png',
+            url: this.getStaticUrl(3, '2.png'),
             name: 'Отель Гамма Измайлово. Хол',
             hotelId: 3,
+          },
+          {
+            id: 106,
+            name: 'DEL900 Hotel Boutique - Номер',
+            url: this.getStaticUrl(4, '1.jpg'),
+            hotelId: 4,
+          },
+          {
+            id: 107,
+            name: 'DEL900 Hotel Boutique - Здание',
+            url: this.getStaticUrl(4, '3.jpg'),
+            hotelId: 4,
+          },
+          {
+            id: 108,
+            name: 'DEL900 Hotel Boutique - Холл',
+            url: this.getStaticUrl(4, '4.jpg'),
+            hotelId: 4,
           },
         ],
       })
@@ -48,5 +66,9 @@ export default class ImageHotelSeed {
       console.error('Error in ImageHotelSeed: ', error)
       throw error
     }
+  }
+
+  private getStaticUrl(hotelId: number, fileName: string) {
+    return `/static/hotel/images/${hotelId}/${fileName}`
   }
 }

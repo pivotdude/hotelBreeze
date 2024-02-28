@@ -1,7 +1,7 @@
 /*
   Warnings:
 
-  - You are about to alter the column `reviewRating` on the `Header` table. The data in that column could be lost. The data in that column will be cast from `Integer` to `Decimal(2,2)`.
+  - You are about to alter the column `reviewRating` on the `Header` table. The data in that column could be lost. The data in that column will be cast from `Integer` to `Decimal(3,3)`.
 
 */
 -- AlterTable

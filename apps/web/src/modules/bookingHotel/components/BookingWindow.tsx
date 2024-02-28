@@ -23,7 +23,6 @@ export interface BookingHotelProps {
 }
 export default function BookingWindow({ isAuth, route, isOverloaded }: BookingHotelProps) {
   const [step, setStep] = useState(1)
-  console.log(step)
 
   if (isOverloaded) {
     return <Result status="error" title="Ваша бронь невозможна" subTitle="Превышено максимальное количество гостей" />

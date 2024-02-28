@@ -16,9 +16,9 @@ const allPosts: PostGraphqlQuery = {
       },
       {
         id: 2,
-        title: 'Post 2',
-        content: 'Content 2',
-        user: { name: 'User 2' },
+        title: 'Post 3',
+        content: 'Content 3',
+        user: { name: 'User 3' },
       },
     ],
   },

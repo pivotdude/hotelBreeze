@@ -16,7 +16,7 @@ export default function HotelGallery(props: HotelGalleryProps) {
         className="grid grid-cols-5 gap-4"
         style={{
           gridTemplateColumns: 'repeat(5, 1fr)',
-          gridTemplateRows: 'repeat(2, 1fr)',
+          gridTemplateRows: 'repeat(3, 1fr)',
           columnGap: '0.5rem',
           rowGap: '0.3rem',
         }}

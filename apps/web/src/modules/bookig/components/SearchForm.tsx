@@ -8,23 +8,21 @@ const { RangePicker } = DatePicker
 
 interface SearchFormProps {
   countries: CountryQuery[]
+  urlCountry?: string
 }
 
-export default function SearchForm({ countries }: SearchFormProps) {
+export default function SearchForm({ countries, urlCountry }: SearchFormProps) {
   const optionsCountry = MapFormat.options(countries, 'name', 'englishName')
   const router = useRouter()
 
-  console.log(optionsCountry)
-
   const changeCountry = (value: string) => {
-    console.log(value)
     router.push(`/booking?country=${value}`)
   }
 
   return (
     <Form size="large" className="w-full mx-auto">
       <Form.Item label="Страна">
-        <Select options={optionsCountry} onChange={changeCountry} />
+        <Select options={optionsCountry} onChange={changeCountry} defaultValue={urlCountry} />
       </Form.Item>
     </Form>
   )

@@ -1,7 +1,6 @@
 import { Col, Row, Title } from '@/ui'
 import { fetchCountries } from '@/modules/main/queries/fetchCountries'
 import CardList from '@/components/ui/InfoCard/CardList'
-import BookingBanner from '@/modules/main/components/BookingBanner'
 
 export default async function Home() {
   const rawCountries = await fetchCountries()
@@ -13,10 +12,6 @@ export default async function Home() {
 
   return (
     <Row gutter={[64, 64]}>
-      <Col xs={24}>
-        <BookingBanner />
-      </Col>
-
       <Col xs={24}>
         <Title level={3}>Страны</Title>
         <div className="flex flex-wrap gap-3">

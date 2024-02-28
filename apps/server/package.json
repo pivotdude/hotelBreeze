@@ -27,7 +27,7 @@
     "prisma:migrate:dev": "prisma migrate dev --schema=prisma/schema.prisma && prisma generate",
     "prisma:migrate:reset": "prisma migrate reset -f --schema=prisma/schema.prisma && prisma generate",
     "prisma:migrate:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
-    "deploy": "npm run prisma:migrate:deploy && npm run prisma:generate",
+    "deploy": "npm run prisma:migrate:reset && npm run prisma:migrate:deploy",
     "postinstall": "npm run deploy && prisma db seed"
   },
   "dependencies": {

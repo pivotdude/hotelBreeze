@@ -20,7 +20,7 @@ export default async function Page({ searchParams }: BookingPageProps) {
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} className="my-10 m-auto">
-        <SearchForm countries={countries} />
+        <SearchForm countries={countries} urlCountry={searchParams.country} />
       </Col>
       {hotels?.length ? (
         <Col xs={24}>

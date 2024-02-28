@@ -9,6 +9,11 @@ export default function BookingBanner() {
     router.push('/booking')
   }
   return (
-    <Image alt="hotel booking" src={image} className="w-full object-cover hover:cursor-pointer" onClick={onClick} />
+    <Image
+      alt="hotel booking"
+      src={image}
+      className="w-full bg-cover object-cover hover:cursor-pointer"
+      onClick={onClick}
+    />
   )
 }

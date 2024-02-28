@@ -40,6 +40,7 @@ export default function LoginPage() {
       if (result.ok) {
         Notification.success('Вы вошли в свою учетную запись')
         router.push('/')
+        router.refresh()
       } else {
         Notification.error('Не удалось войти в учетную запись, пожалуйста, повторите попытку')
       }

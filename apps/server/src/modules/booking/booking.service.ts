@@ -6,11 +6,13 @@ import Utils from '@/core/libs/Utils'
 
 @Injectable()
 export class BookingService {
-  constructor(private readonly countryRepository: BookingRepository, private hotelService: HotelService) {}
+  constructor(private readonly bookingRepository: BookingRepository, private hotelService: HotelService) {}
 
   async create(data: BookingCreateInput, userId: number) {
     const hotel = await this.hotelService.find(data.hotelUid)
     const days = Utils.differenceInDays(data.startDate, data.endDate)
-    return this.countryRepository.create(data, hotel.id, hotel.price, userId, days)
+    console.log(hotel.price)
+    const price = hotel.price * days
+    return this.bookingRepository.create(data, hotel.id, price, userId, days)
   }
 }

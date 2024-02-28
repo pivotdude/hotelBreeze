@@ -8,7 +8,6 @@ export class BookingRepository {
   constructor(private prismaService: PrismaService) {}
 
   async create(data: BookingCreateInput, hotelId: number, price: number, userId: number, days: number) {
-    console.log(data)
     return this.prismaService.booking.create({
       data: {
         startDate: dayjs(data.startDate).toISOString(),

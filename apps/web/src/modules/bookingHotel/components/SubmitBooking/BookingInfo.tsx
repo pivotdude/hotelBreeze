@@ -3,7 +3,6 @@ import { Card, Col, Divider, Row, Title } from '@/ui'
 import Image from '@/components/ui/Image'
 import { IBookingHotel } from '@/modules/bookingHotel/queries/fetchHotel'
 import ReviewPanel from '@/components/ui/Review/ReviewPanel'
-import dayjs from '@/libs/dayjs'
 import Pluralization from '@/helpers/Pluralization'
 import Formatter from '@/helpers/Formatter'
 
@@ -14,13 +13,10 @@ interface BookingInfoProps {
     startDate: string
     endDate: string
   }
+  differenceInDays: number
 }
 
-const BookingInfo = ({ hotel, searchParams }: BookingInfoProps) => {
-  const endDate = dayjs(searchParams.endDate)
-  const startDate = dayjs(searchParams.startDate)
-  const differenceInDays = endDate.diff(startDate, 'day')
-
+const BookingInfo = ({ hotel, searchParams, differenceInDays }: BookingInfoProps) => {
   const price = useMemo(() => {
     return Formatter.price(hotel.price * differenceInDays)
   }, [searchParams, hotel])
