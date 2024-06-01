@@ -9,6 +9,7 @@ export class CountryRepository {
 
   async find(filter: DefaultWhereInput): Promise<Country | null> {
     return this.prismaService.country.findUnique({
+      // @ts-ignore
       where: filter,
       include: {
         language: true,

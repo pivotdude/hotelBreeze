@@ -10,13 +10,14 @@ interface HotelGalleryProps {
 }
 
 export default function HotelGallery(props: HotelGalleryProps) {
+  const columnCount = props.images.length > 4 ? 5 : (props.images.length > 2 ? 4 : 3);
   return (
     <>
       <div
         className="grid grid-cols-5 gap-4"
         style={{
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gridTemplateRows: 'repeat(3, 1fr)',
+          gridTemplateColumns: `repeat(${columnCount}, 1fr)`,
+          gridTemplateRows: 'repeat(2, 1fr)',
           columnGap: '0.5rem',
           rowGap: '0.3rem',
         }}

@@ -10,6 +10,7 @@ export class RoleRepository {
 
   async find(data: DefaultWhereInput): Promise<Role | null> {
     return this.prisma.role.findUnique({
+      // @ts-ignore
       where: data,
     })
   }

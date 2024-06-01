@@ -34,6 +34,7 @@ export class UserRepository {
   async update(where: DefaultWhereInput, data: Prisma.UserUpdateInput): Promise<User> {
     return this.prisma.user.update({
       data,
+      //@ts-ignore
       where,
     })
   }
@@ -86,10 +87,4 @@ export class UserRepository {
       },
     })
   }
-
-  // async delete(where: Prisma.UserWhereUniqueInput): Promise<User> {
-  //   return this.prisma.user.delete({
-  //     where,
-  //   });
-  // }
 }

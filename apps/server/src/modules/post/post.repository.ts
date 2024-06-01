@@ -10,6 +10,7 @@ export class PostRepository {
 
   async find(filter: DefaultWhereInput): Promise<Post | null> {
     return this.prisma.post.findUnique({
+      // @ts-ignore
       where: filter,
       include: {
         user: {

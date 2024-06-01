@@ -14,6 +14,7 @@ export class ReviewResolver {
 
   @Mutation((returns) => ReviewModel)
   async createReview(@Args('input') input: CreateReviewInput, @Context('user') user: ContextUser) {
+    console.log(user)
     return this.hotelService.create(input, user.id)
   }
 
