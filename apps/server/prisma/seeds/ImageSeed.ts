@@ -93,8 +93,28 @@ export default class ImageSeed {
             url: this.getStaticUrl(10, 'jpg'),
             name: 'Sofitel Shahd Al Madinah',
           },
+          {
+            id: 18,
+            url: this.getStaticUrl(11, 'jpg'),
+            name: 'Отель Сарапулъ',
+          },
+          {
+            id: 19,
+            url: this.getStaticUrl(12, 'jpeg'),
+            name: 'Старая башня',
+          },
+          {
+            id: 20,
+            url: this.getStaticUrl(13, 'jpeg'),
+            name: 'Гостиница Каскад',
+          },
+          {
+            id: 21,
+            url: this.getStaticUrl(14, 'jpeg'),
+            name: "Гостиница AMAKS Центральная"
+          }
         ],
-      })
+      })  
     } catch (error) {
       console.error('Error in ImageSeed: ', error)
       throw error

@@ -8,5 +8,6 @@ import Button from './Button'
 import Title from './Title'
 import Avatar from './Avatar'
 import Result from './Result'
+import Carousel from './Carousel'
 
-export { Col, Row, Divider, Space, AntdImage, Card, Button, Title, Avatar, Result }
+export { Col, Row, Divider, Space, AntdImage, Card, Button, Title, Avatar, Result, Carousel }

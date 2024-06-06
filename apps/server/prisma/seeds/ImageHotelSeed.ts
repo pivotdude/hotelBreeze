@@ -60,6 +60,60 @@ export default class ImageHotelSeed {
             url: this.getStaticUrl(4, '4.jpg'),
             hotelId: 4,
           },
+          {
+            id: 109,
+            name: 'Отель Сарапулъ - Вид сверху',
+            url: this.getStaticUrl(11, '1.jpeg'),
+            hotelId: 11,
+          },
+          {
+            id: 110,
+            name: 'Отель Сарапулъ - Вид сбоку',
+            url: this.getStaticUrl(11, '2.jpeg'),
+            hotelId: 11,
+          },
+          {
+            id: 111,
+            name: 'Старая Башня - зал',
+            url: this.getStaticUrl(12, '1.jpg'),
+            hotelId: 12,
+          },
+          {
+            id: 112,
+            name: 'Старая Башня - зал',
+            url: this.getStaticUrl(12, '2.jpg'),
+            hotelId: 12,
+          },
+          {
+            id: 113,
+            name: 'Старая Башня - зал',
+            url: this.getStaticUrl(12, '3.jpg'),
+            hotelId: 12,
+          },
+          {
+            id: 114,
+            name: 'Старая Башня - зал',
+            url: this.getStaticUrl(12, '4.jpg'),
+            hotelId: 12,
+          },
+          {
+            id: 115,
+            name: 'Каскад - Сарапулъ',
+            url: this.getStaticUrl(13, '1.jpeg'),
+            hotelId: 13,
+          },
+          {
+            id: 116,
+            name: 'Каскад - Сарапулъ',
+            url: this.getStaticUrl(13, '2.jpeg'),
+            hotelId: 13,
+          },
+          {
+            id: 117,
+            name: 'Каскад - Сарапулъ',
+            url: this.getStaticUrl(14, '1.jpg'),
+            hotelId: 14,
+          },
         ],
       })
     } catch (error) {
