@@ -11,240 +11,260 @@ generator client {
   //output   = "./generated/client"
 }
 
+// Пост
 model Post {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  id            Int      @id @default(autoincrement()) // Уникальный идентификатор поста
+  uid           String   @unique @default(uuid())      // Уникальный идентификатор поста в формате UUID
+  updatedAt     DateTime @updatedAt                    // Дата и время последнего обновления поста
+  createdAt     DateTime @default(now())               // Дата и время создания поста
 
-  title       String
-  content     String
-  isPublished Boolean @default(false)
+  title         String                               // Заголовок поста
+  content       String                               // Содержимое поста
+  isPublished   Boolean  @default(false)             // Флаг публикации поста
 
-  userId Int?
-  user   User? @relation(fields: [userId], references: [id])
+  userId        Int?                                  // Внешний ключ для пользователя
+  user          User?    @relation(fields: [userId], references: [id]) // Связь с моделью User
 
-  previewImageId Int?
-  previewImage   Image? @relation(fields: [previewImageId], references: [id])
+  previewImageId Int?                                 // Внешний ключ для превью изображения
+  previewImage   Image?  @relation(fields: [previewImageId], references: [id]) // Связь с моделью Image
 }
 
+// Пользователь
 model User {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор пользователя
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор пользователя в формате UUID
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления пользователя
+  createdAt DateTime @default(now())               // Дата и время создания пользователя
 
-  name     String @unique
-  email    String @unique
-  avatarId Int?
-  avatar   Image? @relation(fields: [avatarId], references: [id])
+  name     String @unique                         // Имя пользователя
+  email    String @unique                         // Email пользователя
+  avatarId Int?                                   // Внешний ключ для аватара
+  avatar   Image? @relation(fields: [avatarId], references: [id]) // Связь с моделью Image
 
-  roleId    Int?
-  role      Role?      @relation(fields: [roleId], references: [id])
-  posts     Post[]
-  favorites Favorite[]
-  reviews   Review[]
-  bookings  Booking[]
+  roleId    Int?                                   // Внешний ключ для роли
+  role      Role? @relation(fields: [roleId], references: [id]) // Связь с моделью Role
+  posts     Post[]                                // Массив постов, созданных пользователем
+  favorites Favorite[]                            // Массив избранных отелей пользователя
+  reviews   Review[]                              // Массив отзывов, оставленных пользователем
+  bookings  Booking[]                             // Массив бронирований, сделанных пользователем
 }
 
+// Роль
 model Role {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор роли
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор роли в формате UUID
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления роли
+  createdAt DateTime @default(now())               // Дата и время создания роли
 
-  code        String  @unique
-  name        String
-  description String?
+  code        String  @unique                     // Уникальный код роли
+  name        String                              // Имя роли
+  description String?                             // Описание роли (необязательное поле)
 
-  users User[]
+  users User[]                                    // Массив пользователей, связанных с данной ролью
 }
 
+// Отправленное письмо
 model SentEmail {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор отправленного письма
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор отправленного письма в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания отправленного письма
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления отправленного письма
 
-  theme    String
-  email    String
-  template String
-  context  Json?
-  data     Json?
+  theme    String                                 // Тема письма
+  email    String                                 // Адрес электронной почты получателя
+  template String                                 // Шаблон письма
+  context  Json?                                  // Контекст письма (необязательное поле)
+  data     Json?                                  // Дополнительные данные письма (необязательное поле)
 
-  verificationCode VerificationCode?
+  verificationCode VerificationCode?              // Связь с моделью VerificationCode (необязательное поле)
 }
 
+// Тип кода подтверждения
 model VerificationCodeType {
-  id  Int    @id @default(autoincrement())
-  uid String @unique @default(uuid())
+  id  Int    @id @default(autoincrement()) // Уникальный идентификатор типа кода подтверждения
+  uid String @unique @default(uuid())      // Уникальный идентификатор типа кода подтверждения в формате UUID
 
-  name String
-  code String @unique
+  name String                             // Имя типа кода подтверждения
+  code String @unique                     // Уникальный код типа кода подтверждения
 
-  verificationCode VerificationCode[]
+  verificationCode VerificationCode[]     // Массив кодов подтверждения, связанных с данным типом
 }
 
+// Код подтверждения
 model VerificationCode {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор кода подтверждения
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор кода подтверждения в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания кода подтверждения
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления кода подтверждения
 
-  code    String
-  expired DateTime
-  attempt Int      @default(0)
+  code    String                                   // Сам код подтверждения
+  expired DateTime                                 // Срок действия кода подтверждения
+  attempt Int      @default(0)                     // Количество попыток использования кода подтверждения
 
-  sentEmailId Int                   @unique
-  sentEmail   SentEmail?            @relation(fields: [sentEmailId], references: [id])
-  typeId      Int
-  type        VerificationCodeType? @relation(fields: [typeId], references: [id])
+  sentEmailId Int                   @unique                                            // Уникальный идентификатор отправленного письма
+  sentEmail   SentEmail?            @relation(fields: [sentEmailId], references: [id]) // Связь с отправленным письмом
+  typeId      Int                                                                      // Идентификатор типа кода подтверждения
+  type        VerificationCodeType? @relation(fields: [typeId], references: [id])      // Связь с типом кода подтверждения
 }
 
+// Страна
 model Country {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор страны
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор страны в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания записи о стране
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления записи о стране
 
-  name        String
-  code        String  @unique
-  description String?
-  englishName String
+  name        String                               // Название страны
+  code        String  @unique                      // Уникальный код страны (например, ISO-код)
+  description String?                              // Описание страны (необязательное поле)
+  englishName String                               // Название страны на английском языке
 
-  languageId     Int?
-  language       Language? @relation(fields: [languageId], references: [id])
-  previewImageId Int?
-  previewImage   Image?    @relation("view", fields: [previewImageId], references: [id])
-  bannerImageId  Int?
+  languageId     Int?                                                        // Идентификатор языка страны (необязательное поле)
+  language       Language? @relation(fields: [languageId], references: [id]) // Связь с моделью Language
+  previewImageId Int?                                         // Идентификатор изображения-превью страны (необязательное поле)
+  previewImage   Image?    @relation("view", fields: [previewImageId], references: [id]) // Связь с моделью Image для изображения-превью
+  bannerImageId  Int?                                          // Идентификатор баннерного изображения страны (необязательное поле)
+   // Связь с моделью Image для баннерного изображения
   bannerImage    Image?    @relation("banner", fields: [bannerImageId], references: [id])
-  cities         City[]
+  cities         City[]                                        // Массив городов, связанных с данной страной
 }
 
+// Язык
 model Language {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор языка
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор языка в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания записи о языке
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления записи о языке
 
-  name String
-  code String @unique
+  name String                                      // Название языка
+  code String @unique                              // Уникальный код языка
 
-  avatarId  Int?      @unique
-  avatar    Image?    @relation(fields: [avatarId], references: [id])
-  countries Country[]
+  avatarId  Int?      @unique                      // Идентификатор аватара языка (необязательное поле)
+  avatar    Image?    @relation(fields: [avatarId], references: [id]) // Связь с моделью Image для аватара
+  countries Country[]                              // Массив стран, связанных с данным языком
 }
 
+// Город
 model City {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор города
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор города в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания записи о городе
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления записи о городе
 
-  name        String
-  englishName String
+  name        String                               // Название города
+  englishName String                               // Название города на английском языке
 
-  previewImageId Int?
-  previewImage   Image?  @relation("view", fields: [previewImageId], references: [id])
-  bannerImageId  Int?
-  bannerImage    Image?  @relation("banner", fields: [bannerImageId], references: [id])
-  countryId      Int
-  country        Country @relation(fields: [countryId], references: [id])
-  hotels         Hotel[]
+  previewImageId Int?                              // Идентификатор изображения-превью города (необязательное поле)
+  previewImage   Image?  @relation("view", fields: [previewImageId], references: [id]) // Связь с моделью Image для изображения-превью
+  bannerImageId  Int?                              // Идентификатор баннерного изображения города (необязательное поле)
+  bannerImage    Image?  @relation("banner", fields: [bannerImageId], references: [id]) // Связь с моделью Image для баннерного изображения
+  countryId      Int                                // Идентификатор страны, к которой относится город
+  country        Country @relation(fields: [countryId], references: [id]) // Связь с моделью Country
+  hotels         Hotel[]                            // Массив отелей, связанных с данным городом
 }
 
+// Изображение
 model Image {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // Уникальный идентификатор изображения
+  uid       String   @unique @default(uuid())      // Уникальный идентификатор изображения в формате UUID
+  createdAt DateTime @default(now())               // Дата и время создания записи об изображении
+  updatedAt DateTime @updatedAt                    // Дата и время последнего обновления записи об изображении
 
-  url  String
-  name String
+  url  String                                     // URL изображения
+  name String                                     // Название изображения
 
-  hotelId        Int?
-  hotel          Hotel?    @relation("hotelImage", fields: [hotelId], references: [id])
-  countryBanner  Country[] @relation("banner")
-  countryPreview Country[] @relation("view")
-  language       Language?
-  user           User[]
-  post           Post[]
-  cityBanner     City[]    @relation("banner")
-  cityPreview    City[]    @relation("view")
-  hotelPreview   Hotel[]
+  hotelId        Int?                             // Идентификатор отеля, к которому относится изображение (необязательное поле)
+  hotel          Hotel?    @relation("hotelImage", fields: [hotelId], references: [id]) // Связь с моделью Hotel
+  countryBanner  Country[] @relation("banner")    // Связь с моделью Country для баннерных изображений
+  countryPreview Country[] @relation("view")      // Связь с моделью Country для изображений-превью
+  language       Language?                        // Связь с моделью Language
+  user           User[]                           // Связь с моделью User
+  post           Post[]                           // Связь с моделью Post
+  cityBanner     City[]    @relation("banner")    // Связь с моделью City для баннерных изображений
+  cityPreview    City[]    @relation("view")      // Связь с моделью City для изображений-превью
+  hotelPreview   Hotel[]                          // Связь с моделью Hotel для изображений-превью
 }
 
+// Отель
 model Hotel {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())    // Уникальный идентификатор отеля
+  uid       String   @unique @default(uuid())         // Уникальный идентификатор отеля в формате UUID
+  createdAt DateTime @default(now())                  // Дата и время создания записи об отеле
+  updatedAt DateTime @updatedAt                       // Дата и время последнего обновления записи об отеле
 
-  title        String
-  description  String?
-  price        Int
-  data         Json
-  reviewRating Decimal? @default(0) @db.Decimal(3, 2)
-  reviewCount  Int?     @default(0)
+  title        String                                 // Название отеля
+  description  String?                                // Описание отеля (необязательное поле)
+  price        Int                                    // Цена за номер в отеле
+  data         Json                                   // Дополнительные данные об отеле в формате JSON
+  reviewRating Decimal? @default(0) @db.Decimal(3, 2) // Рейтинг отеля на основе отзывов (с точностью до двух десятичных знаков)
+  reviewCount  Int?     @default(0)                   // Количество отзывов об отеле
 
-  images         Image[]    @relation("hotelImage")
-  cityId         Int
-  city           City       @relation(fields: [cityId], references: [id])
-  previewImageId Int?
-  previewImage   Image?     @relation(fields: [previewImageId], references: [id])
-  favorites      Favorite[]
-  reviews        Review[]
-  bookings       Booking[]
+  images         Image[]    @relation("hotelImage")    // Массив изображений, связанных с данным отелем
+  cityId         Int                                    // Идентификатор города, к которому относится отель
+  city           City       @relation(fields: [cityId], references: [id]) // Связь с моделью City
+  previewImageId Int?                                  // Идентификатор изображения-превью отеля (необязательное поле)
+  previewImage   Image?     @relation(fields: [previewImageId], references: [id]) // Связь с моделью Image для изображения-превью
+  favorites      Favorite[]                            // Массив избранных отелей
+  reviews        Review[]                              // Массив отзывов об отеле
+  bookings       Booking[]                             // Массив бронирований номеров в отеле
 }
 
+// Избранное
 model Favorite {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())  // Уникальный идентификатор избранного
+  uid       String   @unique @default(uuid())       // Уникальный идентификатор избранного в формате UUID
+  createdAt DateTime @default(now())                // Дата и время создания записи о добавлении в избранное
+  updatedAt DateTime @updatedAt                     // Дата и время последнего обновления записи о добавлении в избранное
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
+  userId Int                                        // Идентификатор пользователя, который добавил в избранное
+  user   User @relation(fields: [userId], references: [id]) // Связь с моделью User
+  
+  hotelId Int                                       // Идентификатор отеля, который добавлен в избранное
+  hotel   Hotel @relation(fields: [hotelId], references: [id]) // Связь с моделью Hotel
 
-  hotelId Int
-  hotel   Hotel @relation(fields: [hotelId], references: [id])
-
-  @@unique([userId, hotelId])
+  // Уникальный составной ключ, который гарантирует
+  // что один и тот же отель не может быть добавлен в избранное одним и тем же пользователем более одного раза
+  @@unique([userId, hotelId])    
 }
 
+// Отзыв
 model Review {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())  // Уникальный идентификатор отзыва
+  uid       String   @unique @default(uuid())       // Уникальный идентификатор отзыва в формате UUID
+  createdAt DateTime @default(now())                // Дата и время создания записи об отзыве
+  updatedAt DateTime @updatedAt                     // Дата и время последнего обновления записи об отзыве
 
-  description String
-  rating      Int
+  description String                               // Описание отзыва
+  rating      Int                                  // Рейтинг, выставленный в отзыве
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
+  userId Int                                       // Идентификатор пользователя, который написал отзыв
+  user   User @relation(fields: [userId], references: [id]) // Связь с моделью User
 
-  hotelId Int
-  hotel   Hotel @relation(fields: [hotelId], references: [id])
+  hotelId Int                                      // Идентификатор отеля, к которому относится отзыв
+  hotel   Hotel @relation(fields: [hotelId], references: [id]) // Связь с моделью Hotel
 
-  @@unique([userId, hotelId])
+  // Уникальный составной ключ, который гарантирует, 
+  // что один и тот же пользователь не может оставить более одного отзыва на один и тот же отель
+  @@unique([userId, hotelId])                      
 }
 
+// Бронирование
 model Booking {
-  id        Int      @id @default(autoincrement())
-  uid       String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())  // Уникальный идентификатор бронирования
+  uid       String   @unique @default(uuid())       // Уникальный идентификатор бронирования в формате UUID
+  createdAt DateTime @default(now())                // Дата и время создания записи о бронировании
+  updatedAt DateTime @updatedAt                     // Дата и время последнего обновления записи о бронировании
 
-  startDate DateTime
-  endDate   DateTime
-  guests    Int
-  days      Int
-  price     Decimal  @db.Decimal(10, 2)
+  startDate DateTime                               // Дата начала бронирования
+  endDate   DateTime                               // Дата окончания бронирования
+  guests    Int                                    // Количество гостей
+  days      Int                                    // Количество дней
+  price     Decimal  @db.Decimal(10, 2)            // Итоговая цена бронирования с точностью до двух десятичных знаков
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
+  userId Int                                       // Идентификатор пользователя, который сделал бронирование
+  user   User @relation(fields: [userId], references: [id]) // Связь с моделью User
 
-  hotelId Int
-  hotel   Hotel @relation(fields: [hotelId], references: [id])
+  hotelId Int                                      // Идентификатор отеля, в котором сделано бронирование
+  hotel   Hotel @relation(fields: [hotelId], references: [id]) // Связь с моделью Hotel
 }
+

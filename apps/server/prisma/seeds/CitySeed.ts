@@ -150,6 +150,13 @@ export default class CitySeed {
             englishName: 'Ankara',
             countryId: 7,
           },
+          // Russia
+          {
+            id: 25,
+            name: "Сарапул",
+            englishName: "Sarapul",
+            countryId: 1
+          }
         ],
       })
     } catch (error) {
