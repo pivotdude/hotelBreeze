@@ -70,8 +70,8 @@ export default function HotelCard({ hotel }: HotelCardProps) {
           <Row gutter={[16, 16]} justify="space-between">
             <Col>{hotel.title}</Col>
             <Col>
-              <ReviewsStar rating={hotel.reviewCount} className="mr-2" />
-              <span className="ml-2">({hotel.reviewRating})</span>
+              <ReviewsStar rating={hotel.reviewRating} className="mr-2" />
+              <span className="ml-2">({hotel.reviewCount})</span>
             </Col>
           </Row>
         </Col>
